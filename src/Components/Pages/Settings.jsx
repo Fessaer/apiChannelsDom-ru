@@ -2,13 +2,14 @@
 import React, { useContext } from 'react';
 import { Context } from '../Store';
 
+
 export default function Settings() {
   const [inState, inSetState] = useContext(Context);
   let { count } = inState;
   const buttonHabdler = () => {
-    console.log(count)
+    console.log(inState)
     count = count + 1;
-    inSetState({count})
+    inSetState({...inState, count})
   }
   return (
     <div>
