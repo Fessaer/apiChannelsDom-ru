@@ -17,7 +17,6 @@ let urle = 'http://va.fpst.ru:8080/api/login';
       return data;
     }).then((inf) => {
       const isLoginState = JSON.parse(inf)
-      
       initialState['isLogin'] = isLoginState
       console.log(initialState, 'is')
     }).catch((err) => console.log(err, 'error response auth'))
