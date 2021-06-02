@@ -8,10 +8,11 @@ import Auth from './Authorisation';
 
 
 function App() {
-  // const [inState, inSetState] = useContext(Context);
-  const [dataState, setDataState] = useState(false)
+  const [dataState, setDataState] = useState({validate: false})
+
   useEffect(() => {
     (async function fetchData() {
+      console.log('useEffect')
       let urle = 'http://va.fpst.ru:8080/api/login';
       const form = new FormData();
       form.set('Login', 'tplusfront')
@@ -32,12 +33,18 @@ function App() {
     })()
    }, [])
    console.log(dataState, 'dataState')
+   const { validate } = dataState;
+   if (validate === false) {
+     return null;
+   } else {
+
   return (
-    <Store>
-      {dataState}
+      <Store>
+        {dataState}
       <Navigation />
     </Store>
   )
+  }
 }
 
 export default App;
