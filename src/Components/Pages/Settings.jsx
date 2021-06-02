@@ -7,9 +7,9 @@ export default function Settings() {
   const [inState, inSetState] = useContext(Context);
   let { count } = inState;
   const buttonHabdler = () => {
-    console.log(inState)
+    // console.log(inState, '')
     count = count + 1;
-    inSetState({...inState, count})
+    // inSetState({...inState, count})
   }
   return (
     <div>
