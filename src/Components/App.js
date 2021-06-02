@@ -1,10 +1,8 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import './Styles/App.css';
 import Navigation from './Navigation';
 import Store from './Store';
-import { Context } from './Store';
-import Auth from './Authorisation';
 
 
 function App() {

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import moment from 'moment';
 import { DatePicker, Space } from 'antd';
@@ -36,45 +37,45 @@ export default function SearchBar() {
 
   return (
     <div className="row">
-      <div className="col-lg-2 pb-3">
+      <div className="col-lg-2 col-sm-4 pb-3">
         <label>Группа камер</label>
-        <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+        <select className="form-select form-select-sm" aria-label=".form-select-sm example">
           {/* <option selected>Open this select menu</option> */}
           <option value="1">One</option>
           <option value="2">Two</option>
           <option value="3">Three</option>
         </select>
       </div>
-      <div className="col-lg-2 pb-3">
+      <div className="col-lg-2 col-sm-4 pb-3">
         <label>Камера</label>
-        <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+        <select className="form-select form-select-sm" aria-label=".form-select-sm example">
           {/* <option selected>Open this select menu</option> */}
           <option value="1">One</option>
           <option value="2">Two</option>
           <option value="3">Three</option>
         </select>
       </div>
-      <div className="col-lg-2 pb-3">
+      <div className="col-lg-2 col-sm-4 pb-3">
         <label>Событие</label>
-        <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+        <select className="form-select form-select-sm" aria-label=".form-select-sm example">
           {/* <option selected>Open this select menu</option> */}
           <option value="1">One</option>
           <option value="2">Two</option>
           <option value="3">Three</option>
         </select>
       </div>
-      <div className="col-lg-2 pb-3">
+      <div className="col-lg-2 col-sm-4 pb-3">
         <label>Обьект</label>
-        <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+        <select className="form-select form-select-sm" aria-label=".form-select-sm example">
           {/* <option selected>Open this select menu</option> */}
           <option value="1">One</option>
           <option value="2">Two</option>
           <option value="3">Three</option>
         </select>
       </div>
-      <div className="col-lg-2 pb-3">
+      <div className="col-lg-2 col-sm-4 pb-3">
         <label>Уверенность</label>
-        <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+        <select className="form-select form-select-sm" aria-label=".form-select-sm example">
           {/* <option selected>Open this select menu</option> */}
           <option value="1">One</option>
           <option value="2">Two</option>
@@ -82,7 +83,7 @@ export default function SearchBar() {
         </select>
       </div>
 
-      <div className="col-lg-2 pb-3">
+      <div className="col-lg-2 col-sm-4 pb-3">
       <label>Дата и время (от)</label>
       <Space direction="vertical" size={12}>
         <DatePicker
@@ -96,7 +97,7 @@ export default function SearchBar() {
       </Space>
       </div>
 
-      <div className="col-lg-2 pb-3">
+      <div className="col-lg-2 col-sm-4 pb-3">
       <label>Дата и время (до)</label>
       <Space direction="vertical" size={12}>
         <DatePicker
@@ -110,8 +111,8 @@ export default function SearchBar() {
       </Space>
       </div>
 
-      <div className="col-lg-2 pb-3 d-flex align-items-end">
-      <button type="button" class="btn btn-outline-primary btn-sm">Применить</button>
+      <div className="col-lg-2 col-sm-4 pb-3 d-flex align-items-end">
+      <button type="button" className="btn btn-outline-primary btn-sm">Применить</button>
       </div>
     </div>
   )

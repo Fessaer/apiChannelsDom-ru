@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import React, { useContext, useState, useEffect } from 'react';
 import { Context } from '../Store';
 import SearchBar from './SearchBar';
