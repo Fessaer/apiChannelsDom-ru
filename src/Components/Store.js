@@ -7,6 +7,9 @@ import React, { useState } from 'react';
     const initialState = {
       count: 0,
       elements: [],
+      datePicker1: {},
+      datePicker2: {},
+      loadingComplite: false,
     }
 
 export const Context = React.createContext();

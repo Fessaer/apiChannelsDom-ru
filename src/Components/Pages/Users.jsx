@@ -3,6 +3,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Context } from '../Store';
 import SearchBar from './SearchBar';
+import RenderTable from '../RenderTable';
 var convert = require('xml-js');
 
 export default function Home() {
@@ -13,6 +14,9 @@ export default function Home() {
   
   let { offset } = offsetState
   let { count } = inState;
+  const defaultParamFetch = {
+
+  }
   const apiUrlGetData = 'http://va.fpst.ru:8080/api/exportreport';
   const requestForm = new FormData()
   // ChangePasswordAtNextLogin
@@ -35,23 +39,30 @@ export default function Home() {
     return await fetch(apiUrlGetData, {
       method: 'POST',
       body: requestForm
-    }).then(function(response) {
+    }).then((response) => {
       const dataResponseText = response.text();
       console.log(dataResponseText, 'dataResponseText')
       return dataResponseText;
     }).then((data) => {
     let result = convert.xml2json(data, {compact: false});
     let parseData = JSON.parse(result)
-    console.log(parseData, 'parse data')
+    // console.log(parseData, 'parse data')
     const { elements } = parseData
-    inSetState({...inState, elements})
-  })})()
+    // console.log('target arr', elements[0].elements)
+    // const elements = elements[0].elements
+    const { loadingComplite } = inState;
+    inSetState({...inState, elements:[...elements[0].elements], loadingComplite: true})
+  }).catch((e) => {
+    console.log(e)
+  })
+  })()
 }, [])
 console.log(inState, 'State USers')
   return (
     <div className="container-fluid"> 
     сонтайнер Bootstrap
     <SearchBar />
+    <RenderTable />
     </div>
   )
 }
