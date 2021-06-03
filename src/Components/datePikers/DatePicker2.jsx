@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useContext, useState, useEffect } from 'react';
+import { Context } from '../Store';
 import { DatePicker } from 'antd';
 import 'moment/locale/ru';
 import locale from 'antd/es/date-picker/locale/ru_RU';
@@ -6,6 +7,11 @@ import moment from 'moment';
 
 
 export default function DatePicker1() {
+  const [inState, inSetState] = useContext(Context);
+  let { searchEndDate } = inState;
+
+
+
   function range(start, end) {
     const result = [];
     for (let i = start; i < end; i++) {
@@ -29,14 +35,23 @@ export default function DatePicker1() {
   const onChange = (e) => {
     let formDateDay = e._d;
     let formDateHours = e._d;
-    const resultDate = formDateDay.toISOString().substring(0, 10) + " " + formDateHours.toISOString().substring(11, 19)
-    // YYYY-MM-DD HH::mm::ss
-    console.log(resultDate)
+    let d = new Date(e._d)
+    // const hours = d.getHours()
+    let hours = d.getHours().toString()
+    console.log(hours.length, 'length hours')
+    if (hours.length < 2) {
+      hours = 0 + hours
+    }
+    const resultDate = formDateDay.toISOString().substring(0, 10) + " " + hours + formDateHours.toISOString().substring(13, 19)
+    console.log(resultDate, 'datePicker2')
+    searchEndDate = resultDate;
+    inSetState({...inState, searchEndDate})
+    // console.log(resultDate)
   }
 
   return (
     <div className="col-lg-2 col-sm-4 pb-3 button_max_width">
-      <label>Дата и время (от)</label>
+      <label>Дата и время (до)</label>
       
         <DatePicker
           style={{display: "flex"}}

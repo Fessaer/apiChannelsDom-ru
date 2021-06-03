@@ -10,6 +10,16 @@ import React, { useState } from 'react';
       datePicker1: {},
       datePicker2: {},
       loadingComplite: false,
+      startDate: new Date(),
+      endDate: new Date(),
+      offset: 0,
+      classID: '1',
+      eventSubjectID: '552',
+      subClassID: '2',
+      renderCountItems: 20,
+      offsetRenderMap: 0,
+      searchStartDate: new Date().toISOString().substring(0, 10) + ' 00:00:00',
+      searchEndDate: new Date().toISOString().substring(0, 10) + ' 23:59:59',
     }
 
 export const Context = React.createContext();

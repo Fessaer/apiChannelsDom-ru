@@ -8,11 +8,11 @@ var convert = require('xml-js');
 
 export default function Home() {
   const [inState, inSetState] = useContext(Context);
-  const [offsetState, setOffsetState] = useState({offset: 0});
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  // const [offsetState, setOffsetState] = useState({offset: 0});
+  // const [startDate, setStartDate] = useState(new Date());
+  // const [endDate, setEndDate] = useState(new Date());
   
-  let { offset } = offsetState
+  // let { offset } = offsetState
   let { count } = inState;
   const defaultParamFetch = {
 
@@ -21,6 +21,9 @@ export default function Home() {
   const requestForm = new FormData()
   // ChangePasswordAtNextLogin
   // SessionID
+  const { startDate } = inState;
+  const { endDate } = inState;
+  const { offset } = inState;
   const { SessionID } = inState;
   const { ChangePasswordAtNextLogin } = inState;
   console.log(inState, 'inState users')
