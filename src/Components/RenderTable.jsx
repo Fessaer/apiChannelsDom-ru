@@ -6,28 +6,26 @@ import { Pagination } from 'antd';
 var _ = require('lodash');
 var convert = require('xml-js');
 
-let countPag = 0
+// let countPag = 0
  const RenderTable = () => {
   const [inState, inSetState] = useContext(Context);
-  // const [state, setState] = useState({activePage: 1})
   // console.log(inState, 'RenderTable')
-  let { elements } = inState;
+  let { elements, lengthPagination } = inState;
   const { loadingComplite } = inState;
   const { searchStartDate, searchEndDate } = inState;
   // const { searchEndDate } = inState;
   let { offset } = inState;
   const { SessionID, ChangePasswordAtNextLogin } = inState;
   const { eventSubjectID, classID } = inState;
-  // let { offsetRenderMap } = inState;
-  let { renderCountItems } = inState;
+  let { noRenderPagination } = inState;
   // let activePage = 1
   const handlPagination = async (e, f) => {
     console.log(e, 'e => activePage')
     // inSetState({...inState, activePage: e})
     // activePage = e
-    countPag = (e - 1) * 20
+    lengthPagination = (e - 1) * 20
     console.log(e, f)
-    renderCountItems = f
+    // renderCountItems = f
     const newOffSet = (e - 1) * 20
     const apiUrlGetData = 'http://va.fpst.ru:8080/api/exportreport';
     const requestForm = new FormData()
@@ -40,7 +38,7 @@ let countPag = 0
     requestForm.set('Analytics', 'TPlusCoveralls')
     requestForm.set('From', `${searchStartDate}`)
     requestForm.set('To', `${searchEndDate}`)
-    requestForm.set('Offset', countPag)
+    requestForm.set('Offset', lengthPagination)
     requestForm.set('Limit', 20)
     requestForm.set('TPlusCoveralls[ClassID]', classID)
     requestForm.set('TPlusCoveralls[EventSubjectID]', eventSubjectID)
@@ -59,14 +57,13 @@ let countPag = 0
       const { elements } = parseData
       // console.log('target arr', elements[0].elements)
       // const elements = elements[0].elements
-      inSetState({...inState, elements:[...elements[0].elements], offset, activePage: e})
+      inSetState({...inState, elements:[...elements[0].elements], offset, activePage: e, lengthPagination, noRenderPagination: false})
     }).catch((e) => {
       console.log(e)
     })
     
   }
   let { activePage } = inState; 
-  // let count = offsetRenderMap;
   console.log(offset, 'fetch offset')
   console.log(activePage, 'activePage')
   if (loadingComplite) {
@@ -75,18 +72,20 @@ let countPag = 0
   return (
     
     <div className="d-flex row flex-wrap justify-content-around">
-      <div>
-      <Pagination
-        current={activePage}
+      
+      {elements.length > 0 && noRenderPagination === false ? 
+        <div>
+          <Pagination
+            current={activePage}
         // simple={true}
         // showQuickJumper={true} 
-        onChange={handlPagination}
-        defaultPageSize={20}
-        defaultCurrent={1}
-        showSizeChanger={false}
-        total={elements.length < 20 ? countPag + 20 : countPag + 30} 
-        style={{paddingBlock: "1rem", paddingLeft: "1rem"}}/>
-      </div>
+            onChange={handlPagination}
+            defaultPageSize={20}
+            defaultCurrent={1}
+            showSizeChanger={false}
+            total={elements.length < 20 ? lengthPagination + 20 : lengthPagination + 30} 
+            style={{paddingBlock: "1rem", paddingLeft: "1rem"}}/>
+      </div> : null}
       
       {/* renderBar */}
       {elements.map((item) => {
@@ -118,16 +117,17 @@ let countPag = 0
           </div>
         )
       })}
-      <div>
-      <Pagination
-        current={activePage} 
-        onChange={handlPagination}
-        defaultPageSize={20}
-        showSizeChanger={false}
-        defaultCurrent={1} 
-        total={elements.length < 20 ? countPag + 20 : countPag + 30} 
-        style={{paddingBlock: "1rem", paddingLeft: "1rem"}}/>
-      </div>
+       {elements.length > 0 && noRenderPagination === false ? 
+        <div>
+          <Pagination
+            current={activePage} 
+            onChange={handlPagination}
+            defaultPageSize={20}
+            showSizeChanger={false}
+            defaultCurrent={1} 
+            total={elements.length < 20 ? lengthPagination + 20 : lengthPagination + 30} 
+            style={{paddingBlock: "1rem", paddingLeft: "1rem"}}/>
+        </div> : null}
     </div>
   )
   } else {

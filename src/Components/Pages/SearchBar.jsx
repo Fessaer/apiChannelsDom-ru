@@ -20,7 +20,7 @@ export default function SearchBar() {
   const { loadingComplite } = inState;
   const { searchStartDate, searchEndDate } = inState;
   // const { searchEndDate } = inState;
-  let { offset } = inState;
+  let { offset, noRenderPagination } = inState;
   const { SessionID, ChangePasswordAtNextLogin } = inState;
   const { eventSubjectID, classID } = inState;
 
@@ -55,7 +55,7 @@ export default function SearchBar() {
     requestForm.set('Analytics', 'TPlusCoveralls')
     requestForm.set('From', `${searchStartDate}`)
     requestForm.set('To', `${searchEndDate}`)
-    requestForm.set('Offset', offset)
+    requestForm.set('Offset', 0)
     requestForm.set('Limit', 20)
     requestForm.set('TPlusCoveralls[ClassID]', classID)
     requestForm.set('TPlusCoveralls[EventSubjectID]', eventSubjectID)
@@ -82,9 +82,19 @@ export default function SearchBar() {
       const { elements } = parseData
       // console.log('target arr', elements[0].elements)
       // const elements = elements[0].elements
-      inSetState({...inState, elements:[...elements[0].elements], activePage: 1})
+      if (typeof elements[0]['elements'] !== "undefined") {
+        if (elements[0].elements.length < 20) {
+          noRenderPagination = true
+        } else {
+          noRenderPagination = false
+        }
+      inSetState({...inState, elements:[...elements[0].elements], activePage: 1, lengthPagination: 0, noRenderPagination})
+      }
+      if (typeof elements[0]['elements'] === "undefined") {
+        inSetState({...inState, elements:[], activePage: 1, lengthPagination: 0})
+      }
     } catch (err) {
-      console.log(err, 'err2')
+      console.log(err, 'err2', elements in elements)
       // обработка ошибки
     }
     }).catch((e) => {
