@@ -7,9 +7,9 @@ var _ = require('lodash');
 var convert = require('xml-js');
 
 let countPag = 0
-export default function RenderTable() {
+ const RenderTable = () => {
   const [inState, inSetState] = useContext(Context);
-  const [state, setState] = useState({activePage: 1})
+  // const [state, setState] = useState({activePage: 1})
   // console.log(inState, 'RenderTable')
   let { elements } = inState;
   const { loadingComplite } = inState;
@@ -23,7 +23,7 @@ export default function RenderTable() {
   // let activePage = 1
   const handlPagination = async (e, f) => {
     console.log(e, 'e => activePage')
-    inSetState({...state, activePage: e})
+    // inSetState({...inState, activePage: e})
     // activePage = e
     countPag = (e - 1) * 20
     console.log(e, f)
@@ -33,7 +33,7 @@ export default function RenderTable() {
     const requestForm = new FormData()
     console.log(newOffSet, 'newOffSet')
     offset = newOffSet;
-    inSetState({...inState, offset})
+    // inSetState({...inState, offset, activePage: e})
     
     requestForm.set('SessionID', SessionID)
     requestForm.set('ChangePasswordAtNextLogin', ChangePasswordAtNextLogin)
@@ -59,8 +59,7 @@ export default function RenderTable() {
       const { elements } = parseData
       // console.log('target arr', elements[0].elements)
       // const elements = elements[0].elements
-      inSetState({...inState, elements:[...elements[0].elements]})
-      
+      inSetState({...inState, elements:[...elements[0].elements], offset, activePage: e})
     }).catch((e) => {
       console.log(e)
     })
@@ -137,3 +136,5 @@ export default function RenderTable() {
     )
   }
 }
+
+export default RenderTable;

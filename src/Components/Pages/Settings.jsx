@@ -10,7 +10,7 @@ export default function Settings() {
   const buttonHabdler = () => {
     console.log(inState, 'state button')
     count = count + 1;
-    // inSetState({...inState, count})
+    inSetState({...inState, count})
   }
   return (
     <div>

@@ -36,6 +36,7 @@ export default function SearchBar() {
   }
 
   const handlSearch = async (e) => {
+    
     console.log(typeof e)
     const apiUrlGetData = 'http://va.fpst.ru:8080/api/exportreport';
     const requestForm = new FormData()
@@ -81,7 +82,7 @@ export default function SearchBar() {
       const { elements } = parseData
       // console.log('target arr', elements[0].elements)
       // const elements = elements[0].elements
-      inSetState({...inState, elements:[...elements[0].elements]})
+      inSetState({...inState, elements:[...elements[0].elements], activePage: 1})
     } catch (err) {
       console.log(err, 'err2')
       // обработка ошибки
