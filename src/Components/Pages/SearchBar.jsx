@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, useState, useEffect } from 'react';
 import { Context } from '../Store';
-
+import formatDateToLocale from '../functionFormatReplaceDate'
 import moment from 'moment';
 import { DatePicker, Space } from 'antd';
 import 'moment/locale/ru';
@@ -47,25 +47,34 @@ export default function SearchBar() {
   // SessionID
     
     // console.log(inState, 'inState users')
-  console.log(searchStartDate,searchEndDate, 'fetch data')
+    console.log(searchStartDate,searchEndDate, 'fetch data', searchStartDate < searchEndDate)
+    
     requestForm.set('SessionID', SessionID)
     requestForm.set('ChangePasswordAtNextLogin', ChangePasswordAtNextLogin)
     requestForm.set('Analytics', 'TPlusCoveralls')
     requestForm.set('From', `${searchStartDate}`)
     requestForm.set('To', `${searchEndDate}`)
     requestForm.set('Offset', offset)
-    // requestForm.set('Limit', 20)
+    requestForm.set('Limit', 20)
     requestForm.set('TPlusCoveralls[ClassID]', classID)
     requestForm.set('TPlusCoveralls[EventSubjectID]', eventSubjectID)
-    
+    if (searchStartDate < searchEndDate && new Date() > new Date(searchEndDate) && new Date() > new Date(searchStartDate)) {
+      console.log('...ЗАПРОС =>>>')
       await fetch(apiUrlGetData, {
         method: 'POST',
         body: requestForm
       }).then((response) => {
+        try {
         const dataResponseText = response.text();
         console.log(dataResponseText, 'dataResponseText RenderTable')
         return dataResponseText;
+      } catch (err) {
+        console.log(err, 'err')
+        // обработка ошибки
+      }
+        
       }).then((data) => {
+        try {
       let result = convert.xml2json(data, {compact: false});
       let parseData = JSON.parse(result)
       console.log(parseData, 'pagination')
@@ -73,14 +82,23 @@ export default function SearchBar() {
       // console.log('target arr', elements[0].elements)
       // const elements = elements[0].elements
       inSetState({...inState, elements:[...elements[0].elements]})
+    } catch (err) {
+      console.log(err, 'err2')
+      // обработка ошибки
+    }
     }).catch((e) => {
       console.log(e)
     })
-    
+    } else {
+      console.log('отмена запроса из за некоректной даты')
+    }
   }
   
   const changeCamera = (e) => {
     console.log(e.target.value)
+  }
+  const handlCheck = () => {
+    console.log(inState)
   }
 
   return (
@@ -121,6 +139,7 @@ export default function SearchBar() {
 
       <div className="col-lg-2 col-sm-4 pb-3 d-flex align-items-end button_max_width">
       <button type="button" className="btn btn-outline-primary btn-sm" onClick={handlSearch}>Применить</button>
+      <button type="button" className="btn btn-outline-primary btn-sm" onClick={handlCheck}>Check</button>
       </div>
       
     </div>

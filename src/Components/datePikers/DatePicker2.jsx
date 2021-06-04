@@ -4,6 +4,8 @@ import { DatePicker } from 'antd';
 import 'moment/locale/ru';
 import locale from 'antd/es/date-picker/locale/ru_RU';
 import moment from 'moment';
+import formatDateToLocale from '../functionFormatReplaceDate'
+
 
 
 export default function DatePicker1() {
@@ -22,16 +24,16 @@ export default function DatePicker1() {
 
   function disabledDate(current) {
     // Can not select days before today and today
-    return current && current < moment().endOf('day');
+    return current && current > moment().endOf('day');
   }
   
-  function disabledDateTime() {
-    return {
-      disabledHours: () => range(0, 24).splice(4, 20),
-      disabledMinutes: () => range(30, 60),
-      disabledSeconds: () => [55, 56],
-    };
-  }
+  // function disabledDateTime() {
+  //   return {
+  //     disabledHours: () => range(formatDateToLocale(new Date(), 'hh', 0), 24),
+  //     disabledMinutes: () => range(formatDateToLocale(new Date(), 'MM', 0), 60),
+  //     disabledSeconds: () => range(formatDateToLocale(new Date(), 'ss', 0), 60),
+  //   };
+  // }
   const onChange = (e) => {
     let formDateDay = e._d;
     let formDateHours = e._d;
@@ -58,7 +60,7 @@ export default function DatePicker1() {
           locale={locale}
           format="DD-MM-YYYY HH:mm:ss"
           onChange={onChange}
-          // disabledDate={disabledDate}
+          disabledDate={disabledDate}
           // disabledTime={disabledDateTime}
           showTime={{ defaultValue: moment('00:00:00', 'HH:mm:ss') }}
         />

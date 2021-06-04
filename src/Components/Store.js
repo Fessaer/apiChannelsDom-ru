@@ -4,7 +4,8 @@ import React, { useState } from 'react';
 // connect in bd
 // console.log()
     //
-    const initialState = {
+    let initialState = {
+      activePage: 1,
       count: 0,
       elements: [],
       datePicker1: {},
@@ -33,7 +34,7 @@ const Store = ({children}) => {
   initialState['SessionID'] = SessionID;
   initialState['ChangePasswordAtNextLogin'] = ChangePasswordAtNextLogin;
   initialState['validate'] = validate;
-  console.log(initialState, 'initialState')
+  // console.log(initialState, 'initialState')
   const [inState, inSetState] = useState(initialState);
   
   return (

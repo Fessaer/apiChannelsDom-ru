@@ -23,10 +23,10 @@ export default function Home() {
   // SessionID
   const { startDate } = inState;
   const { endDate } = inState;
-  const { offset } = inState;
+  let { offset } = inState;
   const { SessionID } = inState;
   const { ChangePasswordAtNextLogin } = inState;
-  console.log(inState, 'inState users')
+  // console.log(inState, 'inState users')
   // console.log(SessionID, ChangePasswordAtNextLogin)
   requestForm.set('SessionID', SessionID)
   requestForm.set('ChangePasswordAtNextLogin', ChangePasswordAtNextLogin)
@@ -60,7 +60,7 @@ export default function Home() {
   })
   })()
 }, [])
-console.log(inState, 'State USers')
+// console.log(inState, 'State USers')
   return (
     <div className="container-fluid"> 
     сонтайнер Bootstrap

@@ -29,12 +29,12 @@ function App() {
 
       }).catch((err) => console.log(err, 'error response auth'))
     })()
-   }, [])
-   console.log(dataState, 'dataState')
-   const { validate } = dataState;
-   if (validate === false) {
-     return null;
-   } else {
+  }, [])
+  console.log(dataState, 'dataState')
+  const { validate } = dataState;
+  if (validate === false) {
+    return null;
+  } else {
 
   return (
       <Store>

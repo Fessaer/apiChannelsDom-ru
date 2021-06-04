@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
+import formatDateToLocale from '../functionFormatReplaceDate'
 import { Context } from '../Store';
 import { DatePicker } from 'antd';
 import 'moment/locale/ru';
@@ -22,17 +23,19 @@ export default function DatePicker1() {
 
   function disabledDate(current) {
     // Can not select days before today and today
-    return current && current < moment().endOf('day');
+    // console.log(formatDateToLocale(new Date(), 'hh', 0), 'form')
+    return current && current > moment().endOf('day');
   }
   
-  function disabledDateTime() {
-    return {
-      disabledHours: () => range(0, 24).splice(4, 20),
-      disabledMinutes: () => range(30, 60),
-      disabledSeconds: () => [55, 56],
-    };
-  }
+  // function disabledDateTime() {
+  //   return {
+  //     disabledHours: () => range(formatDateToLocale(new Date(), 'hh', 0), 24),
+  //     disabledMinutes: () => range(formatDateToLocale(new Date(), 'MM', 0), 60),
+  //     disabledSeconds: () => range(formatDateToLocale(new Date(), 'ss', 0), 60),
+  //   };
+  // }
   const onChange = (e) => {
+    console.log(e)
     let formDateDay = e._d;
     let formDateHours = e._d;
     let d = new Date(e._d)
@@ -47,6 +50,9 @@ export default function DatePicker1() {
     inSetState({...inState, searchStartDate})
     console.log(resultDate)
   }
+  const onTest = (e) => {
+    console.log(e)
+  }
 
   return (
     <div className="col-lg-2 col-sm-4 pb-3 button_max_width">
@@ -57,9 +63,10 @@ export default function DatePicker1() {
           locale={locale}
           format="DD-MM-YYYY HH:mm:ss"
           onChange={onChange}
-          // disabledDate={disabledDate}
+          disabledDate={disabledDate}
           // disabledTime={disabledDateTime}
           showTime={{ defaultValue: moment('00:00:00', 'HH:mm:ss') }}
+          input={onTest}
         />
       
       </div>
