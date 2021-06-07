@@ -9,7 +9,13 @@ import locale from 'antd/es/date-picker/locale/ru_RU';
 import '../Styles/searchBar.css'
 import DatePicker1 from '../datePikers/DatePicker1';
 import DatePicker2 from '../datePikers/DatePicker2';
+import DropdownListCameras from '../mountСomponents/DropdownList';
+import Calendar from '../mountСomponents/CalendarDataPicker';
+import Submit from '../mountСomponents/Submit';
+import Paginations from '../mountСomponents/Paging';
+import DataTable from '../mountСomponents/DataTable';
 var convert = require('xml-js');
+
 
 
 
@@ -36,30 +42,18 @@ export default function SearchBar() {
   }
 
   const handlSearch = async (e) => {
-    
-    console.log(typeof e)
     const apiUrlGetData = 'http://va.fpst.ru:8080/api/exportreport';
     const requestForm = new FormData()
-    // const newOffSet = (e - 1) * 20
-    // console.log(newOffSet)
-    // offset = newOffSet;
-    // inSetState({...inState, offset})
-  // ChangePasswordAtNextLogin
-  // SessionID
-    
-    // console.log(inState, 'inState users')
-    console.log(searchStartDate,searchEndDate, 'fetch data', searchStartDate < searchEndDate)
-    
     requestForm.set('SessionID', SessionID)
     requestForm.set('ChangePasswordAtNextLogin', ChangePasswordAtNextLogin)
     requestForm.set('Analytics', 'TPlusCoveralls')
     requestForm.set('From', `${searchStartDate}`)
     requestForm.set('To', `${searchEndDate}`)
     requestForm.set('Offset', 0)
-    requestForm.set('Limit', 20)
+    requestForm.set('Limit', 21)
     requestForm.set('TPlusCoveralls[ClassID]', classID)
     requestForm.set('TPlusCoveralls[EventSubjectID]', eventSubjectID)
-    if (searchStartDate < searchEndDate && new Date() > new Date(searchEndDate) && new Date() > new Date(searchStartDate)) {
+    if (new Date(searchStartDate) < new Date(searchEndDate) && new Date() > new Date(searchEndDate) && new Date() > new Date(searchStartDate)) {
       console.log('...ЗАПРОС =>>>')
       await fetch(apiUrlGetData, {
         method: 'POST',
@@ -80,10 +74,8 @@ export default function SearchBar() {
       let parseData = JSON.parse(result)
       console.log(parseData, 'pagination')
       const { elements } = parseData
-      // console.log('target arr', elements[0].elements)
-      // const elements = elements[0].elements
       if (typeof elements[0]['elements'] !== "undefined") {
-        if (elements[0].elements.length < 20) {
+        if (elements[0].elements.length < 21) {
           noRenderPagination = true
         } else {
           noRenderPagination = false
@@ -145,13 +137,21 @@ export default function SearchBar() {
         </select>
       </div>
 
-      <DatePicker1 />
-      <DatePicker2 />
+      {/* <DatePicker1 /> */}
+      {/* <DatePicker2 /> */}
+      
+      <DropdownListCameras name={'test cameras group'} items={['Спецодежда VLC stream', 'camera 2', 'camera 3']} />
+      <Calendar name={'From'} minDate={'2021-06-04 03:06:10'} maxDate={'2021-06-07 02:01:05'} />
+      <Calendar name={'To'} minDate={'2021-06-04 03:06:10'} maxDate={'2021-06-07 02:01:05'} />
+      <DropdownListCameras name={'ClassID'} items={['class1', 'class2', 'class3']} />
+      <Submit />
+      <Paginations />
+      <DataTable />
 
-      <div className="col-lg-2 col-sm-4 pb-3 d-flex align-items-end button_max_width">
-      <button type="button" className="btn btn-outline-primary btn-sm" onClick={handlSearch}>Применить</button>
-      <button type="button" className="btn btn-outline-primary btn-sm" onClick={handlCheck}>Check</button>
-      </div>
+      {/* <div className="col-lg-2 col-sm-4 pb-3 d-flex align-items-end button_max_width">
+        <button type="button" className="btn btn-outline-primary btn-sm" onClick={handlSearch}>Применить</button>
+        <button type="button" className="btn btn-outline-primary btn-sm" onClick={handlCheck}>Check</button>
+      </div> */}
       
     </div>
   )

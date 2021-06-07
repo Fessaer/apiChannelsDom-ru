@@ -25,8 +25,6 @@ function App() {
       }).then((inf) => {
         const { SessionID, ChangePasswordAtNextLogin } = JSON.parse(inf);
         setDataState({SessionID, ChangePasswordAtNextLogin, validate: true})
-      }).then(() =>{
-
       }).catch((err) => console.log(err, 'error response auth'))
     })()
   }, [])

@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 // console.log()
     //
     let initialState = {
+      algorithm: '',
       noRenderPagination: false,    //включает\выключает пагинацию
       lengthPagination: 0,          //регулирует дину пагинации
       activePage: 1,                //синхронизация пагинации
@@ -13,9 +14,9 @@ import React, { useState } from 'react';
       datePicker1: {},              
       datePicker2: {},
       loadingComplite: false,       //проверка загрузки данных перед рендером
-      startDate: new Date(),        //вроде не используеться
-      endDate: new Date(),          //вроде не используеться
-      offset: 0,                    //вроде не используеться
+      startDate: new Date(),        // используеться при стартовой загрузке
+      endDate: new Date(),          // используеться при стартовой загрузке
+      offset: 0,                    // динамический оффсет
       classID: '1',                 //опции поиска
       eventSubjectID: '552',        //опции поиска
       subClassID: '2',              //опции поиска
@@ -28,10 +29,8 @@ export const Context = React.createContext();
 
 const Store = ({children}) => {
   
-  // console.log(children[0], 'children.props')
   const {SessionID, ChangePasswordAtNextLogin, validate} = children[0];
-  // console.log(children[0], 'children[0]')
-  // const initialState = children[0]
+
   initialState['SessionID'] = SessionID;
   initialState['ChangePasswordAtNextLogin'] = ChangePasswordAtNextLogin;
   initialState['validate'] = validate;
