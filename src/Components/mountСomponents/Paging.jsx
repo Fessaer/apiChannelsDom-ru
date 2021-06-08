@@ -11,7 +11,7 @@ export default function Paging() {
     SessionID,
     ChangePasswordAtNextLogin, 
     eventSubjectID, 
-    classID,
+    ClassID,
     searchStartDate, 
     searchEndDate } = inState;
     
@@ -30,9 +30,9 @@ export default function Paging() {
       requestForm.set('Analytics', 'TPlusCoveralls')
       requestForm.set('From', `${searchStartDate}`)
       requestForm.set('To', `${searchEndDate}`)
-      requestForm.set('Offset', lengthPagination)
+      requestForm.set('Offset', offset)
       requestForm.set('Limit', 21)
-      requestForm.set('TPlusCoveralls[ClassID]', classID)
+      requestForm.set('TPlusCoveralls[ClassID]', ClassID)
       requestForm.set('TPlusCoveralls[EventSubjectID]', eventSubjectID)
       
         await fetch(apiUrlGetData, {

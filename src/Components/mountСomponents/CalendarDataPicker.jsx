@@ -8,10 +8,10 @@ import moment from 'moment';
 // let cn = require('classnames');
 
 
-export default function DatePicker1(props) {
+export default function CalendarPicker(props) {
   const [inState, inSetState] = useContext(Context);
-  let { name, minDate, maxDate } = props;
-  console.log(props, 'props')
+  let { name, minDate, maxDate, labelName } = props;
+  // console.log(props, 'props')
   const range = (start, end) => {
     const result = [];
     for (let i = start; i < end; i++) {
@@ -79,7 +79,7 @@ export default function DatePicker1(props) {
   // const dateFormat = 'DD-MM-YYYY:HH:mm:ss'
   return (
     <div className="col-lg-2 col-sm-4 pb-3 button_max_width">
-      <label>Дата и время ({name === 'From' ? 'от' : 'до'})</label>
+      <label>{labelName}</label>
         <DatePicker
           style={{display: "flex"}}
           locale={locale}
@@ -87,7 +87,7 @@ export default function DatePicker1(props) {
           onChange={onChange}
           disabledDate={disabledDate}
           // disabledDate={disabledDate2}
-          disabledTime={disabledDateTime}
+          // disabledTime={disabledDateTime}
           // defaultValue={moment(minDate, dateFormat)}
           showTime={{ defaultValue: moment('00:00:00', 'HH:mm:ss') }}
           input={onTest}

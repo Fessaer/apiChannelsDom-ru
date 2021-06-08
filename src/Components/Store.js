@@ -6,18 +6,16 @@ import React, { useState } from 'react';
     //
     let initialState = {
       algorithm: '',
-      noRenderPagination: false,    //включает\выключает пагинацию
+      noRenderPagination: true,    //включает\выключает пагинацию
       lengthPagination: 0,          //регулирует дину пагинации
       activePage: 1,                //синхронизация пагинации
       count: 0,                     // тестовый стейт
       elements: [],                 //длина рresponse массива 
-      datePicker1: {},              
-      datePicker2: {},
       loadingComplite: false,       //проверка загрузки данных перед рендером
       startDate: new Date(),        // используеться при стартовой загрузке
       endDate: new Date(),          // используеться при стартовой загрузке
       offset: 0,                    // динамический оффсет
-      classID: '1',                 //опции поиска
+      ClassID: '1',                 //опции поиска
       eventSubjectID: '552',        //опции поиска
       subClassID: '2',              //опции поиска
       renderCountItems: 20,         //опции поиска

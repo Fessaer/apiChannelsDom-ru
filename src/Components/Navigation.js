@@ -1,7 +1,7 @@
 import React from 'react'
 import Home from'./Pages/Home';
-import Settings from './Pages/Settings';
-import Users from './Pages/Users';
+import Chart from './Pages/Chart';
+import Report from './Pages/Report';
 import {
   BrowserRouter as Router,
   Switch,
@@ -19,10 +19,10 @@ export default function Navigation() {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/Settings">График</Link>
+              <Link to="/charts">График</Link>
             </li>
             <li>
-              <Link to="/users">Отчёт</Link>
+              <Link to="/reports">Отчёт</Link>
             </li>
           </ul>
         </nav>
@@ -30,11 +30,11 @@ export default function Navigation() {
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/settings">
-            <Settings />
+          <Route path="/charts">
+            <Chart />
           </Route>
-          <Route path="/users">
-            <Users />
+          <Route path="/reports">
+            <Report />
           </Route>
           <Route path="/">
             <Home />

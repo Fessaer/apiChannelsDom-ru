@@ -14,7 +14,7 @@ export default function Submit() {
     SessionID, 
     ChangePasswordAtNextLogin, 
     eventSubjectID, 
-    classID } = inState;
+    ClassID } = inState;
   let { noRenderPagination } = inState;
   
   const handlSearch = async (e) => {
@@ -27,7 +27,7 @@ export default function Submit() {
     requestForm.set('To', `${searchEndDate}`)
     requestForm.set('Offset', 0)
     requestForm.set('Limit', 21)
-    requestForm.set('TPlusCoveralls[ClassID]', classID)
+    requestForm.set('TPlusCoveralls[ClassID]', ClassID)
     requestForm.set('TPlusCoveralls[EventSubjectID]', eventSubjectID)
     if (new Date(searchStartDate) < new Date(searchEndDate) && new Date() > new Date(searchEndDate) && new Date() > new Date(searchStartDate)) {
       console.log('...ЗАПРОС =>>>')
@@ -56,7 +56,7 @@ export default function Submit() {
         } else {
           noRenderPagination = false
         }
-      inSetState({...inState, elements:[...elements[0].elements], activePage: 1, lengthPagination: 0, noRenderPagination})
+      inSetState({...inState, elements:[...elements[0].elements], activePage: 1, lengthPagination: 0, noRenderPagination, loadingComplite: true})
       }
       if (typeof elements[0]['elements'] === "undefined") {
         inSetState({...inState, elements:[], activePage: 1, lengthPagination: 0})

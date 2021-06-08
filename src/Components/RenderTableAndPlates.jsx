@@ -7,7 +7,7 @@ var _ = require('lodash');
 var convert = require('xml-js');
 
 // let countPag = 0
-const RenderTable = () => {
+const RenderTableAndPlates = () => {
   
   return (
     <>
@@ -15,4 +15,4 @@ const RenderTable = () => {
   )
 }
 
-export default RenderTable;
+export default RenderTableAndPlates;

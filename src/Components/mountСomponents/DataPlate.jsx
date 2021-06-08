@@ -5,7 +5,7 @@ import '../Styles/renderTable.css';
 import formatLocaleDate from '../formatDate';
 let _ = require('lodash');
 
- const RenderTable = () => {
+const RenderPlate = () => {
   const [inState] = useContext(Context);
   let { elements } = inState;
   const { loadingComplite } = inState;
@@ -38,4 +38,4 @@ let _ = require('lodash');
   }
 }
 
-export default RenderTable;
+export default RenderPlate;
