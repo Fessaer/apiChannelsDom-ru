@@ -93,7 +93,7 @@ export default function Submit() {
   }
 
   return (
-    <div className="col-lg-2 col-sm-4 pb-3 d-flex align-items-end button_max_width">
+    <div className="col-lg-2 col-sm-4 d-flex align-items-center button_max_width">
       <button type="button" className="btn btn-outline-primary btn-sm" onClick={handlSearch}>Применить Recharts</button>
     </div>
   )

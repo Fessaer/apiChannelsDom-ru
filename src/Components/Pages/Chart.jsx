@@ -7,6 +7,7 @@ import Calendar from '../mountСomponents/CalendarDataPicker';
 import DropdownList from '../mountСomponents/DropdownList';
 import SearchBar from './SearchBar';
 import SubmitCharts from '../mountСomponents/SubmitCharts'
+import { Container } from 'react-bootstrap';
 var convert = require('xml-js');
 
 
@@ -79,7 +80,7 @@ export default function Settings() {
   }
   
   return (
-    <>
+    <div className="container-fluid">
     <div className="row">
       <DropdownList name={'Cameras'} items={[{'Спецодежда VLC stream': 'Спецодежда VLC stream'}]} labelName={'камера'} />
       <Calendar name={'From'} labelName={'Дата и время (от)'}/>
@@ -104,7 +105,7 @@ export default function Settings() {
         <Line type="monotone" dataKey='Ноги' stroke="#ffb700" />
       </LineChart>
     </ResponsiveContainer>
-    </>
+    </div>
     
   )
 }

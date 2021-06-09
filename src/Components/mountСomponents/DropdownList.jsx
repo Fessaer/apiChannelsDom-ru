@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import { Context } from '../Store';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import Form from 'react-bootstrap/Form'
+import FormControl from 'react-bootstrap/FormControl'
+// import 'bootstrap/dist/css/bootstrap.min.css';
 //DropdownList name={'ClassID'} items={[{1:'Голова'}, {2: 'Туловище'}, {3: 'Ноги'}]} labelName={'класс объекта'}
 
 export default function DropdownList(props) {
@@ -18,10 +20,11 @@ export default function DropdownList(props) {
 
   return (
     <div className="col-lg-2 col-sm-4 pb-3 button_max_width">
-        <label>{labelName}</label>
-        <select className="form-select form-select-sm" aria-label=".form-select-sm example" onChange={changeHandler}>
-          {/* <option selected>Open this select menu</option> */}
-          {items.map((item) => {
+      <Form>
+  <Form.Group controlId="exampleForm.SelectCustom">
+    <Form.Label>{labelName}</Form.Label>
+    <Form.Control as="select"  size="sm" custom>
+    {items.map((item) => {
             const key = Object.keys(item).join()
             const value = Object.values(item)
 
@@ -29,8 +32,10 @@ export default function DropdownList(props) {
               <option key={key} value={key}>{value}</option>
             )
           })}
-          {/* <option value="1">Спецодежда VLC stream</option> */}
-        </select>
+    </Form.Control>
+  </Form.Group>
+</Form>
+        
       </div>
   )
 }

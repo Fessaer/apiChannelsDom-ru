@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Context } from '../Store';
 import 'moment/locale/ru';
-// import '../Styles/searchBar.css'
+import '../Styles/searchBar.css'
 var convert = require('xml-js');
 
 export default function Submit() {
@@ -74,8 +74,8 @@ export default function Submit() {
     }
   }
   return (
-    <div className="col-lg-2 col-sm-4 pb-3 d-flex align-items-end button_max_width">
-      <button type="button" className="btn btn-outline-primary btn-sm" onClick={handlSearch}>Применить</button>
+    <div className="col-lg-2 col-sm-4 d-flex align-items-center">
+      <button type="button" className="btn btn-outline-primary btn-sm button_max_width" onClick={handlSearch}>Применить</button>
     </div>
   )
 }

@@ -37,10 +37,10 @@ export default function SearchBar(props) {
       <Submit />
       {/* <DataTable /> */}
 
-      <div className="col-lg-2 col-sm-4 pb-3 d-flex align-items-end button_max_width">
-        {/* <button type="button" className="btn btn-outline-primary btn-sm" onClick={handlSearch}>Применить</button> */}
+      {/* <div className="col-lg-2 col-sm-4 pb-3 d-flex align-items-end button_max_width">
+        <button type="button" className="btn btn-outline-primary btn-sm" onClick={handlSearch}>Применить</button>
         <button type="button" className="btn btn-outline-primary btn-sm" onClick={handlCheck}>Check</button>
-      </div>
+      </div> */}
     </div>
   )
 }
