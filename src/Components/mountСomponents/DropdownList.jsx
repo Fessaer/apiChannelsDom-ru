@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Context } from '../Store';
+import 'bootstrap/dist/css/bootstrap.min.css';
 //DropdownList name={'ClassID'} items={[{1:'Голова'}, {2: 'Туловище'}, {3: 'Ноги'}]} labelName={'класс объекта'}
 
 export default function DropdownList(props) {

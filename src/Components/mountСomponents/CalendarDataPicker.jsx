@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import formatDateToLocale from '../functionFormatReplaceDate'
+import formatDateToLocale from '../helpers/functionFormatReplaceDate'
 import { Context } from '../Store';
 import { DatePicker } from 'antd';
 import 'moment/locale/ru';
@@ -22,7 +22,6 @@ export default function CalendarPicker(props) {
   }
   
   const disabledDate = (current) => {
-    // console.log(current)
     // eslint-disable-next-line no-mixed-operators
     const dayPlusOne = new Date(maxDate)
     const day = dayPlusOne.setDate(dayPlusOne.getDate() + 1)
@@ -31,27 +30,23 @@ export default function CalendarPicker(props) {
     // eslint-disable-next-line no-mixed-operators
     return current  < moment(min) || current && current > moment(max);
   }
-  // const disabledDate2 = (current) => {
-  //   console.log(current)
-  //   return current && current > moment(maxDate);
+ 
+  // const disabledDateTime = () => {
+  //   return {
+  //     disabledHours: () => {
+  //       if(minDate !== undefined && name === 'From') return range(formatDateToLocale(new Date(minDate), 'hh', 0), 24)
+  //       if(maxDate !== undefined && name === 'To') return range(formatDateToLocale(new Date(maxDate), 'hh', 0), 24)
+  //     },
+  //     disabledMinutes: () => {
+  //       if(minDate !== undefined && name === 'From') return range(formatDateToLocale(new Date(minDate), 'MM', 0), 60)
+  //       if(maxDate !== undefined && name === 'To') return range(formatDateToLocale(new Date(maxDate), 'MM', 0), 60)
+  //     },
+  //     disabledSeconds: () => {
+  //       if(minDate !== undefined && name === 'From') return range(formatDateToLocale(new Date(minDate), 'ss', 0), 60)
+  //       if(maxDate !== undefined && name === 'To') return range(formatDateToLocale(new Date(maxDate), 'ss', 0), 60)
+  //     },
+  //   };
   // }
-  // console.log(formatDateToLocale(minDate, 'yyyy-mm-dd hh:MM:ss', 0))
-  const disabledDateTime = () => {
-    return {
-      disabledHours: () => {
-        if(minDate !== undefined && name === 'From') return range(formatDateToLocale(new Date(minDate), 'hh', 0), 24)
-        if(maxDate !== undefined && name === 'To') return range(formatDateToLocale(new Date(maxDate), 'hh', 0), 24)
-      },
-      disabledMinutes: () => {
-        if(minDate !== undefined && name === 'From') return range(formatDateToLocale(new Date(minDate), 'MM', 0), 60)
-        if(maxDate !== undefined && name === 'To') return range(formatDateToLocale(new Date(maxDate), 'MM', 0), 60)
-      },
-      disabledSeconds: () => {
-        if(minDate !== undefined && name === 'From') return range(formatDateToLocale(new Date(minDate), 'ss', 0), 60)
-        if(maxDate !== undefined && name === 'To') return range(formatDateToLocale(new Date(maxDate), 'ss', 0), 60)
-      },
-    };
-  }
   const onChange = (e) => {
     // console.log(e)
     // let formDateDay = e._d;

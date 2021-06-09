@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import formatDateToLocale from '../functionFormatReplaceDate'
+import formatDateToLocale from '../helpers/functionFormatReplaceDate'
 import { Context } from '../Store';
 import { DatePicker } from 'antd';
 import 'moment/locale/ru';

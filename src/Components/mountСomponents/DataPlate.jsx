@@ -2,7 +2,7 @@
 import React, { useContext } from 'react';
 import { Context } from '../Store';
 import '../Styles/renderTable.css';
-import formatLocaleDate from '../formatDate';
+import formatLocaleDate from '../helpers/formatDate';
 let _ = require('lodash');
 
 const RenderPlate = () => {

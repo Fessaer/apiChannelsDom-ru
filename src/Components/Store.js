@@ -9,7 +9,8 @@ import React, { useState } from 'react';
       noRenderPagination: true,    //включает\выключает пагинацию
       lengthPagination: 0,          //регулирует дину пагинации
       activePage: 1,                //синхронизация пагинации
-      count: 0,                     // тестовый стейт
+      count: 0,
+      elementsRechart: [],                     // графики
       elements: [],                 //длина рresponse массива 
       loadingComplite: false,       //проверка загрузки данных перед рендером
       startDate: new Date(),        // используеться при стартовой загрузке

@@ -4,7 +4,7 @@ import { DatePicker } from 'antd';
 import 'moment/locale/ru';
 import locale from 'antd/es/date-picker/locale/ru_RU';
 import moment from 'moment';
-import formatDateToLocale from '../functionFormatReplaceDate'
+import formatDateToLocale from '../helpers/functionFormatReplaceDate'
 
 
 

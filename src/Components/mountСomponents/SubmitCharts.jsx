@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import { Context } from '../Store';
 import 'moment/locale/ru';
+import formatDateToLocale from '../helpers/functionFormatReplaceDate'
+
 // import '../Styles/searchBar.css'
 var convert = require('xml-js');
 
@@ -10,7 +12,7 @@ export default function Submit() {
   
   const { searchStartDate,
     searchEndDate,
-    elements, 
+    elementsRechart, 
     SessionID, 
     ChangePasswordAtNextLogin, 
     eventSubjectID, 
@@ -26,12 +28,16 @@ export default function Submit() {
     requestForm.set('From', `${searchStartDate}`)
     requestForm.set('To', `${searchEndDate}`)
     requestForm.set('Offset', 0)
-    requestForm.set('Limit', 21)
+    // requestForm.set('Limit', 21)
     requestForm.set('TPlusCoveralls[ClassID]', ClassID)
     requestForm.set('TPlusCoveralls[EventSubjectID]', eventSubjectID)
-    // requestForm.set('CountBy', 'day')
+    requestForm.set('CountBy', 'day')
     if (new Date(searchStartDate) < new Date(searchEndDate) && new Date() > new Date(searchEndDate) && new Date() > new Date(searchStartDate)) {
       console.log('...ЗАПРОС =>>>')
+      if (ClassID === '4') {
+        console.log('ClassID === 4')
+        requestForm.set('SessionID', SessionID)
+      } else {
       await fetch(apiUrlGetData, {
         method: 'POST',
         body: requestForm
@@ -49,33 +55,46 @@ export default function Submit() {
         try {
       let result = convert.xml2json(data, {compact: false});
       let parseData = JSON.parse(result)
-      console.log(parseData, 'pagination')
+      console.log(parseData)
       const { elements } = parseData
-      if (typeof elements[0]['elements'] !== "undefined") {
-        if (elements[0].elements.length < 21) {
-          noRenderPagination = true
-        } else {
-          noRenderPagination = false
-        }
-      inSetState({...inState, elements:[...elements[0].elements], activePage: 1, lengthPagination: 0, noRenderPagination, loadingComplite: true})
+      const arrElements = elements[0].elements
+      console.log(arrElements, 'recharts data')
+      const mappingClassID = {
+        '1': 'Голова',
+        '2': 'Туловище',
+        '3': 'Ноги'
       }
-      if (typeof elements[0]['elements'] === "undefined") {
-        inSetState({...inState, elements:[], activePage: 1, lengthPagination: 0})
-      }
+      const normalasedData = arrElements.map((item) => {
+        const d = item.elements[0].elements[0].text
+        const count = item.elements[1].elements[0].text
+        const date = formatDateToLocale(new Date(d), 'dd.mm.yyyy')
+        // console.log(date, count)
+        
+        const nameLine = mappingClassID[ClassID]
+        console.log(mappingClassID.ClassID)
+        return {date: date, [nameLine]: count, ClassID: ClassID}
+      })
+      let arrNewData = [];
+      
+      inSetState({...inState, elementsRechart: normalasedData})
+      console.log(normalasedData, 'normalasedData')
     } catch (err) {
-      console.log(err, 'err2', elements in elements)
+      console.log(err, 'err2')
       // обработка ошибки
     }
     }).catch((e) => {
       console.log(e)
     })
+    }
     } else {
       console.log('отмена запроса из за некоректной даты')
     }
+    
   }
+
   return (
     <div className="col-lg-2 col-sm-4 pb-3 d-flex align-items-end button_max_width">
-      <button type="button" className="btn btn-outline-primary btn-sm" onClick={handlSearch}>Применить</button>
+      <button type="button" className="btn btn-outline-primary btn-sm" onClick={handlSearch}>Применить Recharts</button>
     </div>
   )
 }
