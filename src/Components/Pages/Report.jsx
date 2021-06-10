@@ -7,6 +7,7 @@ import DataPlate from '../mountСomponents/DataPlate';
 import DataReactTable from '../mountСomponents/DataTable';
 import Pagination from '../mountСomponents/Paging';
 import Submit from '../mountСomponents/Submit';
+import Spinner from '../mountСomponents/Spinner';
 var convert = require('xml-js');
 
 export default function Users() {
@@ -14,7 +15,8 @@ export default function Users() {
   let { count } = inState;
   return (
     <div className="container-fluid"> 
-    <SearchBar props={ <Submit /> }/>
+    <SearchBar />
+    <Spinner />
     <Pagination />
     {/* <DataPlate /> */}
     <DataReactTable />

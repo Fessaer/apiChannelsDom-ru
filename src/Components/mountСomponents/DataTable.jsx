@@ -18,11 +18,10 @@ const RenderReactTable = () => {
     const image = <img className="photo" src={`data:image/png;base64,${item.elements[5].elements[0].text}`} alt="altImage" />
     const param1 = item.elements[6].elements[0].elements[0].elements[0].text
     const param2 = item.elements[6].elements[0].elements[1].elements[0].text
-    console.log(param1)
-    console.log(param2)
+    // 11
     return {id: id, time: dateTime, cameraName: cameraName, image: image, param1: param1, param2: param2}
   })
-  console.log(elements)
+  // console.log(elements)
   return (
     <>
     <Table striped bordered hover>

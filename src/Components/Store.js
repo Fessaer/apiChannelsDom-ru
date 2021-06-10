@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 // console.log()
     //
     let initialState = {
+      loadingSpinner: false,
       algorithm: '',
       noRenderPagination: true,    //включает\выключает пагинацию
       lengthPagination: 0,          //регулирует дину пагинации

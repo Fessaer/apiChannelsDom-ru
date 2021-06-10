@@ -16,6 +16,7 @@ export default function Paging() {
     searchEndDate } = inState;
     
     const handlPagination = async (e, f) => {
+      inSetState({...inState, loadingSpinner: true})
       console.log(e, 'e => activePage')
       lengthPagination = (e - 1) * 20
       console.log(e, f)
@@ -47,9 +48,10 @@ export default function Paging() {
         let parseData = JSON.parse(result)
         console.log(parseData, 'pagination')
         const { elements } = parseData
-        inSetState({...inState, elements:[...elements[0].elements], offset, activePage: e, lengthPagination, noRenderPagination: false})
+        inSetState({...inState, elements:[...elements[0].elements], offset, activePage: e, lengthPagination, noRenderPagination: false, loadingSpinner: false})
       }).catch((e) => {
         console.log(e)
+        inSetState({...inState, loadingSpinner: false})
       })
     }
     let { activePage } = inState; 

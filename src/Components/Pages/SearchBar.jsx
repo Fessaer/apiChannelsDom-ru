@@ -21,26 +21,21 @@ var convert = require('xml-js');
 
 export default function SearchBar(props) {
   const [inState, inSetState] = useContext(Context);
-  // const { Submit } = props
-  const handlCheck = () => {
-    
-    console.log(props)
-  }
-
+  
   return (
     <div className="row">
       <DropdownList name={'Cameras'} items={[{'Спецодежда VLC stream': 'Спецодежда VLC stream'}]} labelName={'камера'} />
       <Calendar name={'From'} labelName={'Дата и время (от)'}/>
       <Calendar name={'To'} labelName={'Дата и время (до)'}/>
-      <DropdownList name={'ClassID'} items={[{1:'Голова'}, {2: 'Туловище'}, {3: 'Ноги'}]} labelName={'класс объекта'} />
+      <DropdownList name={'ClassID'} items={[{1:'Шлем'}, {2: 'Куртка'}, {3: 'Ноги'}, {4: 'Всё'}]} labelName={'класс объекта'} />
       <DropdownList name={'eventSubjectID'} items={[{552:'Нестандартная спецодежда'}, {553: 'Стандартная спецодежда'}]} labelName={'Спецодежда'} />
       <Submit />
       {/* <DataTable /> */}
 
-      {/* <div className="col-lg-2 col-sm-4 pb-3 d-flex align-items-end button_max_width">
-        <button type="button" className="btn btn-outline-primary btn-sm" onClick={handlSearch}>Применить</button>
-        <button type="button" className="btn btn-outline-primary btn-sm" onClick={handlCheck}>Check</button>
-      </div> */}
+      <div className="col-lg-2 col-sm-4 pb-3 d-flex align-items-end button_max_width">
+        {/* <button type="button" className="btn btn-outline-primary btn-sm" onClick={handlSearch}>Применить</button> */}
+        <button type="button" className="btn btn-outline-primary btn-sm" onClick={()=> console.log(inState)}>Check</button>
+      </div>
     </div>
   )
 }

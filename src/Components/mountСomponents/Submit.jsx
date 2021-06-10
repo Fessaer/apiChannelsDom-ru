@@ -14,10 +14,13 @@ export default function Submit() {
     SessionID, 
     ChangePasswordAtNextLogin, 
     eventSubjectID, 
-    ClassID } = inState;
+    ClassID,
+    loadingSpinner } = inState;
+    // const { loadingSpinner } = inState;
   let { noRenderPagination } = inState;
   
   const handlSearch = async (e) => {
+    inSetState({...inState, loadingSpinner: true})
     const apiUrlGetData = 'http://va.fpst.ru:8080/api/exportreport';
     const requestForm = new FormData()
     requestForm.set('SessionID', SessionID)
@@ -42,6 +45,7 @@ export default function Submit() {
         return dataResponseText;
       } catch (err) {
         console.log(err, 'err')
+        inSetState({...inState, loadingSpinner: false})
         // обработка ошибки
       }
         
@@ -57,7 +61,7 @@ export default function Submit() {
         } else {
           noRenderPagination = false
         }
-      inSetState({...inState, elements:[...elements[0].elements], activePage: 1, lengthPagination: 0, noRenderPagination, loadingComplite: true})
+      inSetState({...inState, elements:[...elements[0].elements], activePage: 1, lengthPagination: 0, noRenderPagination, loadingComplite: true, loadingSpinner: false})
       }
       if (typeof elements[0]['elements'] === "undefined") {
         inSetState({...inState, elements:[], activePage: 1, lengthPagination: 0})
@@ -68,9 +72,11 @@ export default function Submit() {
     }
     }).catch((e) => {
       console.log(e)
+      inSetState({...inState, loadingSpinner: false})
     })
     } else {
       console.log('отмена запроса из за некоректной даты')
+      inSetState({...inState, loadingSpinner: false})
     }
   }
   return (
