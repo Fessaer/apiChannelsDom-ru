@@ -8,19 +8,21 @@ import DataReactTable from '../mountСomponents/DataTable';
 import Pagination from '../mountСomponents/Paging';
 import Submit from '../mountСomponents/Submit';
 import Spinner from '../mountСomponents/Spinner';
+import FetchBindComponent from '../mountСomponents/FetchBindComponent';
 var convert = require('xml-js');
 
-export default function Users() {
-  const [inState, inSetState] = useContext(Context);
-  let { count } = inState;
+export default function Reports() {
+  const [globalState, inSetState] = useContext(Context);
+  let { count } = globalState;
   return (
     <div className="container-fluid"> 
-    <SearchBar />
-    <Spinner />
-    <Pagination />
-    {/* <DataPlate /> */}
-    <DataReactTable />
-    <Pagination />
+      {/* <SearchBar /> */}
+      <FetchBindComponent />
+      <Spinner />
+      {/* <Pagination /> */}
+      {/* <DataPlate /> */}
+      {/* <DataReactTable /> */}
+      {/* <Pagination /> */}
     </div>
   )
 }

@@ -15,9 +15,9 @@ export default function Navigation() {
       <div>
         <nav>
           <ul>
-            <li>
+            {/* <li>
               <Link to="/">Home</Link>
-            </li>
+            </li> */}
             <li>
               <Link to="/charts">График</Link>
             </li>
@@ -36,9 +36,9 @@ export default function Navigation() {
           <Route path="/reports">
             <Report />
           </Route>
-          <Route path="/">
+          {/* <Route path="/">
             <Home />
-          </Route>
+          </Route> */}
         </Switch>
       </div>
     </Router>

@@ -6,9 +6,9 @@ import formatLocaleDate from '../helpers/formatDate';
 let _ = require('lodash');
 
 const RenderPlate = () => {
-  const [inState] = useContext(Context);
-  let { elements } = inState;
-  const { loadingComplite } = inState;
+  const [globalState] = useContext(Context);
+  let { elements } = globalState;
+  const { loadingComplite } = globalState;
   if (loadingComplite) {
   let countRenderItems = 0
   return (

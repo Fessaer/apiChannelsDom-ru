@@ -8,7 +8,7 @@ var convert = require('xml-js');
 
 export default function Submit() {
 
-  const [inState, inSetState] = useContext(Context);
+  const [globalState, inSetState] = useContext(Context);
   
   let { searchStartDate,
     searchEndDate,
@@ -16,7 +16,7 @@ export default function Submit() {
     SessionID, 
     ChangePasswordAtNextLogin, 
     eventSubjectID, 
-    ClassID } = inState;
+    ClassID } = globalState;
 
   
   const handlSearch = async (e) => {
@@ -33,7 +33,7 @@ export default function Submit() {
     requestForm.set('TPlusCoveralls[EventSubjectID]', eventSubjectID)
     requestForm.set('CountBy', 'day')
     if (new Date(searchStartDate) < new Date(searchEndDate) && new Date() > new Date(searchEndDate) && new Date() > new Date(searchStartDate)) {
-      inSetState({...inState, loadingSpinner: true})
+      inSetState({...globalState, loadingSpinner: true})
       console.log('...ЗАПРОС =>>>')
       // if (ClassID === '4') {
       //   console.log('ClassID === 4')
@@ -43,14 +43,14 @@ export default function Submit() {
         method: 'POST',
         body: requestForm
       }).then((response) => {
-        inSetState({...inState, loadingSpinner: true})
+        inSetState({...globalState, loadingSpinner: true})
         try {
         const dataResponseText = response.text();
         console.log(dataResponseText, 'dataResponseText RenderTable')
         return dataResponseText;
       } catch (err) {
         console.log(err, 'err')
-        inSetState({...inState, loadingSpinner: false})
+        inSetState({...globalState, loadingSpinner: false})
         // обработка ошибки
       }
         
@@ -62,44 +62,44 @@ export default function Submit() {
       const { elements } = parseData
       const arrElements = elements[0].elements
       console.log(arrElements, 'recharts data')
-      if (ClassID === '') ClassID = 'All'
-      const mappingClassID = {
-        '1': 'Каска',
-        '2': 'Куртка',
-        '3': 'Ноги',
-        '4': 'All'
-      }
-      const normalasedData = arrElements.map((item) => {
-        if (ClassID !== 'All') {
-          const d = item.elements[0].elements[0].text
-          const count = item.elements[1].elements[0].text
-          const date = formatDateToLocale(new Date(d), 'dd.mm.yyyy')
-          // console.log(date, count)
-          const nameLine = mappingClassID[ClassID]
-          console.log(mappingClassID.ClassID)
-        return {date: date, [nameLine]: count, ClassID: ClassID}
-        }
-        if (ClassID === 'All') {
-          console.log(item, 'item')
-        }
-      })
-      let arrNewData = [];
+      // if (ClassID === '') ClassID = 'All'
+      // const mappingClassID = {
+      //   '1': 'Каска',
+      //   '2': 'Куртка',
+      //   '3': 'Ноги',
+      //   '4': 'All'
+      // }
+      // const normalasedData = arrElements.map((item) => {
+      //   if (ClassID !== 'All') {
+      //     const d = item.elements[0].elements[0].text
+      //     const count = item.elements[1].elements[0].text
+      //     const date = formatDateToLocale(new Date(d), 'dd.mm.yyyy')
+      //     // console.log(date, count)
+      //     const nameLine = mappingClassID[ClassID]
+      //     console.log(mappingClassID.ClassID)
+      //   return {date: date, [nameLine]: count, ClassID: ClassID}
+      //   }
+      //   if (ClassID === 'All') {
+      //     console.log(item, 'item')
+      //   }
+      // })
+      // let arrNewData = [];
       
-      inSetState({...inState, elementsRechart: normalasedData, loadingSpinner: false})
-      console.log(normalasedData, 'normalasedData')
+      // inSetState({...globalState, elementsRechart: normalasedData, loadingSpinner: false})
+      // console.log(normalasedData, 'normalasedData')
     } catch (err) {
       console.log(err, 'err2')
-      inSetState({...inState, loadingSpinner: false})
+      inSetState({...globalState, loadingSpinner: false})
       // обработка ошибки
     }
     }).catch((e) => {
       console.log(e)
-      inSetState({...inState, loadingSpinner: false})
+      inSetState({...globalState, loadingSpinner: false})
     })
     // }
     } else {
       console.log('отмена запроса из за некоректной даты')
-      inSetState({...inState, loadingSpinner: false})
+      inSetState({...globalState, loadingSpinner: false})
     }
     
   }

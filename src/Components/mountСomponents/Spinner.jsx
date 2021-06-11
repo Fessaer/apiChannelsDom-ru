@@ -22,8 +22,8 @@ const override = css`
 const Spinner = () => {
   let [loading, setLoading] = useState(true);
   let [color, setColor] = useState("#0D6EFD");
-  const [inState] = useContext(Context);
-  const { loadingSpinner } = inState;
+  const [globalState] = useContext(Context);
+  const { loadingSpinner } = globalState;
 
   return (
     <div className="sweet-loading">

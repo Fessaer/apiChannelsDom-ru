@@ -3,19 +3,19 @@ import { Context } from '../Store';
 import 'moment/locale/ru';
 import '../Styles/searchBar.css'
 import { BarChart, Bar, LineChart, XAxis, YAxis, CartesianGrid, Tooltip, Area, ResponsiveContainer, ReferenceLine, Line, Legend } from 'recharts';
-import Calendar from '../mountСomponents/CalendarDataPicker';
+import Calendar from '../mountСomponents/CalendarDatePicker';
 import DropdownList from '../mountСomponents/DropdownList';
 import SearchBar from './SearchBar';
-import SubmitCharts from '../mountСomponents/SubmitCharts'
+import Submit from '../mountСomponents/Submit'
 import Spinner from '../mountСomponents/Spinner';
 
 var convert = require('xml-js');
 
 
 
-export default function Settings() {
-  const [inState, inSetState] = useContext(Context);
-  let { count } = inState;
+export default function Chart(props) {
+  const [globalState, inSetState] = useContext(Context);
+  let { count } = globalState;
 
   const { searchStartDate,
     searchEndDate,
@@ -24,13 +24,13 @@ export default function Settings() {
     ChangePasswordAtNextLogin, 
     eventSubjectID, 
     ClassID,
-    elementsRechart } = inState;
-  let { noRenderPagination, loadingSpinner } = inState;
+    elementsRechart } = globalState;
+  let { noRenderPagination, loadingSpinner } = globalState;
 
   const buttonHabdler = () => {
-    console.log(inState, 'state button')
+    console.log(globalState, 'state button')
     count = count + 1;
-    inSetState({...inState, count})
+    inSetState({...globalState, count})
   }
   // const handlSearch = async () => {
   //   const apiUrlGetData = 'http://va.fpst.ru:8080/api/exportreport';
@@ -77,24 +77,24 @@ export default function Settings() {
     
   // }
   const handlStoreInfo = () => {
-    console.log(inState)
+    console.log(globalState)
   }
   
   return (
     <div className="container-fluid">
     <Spinner />
     <div className="row">
-      <DropdownList name={'Cameras'} items={[{'Спецодежда VLC stream': 'Спецодежда VLC stream'}]} labelName={'камера'} />
+      <DropdownList name={'Cameras'} items={[{'Спецодежда VLC stream': 'Спецодежда VLC stream'}]} labelName={'Камера'} />
       <Calendar name={'From'} labelName={'Дата и время (от)'}/>
       <Calendar name={'To'} labelName={'Дата и время (до)'}/>
-      <DropdownList name={'ClassID'} items={[{1:'Каска'}, {2: 'Куртка'}, {3: 'Ноги'}, {4: 'Все'}]} labelName={'класс объекта'} />
+      <DropdownList name={'ClassID'} items={[{1:'Каска'}, {2: 'Куртка'}, {3: 'Штаны'}, {4: 'Все'}]} labelName={'Класс объекта'} />
       {/* <DropdownList name={'eventSubjectID'} items={[{552:'Нестандартная спецодежда'}, {553: 'Стандартная спецодежда'}]} labelName={'Спецодежда'} /> */}
-      <SubmitCharts />
+      <Submit handleSearch={() => props.fetchFunction()}/>
       {/* <DataTable /> */}
     </div>
     {/* <button type="button" className="btn btn-outline-primary btn-sm" onClick={handlSearch}>Запрос</button> */}
     <button type="button" className="btn btn-outline-primary btn-sm" onClick={handlStoreInfo}>Вывод</button>
-    <ResponsiveContainer width="95.5%" height={600}>
+    {/* <ResponsiveContainer width="95.5%" height={600}>
       <BarChart data={elementsRechart}>
         <CartesianGrid strokeDasharray="4 4" />
         <XAxis dataKey="date" />
@@ -104,9 +104,9 @@ export default function Settings() {
         <Bar  dataKey='Каска' fill="#8884d8" />
         <Bar  dataKey='Куртка' fill="#82ca9d" />
         <Bar  dataKey='Ноги' fill="#ffb700" />
-        {/* <Line type="monotone" dataKey='All' stroke="red" /> */}
+        
       </BarChart>
-    </ResponsiveContainer>
+    </ResponsiveContainer> */}
     </div>
     
   )

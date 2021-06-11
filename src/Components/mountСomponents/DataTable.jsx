@@ -7,8 +7,8 @@ import formatDateToLocale from '../helpers/functionFormatReplaceDate'
 let _ = require('lodash');
 
 const RenderReactTable = () => {
-  const [inState] = useContext(Context);
-  const { elements } = inState;
+  const [globalState] = useContext(Context);
+  const { elements } = globalState;
   const sortElements = elements.map((item) => {
     const id = _.uniqueId();
     const dateTime = item.elements[0].elements[0].text
@@ -29,7 +29,7 @@ const RenderReactTable = () => {
     <tr>
       <th width="10%">Дата и время</th>
       <th width="15%">Камера</th>
-      <th>image</th>
+      <th>Фото</th>
       <th>Параметры</th>
       {/* <th>param2</th> */}
     </tr>

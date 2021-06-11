@@ -5,10 +5,11 @@ import React, { useState } from 'react';
 // console.log()
     //
     let initialState = {
+      toggleString: 'table',
       loadingSpinner: false,
-      algorithm: '',
+      algorithm: 'TPlusCoveralls',
       noRenderPagination: true,    //включает\выключает пагинацию
-      lengthPagination: 0,          //регулирует дину пагинации
+      lengthPagination: 1,          //регулирует дину пагинации
       activePage: 1,                //синхронизация пагинации
       count: 0,
       elementsRechart: [],                     // графики
@@ -35,10 +36,10 @@ const Store = ({children}) => {
   initialState['ChangePasswordAtNextLogin'] = ChangePasswordAtNextLogin;
   initialState['validate'] = validate;
   // console.log(initialState, 'initialState')
-  const [inState, inSetState] = useState(initialState);
+  const [globalState, inSetState] = useState(initialState);
   
   return (
-    <Context.Provider value={[inState, inSetState]}>{children[1]}</Context.Provider>
+    <Context.Provider value={[globalState, inSetState]}>{children[1]}</Context.Provider>
   )
 }
 export default Store;
