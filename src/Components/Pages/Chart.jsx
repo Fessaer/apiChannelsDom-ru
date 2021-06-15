@@ -3,11 +3,11 @@ import { Context } from '../Store';
 import 'moment/locale/ru';
 import '../Styles/searchBar.css'
 import { BarChart, Bar, LineChart, XAxis, YAxis, CartesianGrid, Tooltip, Area, ResponsiveContainer, ReferenceLine, Line, Legend } from 'recharts';
-import Calendar from '../mountСomponents/CalendarDatePicker';
-import DropdownList from '../mountСomponents/DropdownList';
+import Calendar from '../mountComponents/CalendarDatePicker';
+import DropdownList from '../mountComponents/DropdownList';
 import SearchBar from './SearchBar';
-import Submit from '../mountСomponents/Submit'
-import Spinner from '../mountСomponents/Spinner';
+import Submit from '../mountComponents/Submit'
+import Spinner from '../mountComponents/Spinner';
 
 var convert = require('xml-js');
 

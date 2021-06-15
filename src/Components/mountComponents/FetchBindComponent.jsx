@@ -9,15 +9,15 @@ import locale from 'antd/es/date-picker/locale/ru_RU';
 // import '../Styles/searchBar.css'
 import DatePicker1 from '../datePikers/DatePicker1';
 import DatePicker2 from '../datePikers/DatePicker2';
-import DropdownList from '../mountСomponents/DropdownList';
-import Calendar from '../mountСomponents/CalendarDatePicker';
-import Submit from '../mountСomponents/Submit';
-import Paginations from '../mountСomponents/Paging';
+import DropdownList from './DropdownList';
+import Calendar from './CalendarDatePicker';
+import Submit from './Submit';
+import Paginations from './Paging';
 import SearchBar from '../Pages/SearchBar';
-import DataPlate from '../mountСomponents/DataPlate';
-import DataReactTable from '../mountСomponents/DataTable';
+import DataPlate from './DataPlate';
+import DataReactTable from './DataTable';
 import Pagination from './Paging';
-import Spinner from '../mountСomponents/Spinner';
+import Spinner from './Spinner';
 // import DataTable from '../mountСomponents/DataPlate';
 var convert = require('xml-js');
 

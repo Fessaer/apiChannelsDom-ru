@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, useState, useEffect } from 'react';
 import { Context } from '../Store';
-import DropdownList from '../mountСomponents/DropdownList';
-import Calendar from '../mountСomponents/CalendarDatePicker';
-import Submit from '../mountСomponents/Submit';
+import DropdownList from '../mountComponents/DropdownList';
+import Calendar from '../mountComponents/CalendarDatePicker';
+import Submit from '../mountComponents/Submit';
 import fetchFunc from '../helpers/fetchFunction';
 
 
