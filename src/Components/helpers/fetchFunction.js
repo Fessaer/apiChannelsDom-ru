@@ -17,7 +17,7 @@ const fetchFunction = async(config, e = false) => {
   requestForm.set('Analytics', config.algorithm)
   requestForm.set('From', `${config.searchStartDate}`)
   requestForm.set('To', `${config.searchEndDate}`)
-  if (config.toggleActivePage ==='paging') { 
+  if (config.toggleActivePage ==='report') { 
     requestForm.set('Offset', config.offset) 
   } else {
     requestForm.set('Offset', 0) 

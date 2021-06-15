@@ -3,7 +3,10 @@ import React, {useState, useEffect} from 'react';
 import './Styles/App.css';
 import Navigation from './Navigation';
 import Store from './Store';
-
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route} from 'react-router-dom';
 
 
 function App() {
@@ -36,10 +39,12 @@ function App() {
   } else {
 
   return (
+    // <Router>
       <Store>
-        {dataState}
-      <Navigation />
-    </Store>
+          {dataState}
+        <Navigation />
+      </Store>
+    // </Router>
   )
   }
 }

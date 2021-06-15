@@ -1,13 +1,25 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Context } from '../Store';
 import 'moment/locale/ru';
-import '../Styles/searchBar.css'
-import { BarChart, Bar, LineChart, XAxis, YAxis, CartesianGrid, Tooltip, Area, ResponsiveContainer, ReferenceLine, Line, Legend } from 'recharts';
+import '../Styles/searchBar.css';
+import { BarChart,
+   Bar,
+   LineChart,
+   XAxis,
+   YAxis, 
+   CartesianGrid, 
+   Tooltip, 
+   Area, 
+   ResponsiveContainer, 
+   ReferenceLine, 
+   Line, 
+   Legend } from 'recharts';
 import Calendar from '../mountComponents/CalendarDatePicker';
 import DropdownList from '../mountComponents/DropdownList';
 import SearchBar from './SearchBar';
-import Submit from '../mountComponents/Submit'
+import Submit from '../mountComponents/Submit';
 import Spinner from '../mountComponents/Spinner';
+import preparingGraphArray from '../helpers/preparingGraphArray';
 
 var convert = require('xml-js');
 
@@ -27,11 +39,17 @@ export default function Chart(props) {
     elementsRechart } = globalState;
   let { noRenderPagination, loadingSpinner } = globalState;
 
+  // useEffect(() => {
+  //   inSetState({...globalState, toggleActivePage: 'chart'})
+  //   console.log('useEffect')
+  // }, [])
+
   const buttonHabdler = () => {
     console.log(globalState, 'state button')
     count = count + 1;
     inSetState({...globalState, count})
   }
+
   // const handlSearch = async () => {
   //   const apiUrlGetData = 'http://va.fpst.ru:8080/api/exportreport';
   //   const requestForm = new FormData()
@@ -74,40 +92,40 @@ export default function Chart(props) {
   //   }).catch((e) => {
   //     console.log(e)
   //   })
-    
   // }
+
   const handlStoreInfo = () => {
     console.log(globalState)
   }
   
   return (
-    <>
-    <Spinner />
-    <div className="row">
-      <DropdownList name={'Cameras'} items={[{'Спецодежда VLC stream': 'Спецодежда VLC stream'}]} labelName={'Камера'} />
-      <Calendar name={'From'} labelName={'Дата и время (от)'}/>
-      <Calendar name={'To'} labelName={'Дата и время (до)'}/>
-      <DropdownList name={'ClassID'} items={[{1:'Каска'}, {2: 'Куртка'}, {3: 'Штаны'}, {4: 'Все'}]} labelName={'Класс объекта'} />
+    <form>
+      <div className="row">
+        <Spinner />
+        <DropdownList name={'Cameras'} items={[{'Спецодежда VLC stream': 'Спецодежда VLC stream'}, {2: 'Всё'}]} labelName={'Камера'} />
+        <Calendar name={'From'} labelName={'Дата и время (от)'}/>
+        <Calendar name={'To'} labelName={'Дата и время (до)'}/>
+        <DropdownList name={'ClassID'} items={[{1:'Каска'}, {2: 'Куртка'}, {3: 'Штаны'}, {4: 'Всё'}]} labelName={'Класс объекта'} />
       {/* <DropdownList name={'eventSubjectID'} items={[{552:'Нестандартная спецодежда'}, {553: 'Стандартная спецодежда'}]} labelName={'Спецодежда'} /> */}
-      <Submit handleSearch={() => props.fetchFunction()}/>
+        <Submit />
       {/* <DataTable /> */}
-    </div>
+      </div>
     {/* <button type="button" className="btn btn-outline-primary btn-sm" onClick={handlSearch}>Запрос</button> */}
-    <button type="button" className="btn btn-outline-primary btn-sm" onClick={handlStoreInfo}>Вывод</button>
-    {/* <ResponsiveContainer width="95.5%" height={600}>
+    {/* <button type="button" className="btn btn-outline-primary btn-sm" onClick={handlStoreInfo}>Вывод</button> */}
+    <ResponsiveContainer width="95.5%" height={600}>
       <BarChart data={elementsRechart}>
         <CartesianGrid strokeDasharray="4 4" />
-        <XAxis dataKey="date" />
+        <XAxis dataKey="dateTime" />
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar  dataKey='Каска' fill="#8884d8" />
-        <Bar  dataKey='Куртка' fill="#82ca9d" />
-        <Bar  dataKey='Ноги' fill="#ffb700" />
         
+        <Bar  dataKey='count1' fill="#8884d8" />
+        <Bar  dataKey='count2' fill="#82ca9d" />
+        <Bar  dataKey='count3' fill="#ffb700" />
+        <Bar  dataKey='count' fill="#00FFFF" />
       </BarChart>
-    </ResponsiveContainer> */}
-    </>
-    
+    </ResponsiveContainer>
+    </form>
   )
 }

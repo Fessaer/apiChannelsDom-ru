@@ -24,7 +24,7 @@ export default function SearchBar(props) {
   return (
       <form className="searchForm">
         <div className="row">
-          <DropdownList name={'Cameras'} items={[{'Спецодежда VLC stream': 'Спецодежда VLC stream'}]} labelName={'Камера'} />
+          <DropdownList name={'Cameras'} items={[{'Спецодежда VLC stream': 'Спецодежда VLC stream'}, {2: 'Всё'}]} labelName={'Камера'} />
           <Calendar name={'From'} labelName={'Дата и время (от)'}/>
           <Calendar name={'To'} labelName={'Дата и время (до)'}/>
           <DropdownList name={'ClassID'} items={[{1:'Каска'}, {2: 'Куртка'}, {3: 'Штаны'}, {4: 'Всё'}]} labelName={'Класс объекта'} />

@@ -1,19 +1,57 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import Chart from './Pages/Chart';
 import Report from './Pages/Report';
+import { Context } from './Store';
 import {
   BrowserRouter as Router,
   Switch,
   Route} from 'react-router-dom';
-import { Navbar, Nav, Container } from 'react-bootstrap';
-
-  import ResponsiveNavbar from '@opuscapita/react-responsive-navbar';
+import { Navbar, Nav, Container} from 'react-bootstrap';
+import NavbarCollapse from 'react-bootstrap/esm/NavbarCollapse'
+import NavbarToggle from 'react-bootstrap/esm/NavbarToggle'
+// import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import { Tabs } from 'antd';
+import 'react-tabs/style/react-tabs.css';
+import ResponsiveNavbar from '@opuscapita/react-responsive-navbar';
+const { TabPane } = Tabs;
 
 export default function Navigation() {
-  console.log('1')
+  
+  const [globalState, inSetState] = useContext(Context);
+
+  const handleChangeActivePage = (key) => {
+    inSetState({...globalState, toggleActivePage: key})
+    console.log(key);
+  }
+  
   return (
-    <Router>
-      <div className="container-fluid">
+    <>
+    <div className="container-fluid">
+    {/* <Tabs defaultIndex={0} onSelect={index => console.log(index)}>
+      <TabList>
+        <Tab>Отчёт</Tab>
+        <Tab>График</Tab>
+    </TabList>
+    <TabPanel>{<Report />}</TabPanel>
+    <TabPanel>{<Chart />}</TabPanel>
+  </Tabs> */}
+  <Tabs onChange={handleChangeActivePage} type="card">
+    <TabPane tab="Отчёт" key="report">
+      {<Report />}
+    </TabPane>
+    <TabPane tab="График" key="chart">
+      {<Chart />}
+    </TabPane>
+  </Tabs>
+    {/* <Nav fill variant="tabs" defaultActiveKey="/charts">
+          
+            <Nav.Link href="/reports">Отчёт</Nav.Link>
+          
+            <Nav.Link href="/charts">График</Nav.Link>
+          
+        </Nav> */}
+    {/* <Router>  */}
+      
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         {/* <Navbar collapseOnSelect expand="sm">
@@ -27,21 +65,24 @@ export default function Navigation() {
             </Navbar.Collapse>
           </Container>
         </Navbar> */}
-        <Nav fill variant="tabs" defaultActiveKey="/reports">
-          <Nav.Item>
-            <Nav.Link href="/reports">Отчёт</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link eventKey="/charts">График</Nav.Link>
-          </Nav.Item>
-        </Nav>
+        {/* <Navbar collapseOnSelect expand="md" bg="light" variant="secondary" >
+        <Container>
+          <NavbarToggle aria-controls="responsive-navbar-nav" />
+            <NavbarCollapse id="mr-auto">
+              <Nav.Link href="/reports">Отчёт</Nav.Link>
+              <Nav.Link href="/charts">График</Nav.Link>
+            </NavbarCollapse>
+        </Container>
+      </Navbar> */}
+        
+        
 
-        <Switch>
-          <Route exact path='/reports' component={Report}/>
+        {/* <Switch>
+          <Route path='/reports' component={Report}/>
           <Route path="/charts" component={Chart}/>
-        </Switch>
+        </Switch> */}
       </div>
-    </Router>
+    {/* </Router> */}
+    </>
     )
-  
 }

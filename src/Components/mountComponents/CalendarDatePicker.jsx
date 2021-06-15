@@ -76,6 +76,7 @@ export default function CalendarPicker(props) {
     <div className="col-lg-2 col-sm-4 pb-3 button_max_width">
       <label>{labelName}</label>
         <DatePicker
+          allowClear={false}
           style={{display: "flex"}}
           locale={locale}
           format="DD-MM-YYYY HH:mm:ss"

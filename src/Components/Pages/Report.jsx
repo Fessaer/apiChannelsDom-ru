@@ -14,6 +14,12 @@ var convert = require('xml-js');
 export default function Reports() {
   const [globalState, inSetState] = useContext(Context);
   let { count } = globalState;
+
+  // useEffect(() => {
+  //   inSetState({...globalState, toggleActivePage: 'report'})
+  //   console.log('useEffect')
+  // }, [])
+
   return (
     <> 
       <SearchBar />

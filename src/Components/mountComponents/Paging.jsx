@@ -7,13 +7,13 @@ import fetchFunc from '../helpers/fetchFunction';
 export default function Paging(props) {
   const [globalState, inSetState] = useContext(Context);
   let { elements, lengthPagination, offset, noRenderPagination } = globalState;
-  useEffect(() => {
-    inSetState({...globalState, toggleActivePage: 'paging'})
-    console.log('useEffect')
-  }, [])
+  // useEffect(() => {
+  //   inSetState({...globalState, toggleActivePage: 'paging'})
+  //   console.log('useEffect')
+  // }, [])
 
   const handlePaging = async(e, f) => {
-      inSetState({...globalState, toggleString: 'paging', loadingSpinner: true});
+      inSetState({...globalState, loadingSpinner: true});
       console.log(e, 'e => activePage');
       lengthPagination = (e - 1) * 20;
       const newOffSet = (e - 1) * 20;
