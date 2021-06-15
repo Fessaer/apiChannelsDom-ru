@@ -9,7 +9,7 @@ const RenderPlate = () => {
   const [globalState] = useContext(Context);
   let { elements } = globalState;
   const { loadingComplite } = globalState;
-  if (loadingComplite) {
+  if (true) {
   let countRenderItems = 0
   return (
     <div className="d-flex row flex-wrap justify-content-around">

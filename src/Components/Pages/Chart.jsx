@@ -81,7 +81,7 @@ export default function Chart(props) {
   }
   
   return (
-    <div className="container-fluid">
+    <>
     <Spinner />
     <div className="row">
       <DropdownList name={'Cameras'} items={[{'Спецодежда VLC stream': 'Спецодежда VLC stream'}]} labelName={'Камера'} />
@@ -107,7 +107,7 @@ export default function Chart(props) {
         
       </BarChart>
     </ResponsiveContainer> */}
-    </div>
+    </>
     
   )
 }

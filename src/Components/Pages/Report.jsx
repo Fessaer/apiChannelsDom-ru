@@ -15,14 +15,14 @@ export default function Reports() {
   const [globalState, inSetState] = useContext(Context);
   let { count } = globalState;
   return (
-    <div className="container-fluid"> 
-      {/* <SearchBar /> */}
-      <FetchBindComponent />
+    <> 
+      <SearchBar />
+      {/* <FetchBindComponent /> */}
       <Spinner />
-      {/* <Pagination /> */}
+      <Pagination />
       {/* <DataPlate /> */}
-      {/* <DataReactTable /> */}
-      {/* <Pagination /> */}
-    </div>
+      <DataReactTable />
+      <Pagination />
+    </>
   )
 }

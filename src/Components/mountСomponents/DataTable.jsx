@@ -6,7 +6,7 @@ import Table from 'react-bootstrap/Table'
 import formatDateToLocale from '../helpers/functionFormatReplaceDate'
 let _ = require('lodash');
 
-const RenderReactTable = () => {
+const RenderTable = () => {
   const [globalState] = useContext(Context);
   const { elements } = globalState;
   const sortElements = elements.map((item) => {
@@ -40,8 +40,8 @@ const RenderReactTable = () => {
       <td className="mw-8">{formatDateToLocale(new Date(item.time), 'dd.mm.yyyy hh:MM:ss')}</td>
       <td>{item.cameraName}</td>
       <td>{item.image}</td>
-      <td><p>Нарушение: {item.param1}</p>
-          <p>Уверенность: {item.param2}</p></td>
+      <td><p className="m-0">Нарушение: {item.param1}</p>
+          <p className="m-0">Уверенность: {item.param2}</p></td>
       {/* <td>{item.param2}</td> */}
       
       </tr>)
@@ -52,4 +52,4 @@ const RenderReactTable = () => {
   )
 }
 
-export default RenderReactTable;
+export default RenderTable;
