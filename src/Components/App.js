@@ -3,18 +3,13 @@ import React, {useState, useEffect} from 'react';
 import './Styles/App.css';
 import Navigation from './Navigation';
 import Store from './Store';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route} from 'react-router-dom';
-
 
 function App() {
   const [dataState, setDataState] = useState({validate: false})
 
   useEffect(() => {
     (async function fetchData() {
-      console.log('useEffect')
+      // console.log('useEffect')
       let urle = 'http://va.fpst.ru:8080/api/login';
       const form = new FormData();
       form.set('Login', 'tplusfront')
@@ -24,7 +19,7 @@ function App() {
         body: form
       }).then(function(response) {
         let data = response.text()
-        console.log(data)
+        // console.log(data)
         return data;
       }).then((inf) => {
         const { SessionID, ChangePasswordAtNextLogin } = JSON.parse(inf);
@@ -32,7 +27,7 @@ function App() {
       }).catch((err) => console.log(err, 'error response auth'))
     })()
   }, [])
-  console.log(dataState, 'dataState')
+  // console.log(dataState, 'dataState')
   const { validate } = dataState;
   if (validate === false) {
     return null;

@@ -6,9 +6,24 @@ import Table from 'react-bootstrap/Table'
 import formatDateToLocale from '../helpers/functionFormatReplaceDate'
 let _ = require('lodash');
 
+const SubClassID = {
+  "2": 'нолова в каске',
+  "3":"стандартная куртка",
+  "4":"стандартные штаны",
+  "5":"голова без каски",
+  "6":"нестандартная куртка",
+  "7": "нестандартные штаны"
+}
+
+
 const RenderTable = () => {
   const [globalState] = useContext(Context);
-  const { elements } = globalState;
+  let { elements } = globalState.fetch.report;
+
+  if (elements === undefined) {
+      elements = []
+  }
+  
   const sortElements = elements.map((item) => {
     const id = _.uniqueId();
     const dateTime = item.elements[0].elements[0].text
@@ -40,7 +55,7 @@ const RenderTable = () => {
       <td className="mw-8">{formatDateToLocale(new Date(item.time), 'dd.mm.yyyy hh:MM:ss')}</td>
       <td>{item.cameraName}</td>
       <td>{item.image}</td>
-      <td><p className="m-0">Нарушение: {item.param1}</p>
+      <td><p className="m-0">Нарушение: {SubClassID[item.param1]}</p>
           <p className="m-0">Уверенность: {item.param2}</p></td>
       {/* <td>{item.param2}</td> */}
       

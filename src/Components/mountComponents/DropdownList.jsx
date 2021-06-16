@@ -8,11 +8,18 @@ import allSelect from '../helpers/allSelect';
 export default function DropdownList(props) {
   let { name, items, labelName } = props
   const [globalState, inSetState] = useContext(Context);
-  
+  let { fetch } = globalState;
+  let {chart, report} = globalState.fetch
+
   if (items === undefined) console.log('не все параметры переданны для dropdown(items)');
   if (name === undefined) console.log('не все параметры переданны для dropdown(name)');
   const changeHandle = (e) => {
-       inSetState({...globalState, [name]: e.target.value})   //настраиваем в ручную, куда в СТОРЕ отправлять данные
+    console.log(e.target.value, 'e.target.value')
+    if (e.target.value === 'Всё') {
+      inSetState({...globalState, [name]: ''})
+    } else {
+      inSetState({...globalState, [name]: e.target.value})   //настраиваем в ручную, куда в СТОРЕ отправлять данные
+    }
   }
 
   return (
@@ -22,8 +29,7 @@ export default function DropdownList(props) {
         {items.map((item) => {
             const key = Object.keys(item).join()
             const value = Object.values(item).join()
-            console.log(key)
-            if (value === 'Всё') return <option key={key} selected>{value}</option>
+            if (value === 'Всё' || value === 'Все камеры') return <option key={key} selected>{value}</option>
             return (
               <option key={key} value={allSelect(key, value)}>{value}</option>
             )

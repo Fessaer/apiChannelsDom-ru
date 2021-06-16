@@ -1,34 +1,34 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Context } from '../Store';
 import '../Styles/renderTable.css';
 import { Pagination } from 'antd';
 import fetchFunc from '../helpers/fetchFunction';
 
-export default function Paging(props) {
+export default function Paging() {
   const [globalState, inSetState] = useContext(Context);
-  let { elements, lengthPagination, offset, noRenderPagination } = globalState;
-  // useEffect(() => {
-  //   inSetState({...globalState, toggleActivePage: 'paging'})
-  //   console.log('useEffect')
-  // }, [])
+  let { lengthPagination, offset, noRenderPagination, fetch } = globalState;
+  let { elements } = globalState.fetch.report;
+  let { report } = globalState.fetch
 
   const handlePaging = async(e, f) => {
-      inSetState({...globalState, loadingSpinner: true});
-      console.log(e, 'e => activePage');
+      report = {...report, loadingSpinnerReport: true }
+      fetch = {...fetch, report}
+      await inSetState({...globalState, fetch});
       lengthPagination = (e - 1) * 20;
       const newOffSet = (e - 1) * 20;
       offset = newOffSet;
-      inSetState({...globalState, offset, activePage: e, lengthPagination, noRenderPagination: false});
+      await inSetState({...globalState, offset, activePage: e, lengthPagination, noRenderPagination: false});
       const dataFetch = await fetchFunc(globalState, e);
-      inSetState({...globalState, elements:[...dataFetch.arr], offset, activePage: e, lengthPagination, noRenderPagination: dataFetch.noRenderPagination, loadingSpinner: false});
-      console.log(globalState, 'globalState');
+      report = {...report, elements: [...dataFetch.arr], loadingSpinnerReport: false }
+      fetch = {...fetch, report}
+      await inSetState({...globalState, fetch, offset, activePage: e, lengthPagination, noRenderPagination: dataFetch.noRenderPagination});
   }
   
     let { activePage } = globalState; 
-    console.log(elements.length, 'elements.length')
+    if (elements !== undefined) {
   return (
     <div>
-      {elements.length !== 0 || elements.length > 20 || noRenderPagination === false ? 
+      {elements.length !== 0  || elements.length > 20 || noRenderPagination === false ? 
         <div>
           <Pagination
             current={activePage} 
@@ -41,4 +41,7 @@ export default function Paging(props) {
         </div> : null}
     </div>
   )
+      } else {
+        return null
+      }
 }

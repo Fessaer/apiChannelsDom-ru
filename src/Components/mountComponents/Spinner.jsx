@@ -20,16 +20,29 @@ const override = css`
 `;
 
 const Spinner = () => {
-  let [loading, setLoading] = useState(true);
-  let [color, setColor] = useState("#0D6EFD");
+  // let [loading, setLoading] = useState(true);
+  let [color] = useState("#0D6EFD");
   const [globalState] = useContext(Context);
-  const { loadingSpinner } = globalState;
-
+  const { loadingSpinnerChart } = globalState.fetch.chart;
+  const { loadingSpinnerReport } = globalState.fetch.report;
+  const { toggleActivePage } = globalState;
+  if (toggleActivePage === "report") {
+    return (
+    <div className="sweet-loading">
+      <FadeLoader color={color} loading={loadingSpinnerReport} css={override} height={15} width={5} radius={2} margin={2} />
+    </div>
+    );
+  }
+  if (toggleActivePage === "chart") {
   return (
     <div className="sweet-loading">
-      <FadeLoader color={color} loading={loadingSpinner} css={override} height={15} width={5} radius={2} margin={2} />
+      <FadeLoader color={color} loading={loadingSpinnerChart} css={override} height={15} width={5} radius={2} margin={2} />
     </div>
-  );
+  )
+  }
+  else {
+    return null
+  }
 }
 
 export default Spinner;

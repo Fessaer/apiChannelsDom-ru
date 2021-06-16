@@ -11,16 +11,18 @@ import moment from 'moment';
 export default function CalendarPicker(props) {
   const [globalState, inSetState] = useContext(Context);
   let { name, minDate, maxDate, labelName } = props;
+  const { toggleActivePage } = globalState;
   // console.log(props, 'props')
-  const range = (start, end) => {
-    const result = [];
-    for (let i = start; i < end; i++) {
-      result.push(i);
-    }
-    // console.log(result, 'range result')
-    return result;
-  }
-  
+  // const range = (start, end) => {
+  //   const result = [];
+  //   for (let i = start; i < end; i++) {
+  //     result.push(i);
+  //   }
+  //   // console.log(result, 'range result')
+  //   return result;
+  // }
+  let { fetch  } = globalState;
+  let { chart, report } = globalState.fetch 
   const disabledDate = (current) => {
     // eslint-disable-next-line no-mixed-operators
     const dayPlusOne = new Date(maxDate)
@@ -62,10 +64,28 @@ export default function CalendarPicker(props) {
     // const resultDate = formDateDay.toISOString().substring(0, 10) + " " + hours + formDateHours.toISOString().substring(13, 19)
     // searchStartDate = resultDate
     const resultDate = formatDateToLocale(d, 'yyyy-mm-dd hh:MM:ss', 0)
-    if (name === 'From') inSetState({...globalState, searchStartDate: resultDate})
-    if (name === 'To') inSetState({...globalState, searchEndDate: resultDate})
-    console.log(resultDate, 'resultDate')
-    console.log(formatDateToLocale(d, 'yyyy-mm-dd hh:MM:ss', 0), 'formatDateToLocale')
+    if (name === 'From' && toggleActivePage === 'report') {
+      report = {...report, searchStartDateReport: resultDate }
+      fetch = {...fetch, report}
+      inSetState({...globalState, fetch})
+    }
+    if (name === 'To' && toggleActivePage === 'report') {
+      report = {...report, searchEndDateReport: resultDate }
+      fetch = {...fetch, report}
+      inSetState({...globalState, fetch})
+    }
+    if (name === 'From' && toggleActivePage === 'chart') {
+      chart = {...chart, searchStartDateChart: resultDate }
+      fetch = {...fetch, chart}
+      inSetState({...globalState, fetch}) 
+    }
+    if (name === 'To' && toggleActivePage === 'chart') {
+      chart = {...chart, searchEndDateChart: resultDate }
+      fetch = {...fetch, chart}
+      inSetState({...globalState, fetch})
+    }
+    // console.log(resultDate, 'resultDate')
+    // console.log(formatDateToLocale(d, 'yyyy-mm-dd hh:MM:ss', 0), 'formatDateToLocale')
   }
 
   const onTest = (e) => {

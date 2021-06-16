@@ -5,19 +5,30 @@ import React, { useState } from 'react';
 // console.log()
     //
     let initialState = {
-      toggleString: 'table',
-      loadingSpinner: false,
+      fetch: {
+        chart: {
+          loadingSpinnerChart: false,
+          ClassIdChart: "",
+          EventSubjectID: "552",
+        },
+        report: {
+          ClassIdReport: "",
+          loadingSpinnerReport: false,
+        },
+      },
+      // loadingSpinnerChart: false,
+      // loadingSpinnerReport: false,
+      // loadingSpinner: false,
       algorithm: 'TPlusCoveralls',
       noRenderPagination: true,    //включает\выключает пагинацию
       lengthPagination: 1,          //регулирует дину пагинации
       activePage: 1,                //синхронизация пагинации
-      elementsRechart: [],                     // графики
-      elements: [],                 //длина рresponse массива 
+      // elementsRechart: [],                     // графики
+      // elementsReport: [],                 //длина рresponse массива 
       loadingComplite: false,       //проверка загрузки данных перед рендером
       offset: 0,                    // динамический оффсет
-      ClassID: '1',                 //опции поиска
+      ClassID: '',                 //опции поиска
       eventSubjectID: '552',        //опции поиска
-      subClassID: '2',              //опции поиска
       renderCountItems: 20,         //опции поиска
       searchStartDate: new Date().toISOString().substring(0, 10) + ' 00:00:00', // начальная дата
       searchEndDate: new Date().toISOString().substring(0, 10) + ' 23:59:59', // начальная дата
@@ -32,7 +43,6 @@ const Store = ({children}) => {
   initialState['SessionID'] = SessionID;
   initialState['ChangePasswordAtNextLogin'] = ChangePasswordAtNextLogin;
   initialState['validate'] = validate;
-  // console.log(initialState, 'initialState')
   const [globalState, inSetState] = useState(initialState);
   
   return (
@@ -40,3 +50,7 @@ const Store = ({children}) => {
   )
 }
 export default Store;
+
+
+// searchStartDateChart: new Date().toISOString().substring(0, 10) + ' 00:00:00',
+// searchEndDateChart: new Date().toISOString().substring(0, 10) + ' 23:59:59',

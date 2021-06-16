@@ -1,27 +1,30 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Chart from './Pages/Chart';
 import Report from './Pages/Report';
 import { Context } from './Store';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route} from 'react-router-dom';
-import { Navbar, Nav, Container} from 'react-bootstrap';
-import NavbarCollapse from 'react-bootstrap/esm/NavbarCollapse'
-import NavbarToggle from 'react-bootstrap/esm/NavbarToggle'
+// import {
+  // BrowserRouter as Router,
+  // Switch,
+  // Route} from 'react-router-dom';
+// import { Navbar, Nav, Container} from 'react-bootstrap';
+// import NavbarCollapse from 'react-bootstrap/esm/NavbarCollapse'
+// import NavbarToggle from 'react-bootstrap/esm/NavbarToggle'
 // import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { Tabs } from 'antd';
 import 'react-tabs/style/react-tabs.css';
-import ResponsiveNavbar from '@opuscapita/react-responsive-navbar';
+// import ResponsiveNavbar from '@opuscapita/react-responsive-navbar';
 const { TabPane } = Tabs;
 
 export default function Navigation() {
   
   const [globalState, inSetState] = useContext(Context);
+  useEffect(() => {
+    inSetState({...globalState, toggleActivePage: 'report'})
+  }, [])
 
   const handleChangeActivePage = (key) => {
     inSetState({...globalState, toggleActivePage: key})
-    console.log(key);
+    // console.log(key === "report" && loadingSpinnerChart === true && loadingFetchReport === false);
   }
   
   return (
