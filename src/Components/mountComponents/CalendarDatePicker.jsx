@@ -94,7 +94,7 @@ export default function CalendarPicker(props) {
   // const dateFormat = 'DD-MM-YYYY:HH:mm:ss'
   return (
     <div className="col-lg-2 col-sm-4 pb-3 button_max_width">
-      <label>{labelName}</label>
+      <label className="pb-1">{labelName}</label>
         <DatePicker
           allowClear={false}
           style={{display: "flex"}}

@@ -24,11 +24,13 @@ const RenderPlate = () => {
   
   let countRenderItems = 0
   return (
-    <div className="d-flex row flex-wrap justify-content-around">
+    <div className="row">
       {elements.map((item) => {
         countRenderItems = countRenderItems + 1
         if(countRenderItems <= 20) return (
-          <div key={_.uniqueId()} className="m-1 border border-grey rounded col-sm-6 col-md-4 col-lg-3 col-xl-2 p-2 d-flex">
+          
+          <div key={_.uniqueId()} className="col-sm-6 col-md-4 col-lg-3 col-xl-3">
+            <div className="d-flex m-1 border border-grey rounded">
             <div>
             <img className="photo" src={`data:image/png;base64,${item.elements[5].elements[0].text}`} alt="altImage" />
             </div>
@@ -41,6 +43,8 @@ const RenderPlate = () => {
                 </p>
             </div>
           </div>
+          </div>
+          
         )
       })}
     </div>

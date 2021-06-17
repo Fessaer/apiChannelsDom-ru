@@ -14,10 +14,6 @@ export default function SearchBar(props) {
           <DropdownList name={'ClassIdReport'} items={[{1:'Каска'}, {2: 'Куртка'}, {3: 'Штаны'}, {4: 'Всё'}]} labelName={'Класс объекта'} />
           <DropdownList name={'eventSubjectID'} items={[{552:'Нестандартная спецодежда'}, {553: 'Стандартная спецодежда'}]} labelName={'Спецодежда'} />
           <Submit />
-          {/* <select className="form-select form-select-sm" value={'2'}>
-          <option value="1">1111</option>
-          <option value="2">2222</option>
-          </select> */}
         </div>
     </form>
   )

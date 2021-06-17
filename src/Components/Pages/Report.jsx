@@ -18,8 +18,8 @@ export default function Reports() {
       <SearchBar />
       <Spinner />
       <Pagination />
-      {/* <DataPlate /> */}
-      <DataReactTable />
+      <DataPlate />
+      {/* <DataReactTable /> */}
       <Pagination />
     </>
   )

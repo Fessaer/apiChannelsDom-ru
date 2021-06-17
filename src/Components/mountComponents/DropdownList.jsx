@@ -42,7 +42,7 @@ export default function DropdownList(props) {
 
   return (
     <div className="col-lg-2 col-sm-4 pb-3 button_max_width">
-      <label>{labelName}</label>
+      <label className="pb-1">{labelName}</label>
       <select className="form-select form-select-sm"  onChange={changeHandle}>
         {items.map((item) => {
           // console.log(item)

@@ -31,9 +31,9 @@ export default function Paging() {
     let { activePage } = globalState.ui; 
     if (elements !== undefined) {
   return (
-    <div>
+    <>
       {elements.length !== 0  || elements.length > 20 || noRenderPagination === false ? 
-        <div>
+        <div className="pl-0">
           <Pagination
             current={activePage} 
             onChange={handlePaging}
@@ -41,9 +41,9 @@ export default function Paging() {
             showSizeChanger={false}
             defaultCurrent={1} 
             total={elements.length <= 20 ? lengthPagination + 20 : lengthPagination + 30} 
-            style={{paddingBlock: "1rem", paddingLeft: "1rem"}}/>
+            style={{paddingBlock: "1rem", paddingLeft: "0rem"}}/>
         </div> : null}
-    </div>
+    </>
   )
       } else {
         return null
