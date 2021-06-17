@@ -5,6 +5,7 @@ import { DatePicker } from 'antd';
 import 'moment/locale/ru';
 import locale from 'antd/es/date-picker/locale/ru_RU';
 import moment from 'moment';
+import '../Styles/timePicker.css'
 // let cn = require('classnames');
 
 
@@ -107,6 +108,7 @@ export default function CalendarPicker(props) {
           // defaultValue={moment(minDate, dateFormat)}
           showTime={{ defaultValue: moment('00:00:00', 'HH:mm:ss') }}
           input={onTest}
+          clearIcon={() => <span>wewe</span>}
           // placeholder={minDate}
         />
       

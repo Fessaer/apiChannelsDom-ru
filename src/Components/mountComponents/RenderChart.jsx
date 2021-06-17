@@ -55,7 +55,7 @@ export default function RenderChart(props) {
       <ResponsiveContainer width="95.5%" height={600}>
         <BarChart data={elementsRechart}>
           <CartesianGrid strokeDasharray="3 3" /> 
-          <XAxis dataKey="dateTime" domain={[0, 0]} />
+          <XAxis dataKey="dateTime" domain={['', '']} />
           <YAxis tickCount={20} domain={[0, bigNumberArray]}
               padding={{ top: 20 }} interval={0} width={autoWidth(elementsRechart)}/>
           <Tooltip />

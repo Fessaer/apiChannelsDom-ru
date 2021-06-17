@@ -29,7 +29,7 @@ const RenderPlate = () => {
         countRenderItems = countRenderItems + 1
         if(countRenderItems <= 20) return (
           
-          <div key={_.uniqueId()} className="col-sm-6 col-md-4 col-lg-3 col-xl-3">
+          <div key={_.uniqueId()} className="col-sm-6 col-md-6 col-lg-4 col-xl-3">
             <div className="d-flex m-1 border border-grey rounded">
             <div>
             <img className="photo" src={`data:image/png;base64,${item.elements[5].elements[0].text}`} alt="altImage"/>

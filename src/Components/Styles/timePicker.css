@@ -1,0 +1,14 @@
+button.ant-btn {
+  font-size: 0;
+  height: 33px;
+  
+  /* padding-bottom: 10px; */
+}
+
+button.ant-btn-sm:after {
+  /* content: "Применить"; */
+  /* padding-bottom: 10px; */
+  font-size: 16px; /* original font size */
+  /* height: 30px; */
+  content: "Применить";
+}
