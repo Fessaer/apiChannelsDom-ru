@@ -6,12 +6,12 @@ import formatLocaleDate from '../helpers/formatDate';
 let _ = require('lodash');
 
 const SubClassID = {
-  "2": 'нолова в каске',
-  "3":"стандартная куртка",
-  "4":"стандартные штаны",
-  "5":"голова без каски",
-  "6":"нестандартная куртка",
-  "7": "нестандартные штаны"
+  "2": 'Голова в каске',
+  "3": "Стандартная куртка",
+  "4": "Стандартные штаны",
+  "5": "Голова без каски",
+  "6": "Нестандартная куртка",
+  "7": "Нестандартные штаны"
 }
 
 const RenderPlate = () => {
@@ -32,14 +32,14 @@ const RenderPlate = () => {
           <div key={_.uniqueId()} className="col-sm-6 col-md-4 col-lg-3 col-xl-3">
             <div className="d-flex m-1 border border-grey rounded">
             <div>
-            <img className="photo" src={`data:image/png;base64,${item.elements[5].elements[0].text}`} alt="altImage" />
+            <img className="photo" src={`data:image/png;base64,${item.elements[5].elements[0].text}`} alt="altImage"/>
             </div>
             <div>
               <p className="p-2 m-0" style={{"fontSize": "12px"}}>
-                Дата: {formatLocaleDate(item.elements[0].elements[0].text.substring(0, 10))}<br />
-                Время: {item.elements[0].elements[0].text.substr(10)}<br />
-                Нарушение: {SubClassID[item.elements[6].elements[0].elements[0].elements[0].text]}<br />
-                Уверенность: {item.elements[6].elements[0].elements[1].elements[0].text}
+                {formatLocaleDate(item.elements[0].elements[0].text.substring(0, 10))}<br />
+                {item.elements[0].elements[0].text.substr(10)}<br />
+                {SubClassID[item.elements[6].elements[0].elements[0].elements[0].text]}<br />
+                Уверенность: {item.elements[6].elements[0].elements[1].elements[0].text}%
                 </p>
             </div>
           </div>

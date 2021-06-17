@@ -19,7 +19,6 @@ import React, { useState } from 'react';
         offset: 0,
       },
       ui: {
-        loadingComplite: false,
         noRenderPagination: true,
         lengthPagination: 1,
         activePage: 1,

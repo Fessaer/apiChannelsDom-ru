@@ -40,10 +40,10 @@ export default function Navigation() {
     <TabPanel>{<Chart />}</TabPanel>
   </Tabs> */}
   <Tabs onChange={handleChangeActivePage} type="card">
-    <TabPane tab="Отчёт" key="report">
+    <TabPane tab="Журнал" key="report">
       {<Report />}
     </TabPane>
-    <TabPane tab="График" key="chart">
+    <TabPane tab="Статистика за день" key="chart">
       {<Chart />}
     </TabPane>
   </Tabs>

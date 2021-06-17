@@ -14,8 +14,8 @@ export default function DropdownList(props) {
   if (items === undefined) console.log('не все параметры переданны для dropdown(items)');
   if (name === undefined) console.log('не все параметры переданны для dropdown(name)');
   const changeHandle = (e) => {
-    console.log(e.target.value, 'e.target.value')
-    if (e.target.value === 'Всё' || e.target.value === 'Все камеры') {
+    // console.log(e.target.value, 'e.target.value')
+    if (e.target.value === 'Все классы' || e.target.value === 'Все камеры') {
       if (toggleActivePage === 'chart') {
         chart = {...chart, [name]: ''}
         fetch = {...fetch, chart}
@@ -48,7 +48,7 @@ export default function DropdownList(props) {
           // console.log(item)
             const key = Object.keys(item).join()
             const value = Object.values(item).join()
-            if (value === 'Всё' || value === 'Все камеры') return <option key={key} selected>{value}</option>
+            if (value === 'Все классы' || value === 'Все камеры') return <option key={key} selected>{value}</option>
             return (
               <option key={key} value={allSelect(key, value)}>{value}</option>
             )
