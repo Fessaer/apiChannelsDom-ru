@@ -7,10 +7,9 @@ import preparingGraphArray from '../helpers/preparingGraphArray';
 
 export default function Submit() {
   const [globalState, inSetState] = useContext(Context);
-  let { toggleActivePage, fetch  } = globalState;
+  let { toggleActivePage, fetch, ui  } = globalState;
   let { chart, report } = globalState.fetch
   let { ClassIdChart } =  globalState.fetch.chart
-  let { ClassIdReport } =  globalState.fetch.chart
 
   const handleSubmit = async () => {
     if (toggleActivePage === 'chart') {
@@ -27,15 +26,16 @@ export default function Submit() {
     const dataFetch = await fetchFunc(globalState)
     if (toggleActivePage === 'report') {
       report = {...report, loadingSpinnerReport: false, elements: [...dataFetch.arr] }
-      fetch = {...fetch, report}
-      inSetState({...globalState, fetch, offset: 0, activePage: 1, loadingSpinnerReport: false, lengthPagination: 0, noRenderPagination: dataFetch.noRenderPagination})
+      ui = {...ui, activePage: 1, loadingSpinnerReport: false, lengthPagination: 0, noRenderPagination: dataFetch.noRenderPagination}
+      fetch = {...fetch, report, offset: 0}
+      inSetState({...globalState, fetch, ui })
     }
     if (toggleActivePage === 'chart') {
       const arrAgregating = preparingGraphArray(dataFetch.arr, ClassIdChart)
       chart = {...chart, loadingSpinnerChart: false, elementsRechart: [...arrAgregating] }
-      fetch = {...fetch, chart}
-      
-      inSetState({...globalState, offset: 0, activePage: 1, fetch, loadingSpinnerChart: false, lengthPagination: 0, noRenderPagination: true, activeFilterChart: ClassIdChart})
+      ui = {activePage: 1, loadingSpinnerChart: false, lengthPagination: 0, noRenderPagination: true, activeFilterChart: ClassIdChart}
+      fetch = {...fetch, chart, offset: 0}
+      inSetState({...globalState, fetch, ui})
     }
   }
 

@@ -12,14 +12,13 @@ import Spinner from '../mountComponents/Spinner';
 
 export default function Reports() {
   const [globalState, inSetState] = useContext(Context);
-  let { count } = globalState;
 
   return (
     <> 
       <SearchBar />
       <Spinner />
       <Pagination />
-      <DataPlate />
+      {/* <DataPlate /> */}
       <DataReactTable />
       <Pagination />
     </>

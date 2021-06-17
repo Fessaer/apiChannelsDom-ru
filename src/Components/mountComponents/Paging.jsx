@@ -6,25 +6,29 @@ import fetchFunc from '../helpers/fetchFunction';
 
 export default function Paging() {
   const [globalState, inSetState] = useContext(Context);
-  let { lengthPagination, offset, noRenderPagination, fetch } = globalState;
+  let { fetch, ui } = globalState;
+  let { lengthPagination, noRenderPagination } = globalState.ui;
   let { elements } = globalState.fetch.report;
-  let { report } = globalState.fetch
+  let { report, offset } = globalState.fetch
 
   const handlePaging = async(e, f) => {
-      report = {...report, loadingSpinnerReport: true }
-      fetch = {...fetch, report}
-      await inSetState({...globalState, fetch});
-      lengthPagination = (e - 1) * 20;
-      const newOffSet = (e - 1) * 20;
-      offset = newOffSet;
-      await inSetState({...globalState, offset, activePage: e, lengthPagination, noRenderPagination: false});
-      const dataFetch = await fetchFunc(globalState, e);
-      report = {...report, elements: [...dataFetch.arr], loadingSpinnerReport: false }
-      fetch = {...fetch, report}
-      await inSetState({...globalState, fetch, offset, activePage: e, lengthPagination, noRenderPagination: dataFetch.noRenderPagination});
+    report = await {...report, loadingSpinnerReport: true }
+    fetch = await {...fetch, report}
+    await inSetState({...globalState, fetch});
+    lengthPagination = (e - 1) * 20;
+    const newOffSet = (e - 1) * 20;
+    offset = newOffSet;
+    fetch = await {...fetch, offset}
+    ui = await {...ui, activePage: e, lengthPagination, noRenderPagination: false}
+    await inSetState({...globalState, fetch, ui});
+    const dataFetch = await fetchFunc(globalState, e);
+    report = await {...report, elements: [...dataFetch.arr], loadingSpinnerReport: false }
+    fetch = await {...fetch, report, offset}
+    ui = await {...ui, activePage: e, lengthPagination, noRenderPagination: dataFetch.noRenderPagination}
+    await inSetState({...globalState, fetch, ui});
   }
   
-    let { activePage } = globalState; 
+    let { activePage } = globalState.ui; 
     if (elements !== undefined) {
   return (
     <div>

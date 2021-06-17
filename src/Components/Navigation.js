@@ -20,6 +20,7 @@ export default function Navigation() {
   const [globalState, inSetState] = useContext(Context);
   useEffect(() => {
     inSetState({...globalState, toggleActivePage: 'report'})
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleChangeActivePage = (key) => {

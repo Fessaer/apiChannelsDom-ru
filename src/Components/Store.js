@@ -15,21 +15,16 @@ import React, { useState } from 'react';
           ClassIdReport: "",
           loadingSpinnerReport: false,
         },
+        algorithm: 'TPlusCoveralls',
+        offset: 0,
       },
-      // loadingSpinnerChart: false,
-      // loadingSpinnerReport: false,
-      // loadingSpinner: false,
-      algorithm: 'TPlusCoveralls',
-      noRenderPagination: true,    //включает\выключает пагинацию
-      lengthPagination: 1,          //регулирует дину пагинации
-      activePage: 1,                //синхронизация пагинации
-      // elementsRechart: [],                     // графики
-      // elementsReport: [],                 //длина рresponse массива 
-      loadingComplite: false,       //проверка загрузки данных перед рендером
-      offset: 0,                    // динамический оффсет
-      ClassID: '',                 //опции поиска
-      eventSubjectID: '552',        //опции поиска
-      renderCountItems: 20,         //опции поиска
+      ui: {
+        loadingComplite: false,
+        noRenderPagination: true,
+        lengthPagination: 1,
+        activePage: 1,
+        renderCountItems: 20,  
+      },
       searchStartDate: new Date().toISOString().substring(0, 10) + ' 00:00:00', // начальная дата
       searchEndDate: new Date().toISOString().substring(0, 10) + ' 23:59:59', // начальная дата
     }

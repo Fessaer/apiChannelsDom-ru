@@ -5,7 +5,7 @@ const fetchFunction = async(config, e = false) => {
   let noRenderPagination = false;
   if (e !== false) {
     const newOffSet = (e - 1) * 20;
-    config.offset = newOffSet;
+    config.fetch.offset = newOffSet;
   }
   
   // console.log(config)
@@ -14,19 +14,19 @@ const fetchFunction = async(config, e = false) => {
   const requestForm = new FormData()
   requestForm.set('SessionID', config.SessionID)
   requestForm.set('ChangePasswordAtNextLogin', config.ChangePasswordAtNextLogin)
-  requestForm.set('Analytics', config.algorithm)
+  requestForm.set('Analytics', config.fetch.algorithm)
   
   if (config.toggleActivePage ==='report') { 
-    requestForm.set('CameraID', config.CameraIdReport)
-    requestForm.set('Offset', config.offset)
+    requestForm.set('CameraID', config.fetch.report.CameraIdReport === undefined ? "" : config.fetch.report.CameraIdReport)
+    requestForm.set('Offset', config.fetch.offset)
     requestForm.set('From', `${config.fetch.report.searchStartDateReport}`)
     requestForm.set('To', `${config.fetch.report.searchEndDateReport}`)
     requestForm.set('Limit', 21)
-    requestForm.set('TPlusCoveralls[ClassID]', config.ClassID)
-    requestForm.set('TPlusCoveralls[EventSubjectID]', config.eventSubjectID) 
+    requestForm.set('TPlusCoveralls[ClassID]', config.fetch.report.ClassIdReport === undefined ? "" : config.fetch.report.ClassIdReport)
+    requestForm.set('TPlusCoveralls[EventSubjectID]', config.fetch.report.eventSubjectID === undefined ? "552" : config.fetch.report.eventSubjectID) 
   } 
   if (config.toggleActivePage ==='chart') {
-    requestForm.set('CameraID', "config.CameraIdChart")
+    requestForm.set('CameraID', config.CameraIdReport)
     requestForm.set('From', `${config.fetch.chart.searchStartDateChart}`)
     requestForm.set('To', `${config.fetch.chart.searchEndDateChart}`) 
     requestForm.set('Offset', 0)
