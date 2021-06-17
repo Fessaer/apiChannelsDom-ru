@@ -5,7 +5,7 @@ import '../Styles/searchBar.css';
 
 export default function Chart() {
   return (
-    <div className="container-fluid vh-90">
+    <div className="container-fluid vh-90 ps-0">
       <SearchBarChart />
       <RenderChart />
     </div>
