@@ -11,8 +11,20 @@ import '../Styles/timePicker.css'
 
 export default function CalendarPicker(props) {
   const [globalState, inSetState] = useContext(Context);
-  let { name, minDate, maxDate, labelName } = props;
+  let { name, minDate, maxDate, labelName, period } = props;
   const { toggleActivePage } = globalState;
+
+  const defaultPeriod = (period, format) => {
+    if(typeof period !== "number") {
+      period = Number(period)
+    }
+    //'dd:mm:yyyy'
+    let d = new Date(); // today!
+    d.setDate(d.getDate() - period);
+    let result = formatDateToLocale(d, format)
+    return result;
+  }
+
   // console.log(props, 'props')
   // const range = (start, end) => {
   //   const result = [];
@@ -22,8 +34,8 @@ export default function CalendarPicker(props) {
   //   // console.log(result, 'range result')
   //   return result;
   // }
-  let { fetch  } = globalState;
-  let { chart, report } = globalState.fetch 
+  let { fetch } = globalState;
+  let { chart, report } = globalState.fetch
   const disabledDate = (current) => {
     // eslint-disable-next-line no-mixed-operators
     const dayPlusOne = new Date(maxDate)
@@ -31,9 +43,9 @@ export default function CalendarPicker(props) {
     const min = formatDateToLocale(new Date(minDate), 'yyyy-mm-dd', 0)
     const max = formatDateToLocale(new Date(day), 'yyyy-mm-dd', 0)
     // eslint-disable-next-line no-mixed-operators
-    return current  < moment(min) || current && current > moment(max);
+    return current < moment(min) || current && current > moment(max);
   }
- 
+
   // const disabledDateTime = () => {
   //   return {
   //     disabledHours: () => {
@@ -66,24 +78,24 @@ export default function CalendarPicker(props) {
     // searchStartDate = resultDate
     const resultDate = formatDateToLocale(d, 'yyyy-mm-dd hh:MM:ss', 0)
     if (name === 'From' && toggleActivePage === 'report') {
-      report = {...report, searchStartDateReport: resultDate }
-      fetch = {...fetch, report}
-      inSetState({...globalState, fetch})
+      report = { ...report, searchStartDateReport: resultDate }
+      fetch = { ...fetch, report }
+      inSetState({ ...globalState, fetch })
     }
     if (name === 'To' && toggleActivePage === 'report') {
-      report = {...report, searchEndDateReport: resultDate }
-      fetch = {...fetch, report}
-      inSetState({...globalState, fetch})
+      report = { ...report, searchEndDateReport: resultDate }
+      fetch = { ...fetch, report }
+      inSetState({ ...globalState, fetch })
     }
     if (name === 'From' && toggleActivePage === 'chart') {
-      chart = {...chart, searchStartDateChart: resultDate }
-      fetch = {...fetch, chart}
-      inSetState({...globalState, fetch}) 
+      chart = { ...chart, searchStartDateChart: resultDate }
+      fetch = { ...fetch, chart }
+      inSetState({ ...globalState, fetch })
     }
     if (name === 'To' && toggleActivePage === 'chart') {
-      chart = {...chart, searchEndDateChart: resultDate }
-      fetch = {...fetch, chart}
-      inSetState({...globalState, fetch})
+      chart = { ...chart, searchEndDateChart: resultDate }
+      fetch = { ...fetch, chart }
+      inSetState({ ...globalState, fetch })
     }
     // console.log(resultDate, 'resultDate')
     // console.log(formatDateToLocale(d, 'yyyy-mm-dd hh:MM:ss', 0), 'formatDateToLocale')
@@ -93,25 +105,29 @@ export default function CalendarPicker(props) {
     console.log(e, 'onTest')
   }
   // const dateFormat = 'DD-MM-YYYY:HH:mm:ss'
+  
+  
+  console.log()
   return (
     <div className="col-lg-2 col-sm-4 pb-3 button_max_width">
       <label className="pb-1">{labelName}</label>
-        <DatePicker
-          allowClear={false}
-          style={{display: "flex"}}
-          locale={locale}
-          format="DD-MM-YYYY HH:mm:ss"
-          onChange={onChange}
-          disabledDate={disabledDate}
-          // disabledDate={disabledDate2}
-          // disabledTime={disabledDateTime}
-          // defaultValue={moment(minDate, dateFormat)}
-          showTime={{ defaultValue: moment('00:00:00', 'HH:mm:ss') }}
-          input={onTest}
-          clearIcon={() => <span>wewe</span>}
-          // placeholder={minDate}
-        />
-      
-      </div>
+      <DatePicker
+        allowClear={false}
+        style={{ display: "flex" }}
+        locale={locale}
+        format="DD-MM-YYYY HH:mm:ss"
+        onChange={onChange}
+        disabledDate={disabledDate}
+        // disabledDate={disabledDate2}
+        // disabledTime={disabledDateTime}
+        // defaultValue={moment(minDate, dateFormat)}
+        showTime={{ defaultValue: moment('00:00:00', 'HH:mm:ss') }}
+        input={onTest}
+        defaultValue={moment(defaultPeriod(period, 'dd:mm:yyyy'), 'DD:MM:YYYY')}
+        clearIcon={() => <span>wewe</span>}
+      // placeholder={minDate}
+      />
+
+    </div>
   )
 }

@@ -1,17 +1,25 @@
 import React, { useState } from 'react';
+import formatDateToLocale from './helpers/functionFormatReplaceDate';
 
 
-// connect in bd
-// console.log()
-    //
+  let d = new Date(); // today!
+  d.setDate(d.getDate() - 7);
+  const period = "yyyy-mm-dd"
+  const defaultDateStart = formatDateToLocale(d, period)
+  // console.log(defaultDateStart)
+
     let initialState = {
       fetch: {
         chart: {
+          searchStartDateChart: defaultDateStart + ' 00:00:00',
+          searchEndDateChart: formatDateToLocale(new Date(), period) + ' 00:00:00',
           loadingSpinnerChart: false,
           ClassIdChart: "",
-          EventSubjectID: "552",
+          eventSubjectID: "552",
         },
         report: {
+          searchStartDateReport: defaultDateStart + ' 00:00:00',
+          searchEndDateReport: formatDateToLocale(new Date(), period) + ' 00:00:00',
           ClassIdReport: "",
           loadingSpinnerReport: false,
         },
@@ -24,8 +32,8 @@ import React, { useState } from 'react';
         activePage: 1,
         renderCountItems: 20,  
       },
-      searchStartDate: new Date().toISOString().substring(0, 10) + ' 00:00:00', // начальная дата
-      searchEndDate: new Date().toISOString().substring(0, 10) + ' 23:59:59', // начальная дата
+      // searchStartDate: new Date().toISOString().substring(0, 10) + ' 00:00:00', // начальная дата
+      // searchEndDate: new Date().toISOString().substring(0, 10) + ' 23:59:59', // начальная дата
     }
 
 export const Context = React.createContext();

@@ -43,7 +43,7 @@ export default function Navigation() {
     <TabPane tab="Журнал" key="report">
       {<Report />}
     </TabPane>
-    <TabPane tab="Статистика за день" key="chart">
+    <TabPane tab="Статистика за период" key="chart">
       {<Chart />}
     </TabPane>
   </Tabs>

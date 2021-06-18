@@ -2,48 +2,50 @@ import React, { useContext } from 'react';
 import { Context } from '../Store';
 import 'moment/locale/ru';
 import '../Styles/searchBar.css';
-import { BarChart,
+import {
+  BarChart,
   Bar,
   XAxis,
-  YAxis, 
-  CartesianGrid, 
-  Tooltip, 
-  ResponsiveContainer, 
-  Legend } from 'recharts';
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  Legend
+} from 'recharts';
 
 export default function RenderChart(props) {
   const [globalState] = useContext(Context);
 
   let { activeFilterChart } = globalState.ui;
   let { elementsRechart } = globalState.fetch.chart;
-  
+
   // useEffect(() => {
   //   inSetState({...globalState, toggleActivePage: 'chart'})
   //   console.log('useEffect')
   // }, [])
-  
+
   const objClassID = {
     '1': 'Каска',
     '2': 'Куртка',
     '3': 'Штаны',
-    '4': 'Все классы'
+    '4': 'Все объекты'
   }
 
   if (elementsRechart === undefined) {
-      elementsRechart = [];
+    elementsRechart = [];
   }
   if (activeFilterChart === "") activeFilterChart = '4'
   let copyArrayData = [...elementsRechart]
 
   const bigNumberArray = copyArrayData.length
-  > 0 ? Number(copyArrayData.sort((prev, next) =>
-  prev[objClassID[activeFilterChart]] - next[objClassID[activeFilterChart]]).pop()[objClassID[activeFilterChart]]) : 0
-  
+    > 0 ? Number(copyArrayData.sort((prev, next) =>
+      prev[objClassID[activeFilterChart]] - next[objClassID[activeFilterChart]]).pop()[objClassID[activeFilterChart]]) : 0
+
   const autoWidth = (arr) => {
     if (arr.length === 0) return 0
     let arrLength = []
     arr.forEach((item) => {
-      if(item !== undefined) arrLength.push(Number(item[objClassID[activeFilterChart]]))
+      if (item !== undefined) arrLength.push(Number(item[objClassID[activeFilterChart]]))
     })
     if (arrLength.length > 0) arrLength.sort((prev, next) => Number(prev) - Number(next))
     let resultArr = arrLength[arrLength.length - 1]
@@ -54,16 +56,16 @@ export default function RenderChart(props) {
     <div className="me-0">
       <ResponsiveContainer width="95.5%" height={600}>
         <BarChart data={elementsRechart}>
-          <CartesianGrid strokeDasharray="3 3" /> 
+          <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="dateTime" domain={['', '']} />
           <YAxis tickCount={20} domain={[0, bigNumberArray]}
-              padding={{ top: 20 }} interval={0} width={autoWidth(elementsRechart)}/>
+            padding={{ top: 20 }} interval={2} width={autoWidth(elementsRechart)} />
           <Tooltip />
           <Legend />
-          <Bar  dataKey='Каска' fill="#8884d8" />
-          <Bar  dataKey='Куртка' fill="#82ca9d" />
-          <Bar  dataKey='Штаны' fill="#ffb700" />
-          <Bar  dataKey='Все классы' fill="#808080" />
+          <Bar dataKey='Каска' fill="#8884d8" />
+          <Bar dataKey='Куртка' fill="#82ca9d" />
+          <Bar dataKey='Штаны' fill="#ffb700" />
+          <Bar dataKey='Все объекты' fill="#808080" />
         </BarChart>
       </ResponsiveContainer>
     </div>

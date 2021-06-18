@@ -14,7 +14,7 @@ export default function Reports() {
   const [globalState, inSetState] = useContext(Context);
 
   return (
-    <> 
+    <>
       <SearchBar />
       <Spinner />
       <Pagination />

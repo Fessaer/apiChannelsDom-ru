@@ -28,17 +28,17 @@ const Spinner = () => {
   const { toggleActivePage } = globalState;
   if (toggleActivePage === "report") {
     return (
-    <div className="sweet-loading">
-      <FadeLoader color={color} loading={loadingSpinnerReport} css={override} height={15} width={5} radius={2} margin={2} />
-    </div>
+      <div className="sweet-loading">
+        <FadeLoader color={color} loading={loadingSpinnerReport} css={override} height={15} width={5} radius={2} margin={2} />
+      </div>
     );
   }
   if (toggleActivePage === "chart") {
-  return (
-    <div className="sweet-loading">
-      <FadeLoader color={color} loading={loadingSpinnerChart} css={override} height={15} width={5} radius={2} margin={2} />
-    </div>
-  )
+    return (
+      <div className="sweet-loading">
+        <FadeLoader color={color} loading={loadingSpinnerChart} css={override} height={15} width={5} radius={2} margin={2} />
+      </div>
+    )
   }
   else {
     return null

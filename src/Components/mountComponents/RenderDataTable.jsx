@@ -37,6 +37,13 @@ const RenderTable = () => {
     return {id: id, time: dateTime, cameraName: cameraName, image: image, param1: param1, param2: param2}
   })
   // console.log(elements)
+  if (globalState.fetch.report.elements !== undefined) {
+    if(globalState.fetch.report.elements.length === 0) return (
+      <div class="alert alert-primary" role="alert">
+        События не найдены
+      </div>
+      )
+  }
   return (
     <>
     <Table striped bordered hover>
