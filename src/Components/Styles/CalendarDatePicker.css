@@ -1,14 +1,13 @@
 button.ant-btn {
-  font-size: 0;
+  /* font-size: 0; */
   height: 33px;
   
-  /* padding-bottom: 10px; */
 }
 
-button.ant-btn-sm:after {
+/* button.ant-btn-sm:after {
   font-size: 14px; 
   content: "Выбрать";
-}
+} */
 .anticon.anticon-calendar > svg {
   margin: 0
 }
