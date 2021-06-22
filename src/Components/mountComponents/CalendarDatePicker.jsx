@@ -5,7 +5,7 @@ import { Context } from '../Store';
 import { DatePicker } from 'antd';
 import 'moment/locale/ru';
 // import locale from 'antd/es/date-picker/locale/ru_RU';
-import locale from '../config/locale/data_picker/ru/date_picker_ru_RU';
+import locale from '../config/locale/date_picker/ru/date_picker_ru_RU';
 import moment from 'moment';
 import '../Styles/CalendarDatePicker.css'
 // const enhanceWithClickOutside = require('react-click-outside');
