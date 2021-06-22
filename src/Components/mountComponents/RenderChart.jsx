@@ -52,7 +52,7 @@ export default function RenderChart(props) {
     let resultArr = arrLength[arrLength.length - 1]
     return Number(resultArr.toString().length + '0') + 10
   }
-  if(elementsRechart.length > 0 ) console.log(Object.entries(elementsRechart[0]), activeFilterChart )
+  // if(elementsRechart.length > 0 ) console.log(Object.entries(elementsRechart[0]), activeFilterChart )
   return (
     <div className="me-0">
       <ResponsiveContainer width="95.5%" height={600}>
