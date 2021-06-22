@@ -7,7 +7,7 @@ button.ant-btn {
 
 button.ant-btn-sm:after {
   font-size: 14px; 
-  content: "Применить";
+  content: "Выбрать";
 }
 .anticon.anticon-calendar > svg {
   margin: 0
