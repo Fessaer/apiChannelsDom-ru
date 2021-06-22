@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Context } from '../Store';
 import 'moment/locale/ru';
 import '../Styles/searchBar.css';
+import configColorsChart from '../config/configCharts';
 import {
   BarChart,
   Bar,
@@ -62,10 +63,10 @@ export default function RenderChart(props) {
             padding={{ top: 20 }} interval={2} width={autoWidth(elementsRechart)} />
           <Tooltip />
           <Legend />
-          <Bar dataKey='Каска' fill="#8884d8" />
-          <Bar dataKey='Куртка' fill="#82ca9d" />
-          <Bar dataKey='Штаны' fill="#ffb700" />
-          <Bar dataKey='Все объекты' fill="#808080" />
+          <Bar dataKey='Каска' fill={configColorsChart['Каска']} />
+          <Bar dataKey='Куртка' fill={configColorsChart['Куртка']} />
+          <Bar dataKey='Штаны' fill={configColorsChart['Штаны']} />
+          <Bar dataKey='Все объекты' fill={configColorsChart['Все объекты']} />
         </BarChart>
       </ResponsiveContainer>
     </div>
