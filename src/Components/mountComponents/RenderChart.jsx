@@ -55,7 +55,12 @@ export default function RenderChart(props) {
   // if(elementsRechart.length > 0 ) console.log(Object.entries(elementsRechart[0]), activeFilterChart )
   return (
     <div className="me-0">
-      <ResponsiveContainer width="95.5%" height={600}>
+      <ResponsiveContainer width="95.5%" height={(() => {
+        const pageWidth = document.documentElement.scrollWidth
+        const height = pageWidth / 2
+        if (height > 600) return 600
+        if (height < 300) return 300
+        return height })()}>
         <BarChart data={elementsRechart}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="dateTime" domain={['', '']} />
