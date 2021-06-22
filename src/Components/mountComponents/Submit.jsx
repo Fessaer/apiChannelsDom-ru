@@ -41,7 +41,7 @@ export default function Submit() {
 
   return (
     <div className="col-lg-2 col-sm-4 pt-1 d-flex align-items-center">
-      <button type="button" className="btn btn-outline-primary btn-sm button_max_width" onClick={handleSubmit}>Применить</button>
+      <button type="button" className="btn btn-outline-primary btn-sm button_max_width mt-1" onClick={handleSubmit}>Применить</button>
     </div>
   )
 }

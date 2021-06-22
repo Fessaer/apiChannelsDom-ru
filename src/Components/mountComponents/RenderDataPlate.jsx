@@ -25,7 +25,7 @@ const RenderPlate = () => {
   let countRenderItems = 0
   if (globalState.fetch.report.elements !== undefined) {
     if(globalState.fetch.report.elements.length === 0) return (
-      <div class="alert alert-warning" role="alert">
+      <div className="alert alert-warning" role="alert">
         События не найдены
       </div>
       )

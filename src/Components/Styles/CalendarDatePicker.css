@@ -1,0 +1,32 @@
+button.ant-btn {
+  font-size: 0;
+  height: 33px;
+  
+  /* padding-bottom: 10px; */
+}
+
+button.ant-btn-sm:after {
+  font-size: 14px; 
+  content: "Применить";
+}
+.anticon.anticon-calendar > svg {
+  margin: 0
+}
+
+/* .ant-picker-ranges {
+  display: none;
+} */
+/* .ant-picker-footer {
+  display: flex;
+  align-items: center;
+  height: 39px;
+  padding-top: 1px !important;
+} */
+/* .ant-picker-footer-extra {
+  display: flex;
+  align-items: center;
+} */
+/* .ant-picker-footer-extra:not(:last-child) {
+  border-bottom: none !important; 
+} */
+
