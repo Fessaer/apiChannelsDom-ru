@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Context } from '../Store';
 import 'moment/locale/ru';
 import '../Styles/searchBar.css';
-import configColorsChart from '../config/configCharts';
+import {colors} from '../config/configCharts';
 import {
   BarChart,
   Bar,
@@ -68,10 +68,10 @@ export default function RenderChart(props) {
             padding={{ top: 20 }} interval={2} width={autoWidth(elementsRechart)} />
           <Tooltip />
           <Legend />
-          {activeFilterChart !== '4' && activeFilterChart !== '1' ? null : <Bar maxBarSize={200} dataKey='Каска' fill={activeFilterChart !== '4' ? configColorsChart['SingColor'] : configColorsChart['Каска']} />}
-          {activeFilterChart !== '4' && activeFilterChart !== '2' ? null : <Bar dataKey='Куртка' fill={activeFilterChart !== '4' ? configColorsChart['SingColor'] : configColorsChart['Куртка']} />}
-          {activeFilterChart !== '4' && activeFilterChart !== '3' ? null : <Bar dataKey='Штаны' fill={activeFilterChart !== '4' ? configColorsChart['SingColor'] : configColorsChart['Штаны']} />}
-          {activeFilterChart !== '4' && activeFilterChart !== '4' ? null : <Bar dataKey='Все объекты' fill={activeFilterChart !== '4' ? configColorsChart['SingColor'] : configColorsChart['Все объекты']} />}
+          {activeFilterChart !== '4' && activeFilterChart !== '1' ? null : <Bar maxBarSize={200} dataKey='Каска' fill={activeFilterChart !== '4' ? colors[0] : colors[0]} />}
+          {activeFilterChart !== '4' && activeFilterChart !== '2' ? null : <Bar maxBarSize={200} dataKey='Куртка' fill={activeFilterChart !== '4' ? colors[0] : colors[1]} />}
+          {activeFilterChart !== '4' && activeFilterChart !== '3' ? null : <Bar maxBarSize={200} dataKey='Штаны' fill={activeFilterChart !== '4' ? colors[0] : colors[2]} />}
+          {activeFilterChart !== '4' && activeFilterChart !== '4' ? null : <Bar maxBarSize={200} dataKey='Все объекты' fill={activeFilterChart !== '4' ? colors[0] : colors[3]} />}
         </BarChart>
       </ResponsiveContainer>
     </div>
