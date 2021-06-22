@@ -92,7 +92,7 @@ function CalendarPicker(props) {
         // open={state.toggleActivePage}
         defaultValue={moment(defaultPeriod(period, 'dd:mm:yyyy'), 'DD:MM:YYYY')}
         value={ moment(formatDateToLocale(new Date(mappingValueCalendar[name]()))) }
-        showNow={true}
+        showNow={false}
         onSelect={onChange}
         showToday={true}
       />
