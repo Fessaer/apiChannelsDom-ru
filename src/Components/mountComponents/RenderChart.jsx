@@ -52,7 +52,7 @@ export default function RenderChart(props) {
     let resultArr = arrLength[arrLength.length - 1]
     return Number(resultArr.toString().length + '0') + 10
   }
-
+  if(elementsRechart.length > 0 ) console.log(Object.entries(elementsRechart[0]), activeFilterChart )
   return (
     <div className="me-0">
       <ResponsiveContainer width="95.5%" height={600}>
@@ -63,10 +63,10 @@ export default function RenderChart(props) {
             padding={{ top: 20 }} interval={2} width={autoWidth(elementsRechart)} />
           <Tooltip />
           <Legend />
-          <Bar dataKey='Каска' fill={configColorsChart['Каска']} />
-          <Bar dataKey='Куртка' fill={configColorsChart['Куртка']} />
-          <Bar dataKey='Штаны' fill={configColorsChart['Штаны']} />
-          <Bar dataKey='Все объекты' fill={configColorsChart['Все объекты']} />
+          {activeFilterChart !== '4' && activeFilterChart !== '1' ? null : <Bar maxBarSize={200} dataKey='Каска' fill={activeFilterChart !== '4' ? configColorsChart['SingColor'] : configColorsChart['Каска']} />}
+          {activeFilterChart !== '4' && activeFilterChart !== '2' ? null : <Bar dataKey='Куртка' fill={activeFilterChart !== '4' ? configColorsChart['SingColor'] : configColorsChart['Куртка']} />}
+          {activeFilterChart !== '4' && activeFilterChart !== '3' ? null : <Bar dataKey='Штаны' fill={activeFilterChart !== '4' ? configColorsChart['SingColor'] : configColorsChart['Штаны']} />}
+          {activeFilterChart !== '4' && activeFilterChart !== '4' ? null : <Bar dataKey='Все объекты' fill={activeFilterChart !== '4' ? configColorsChart['SingColor'] : configColorsChart['Все объекты']} />}
         </BarChart>
       </ResponsiveContainer>
     </div>
