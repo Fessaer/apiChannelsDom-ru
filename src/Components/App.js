@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react';
 import './Styles/App.css';
 import Navigation from './Navigation';
 import Store from './Store';
-
+// import { FormData } from 'formdata-polyfill/esm-min.js'
 
 function App() {
   const [dataState, setDataState] = useState({validate: false})
@@ -12,15 +12,21 @@ function App() {
     (async function fetchData() {
       // console.log('useEffect')
       let urle = 'http://va.fpst.ru:8080/api/login';
-      const form = new FormData();
-      form.set('Login', 'tplusfront')
-      form.set('Password', 'tplusfront00')
+      // let form = new FormData();
+      // form.set('Login', 'tplusfront')
+      // form.set('Password', 'tplusfront00')
+      var bodyfetch = 'Login=' + encodeURIComponent('tplusfront') +
+      '&Password=' + encodeURIComponent('tplusfront00');
+      console.log(bodyfetch.length)
       await fetch(urle, {
         method: 'POST',
-        body: form
+        body: bodyfetch,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
       }).then(function(response) {
         let data = response.text()
-        // console.log(data)
+        console.log(data)
         return data;
       }).then((inf) => {
         const { SessionID, ChangePasswordAtNextLogin } = JSON.parse(inf);

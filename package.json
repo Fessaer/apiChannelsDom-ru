@@ -14,7 +14,9 @@
     "core-js": "^3.15.0",
     "date-input-polyfill": "^2.14.0",
     "date-input-polyfill-react": "^2.14.4",
+    "formdata-polyfill": "^4.0.6",
     "lodash": "^4.17.21",
+    "object-to-formdata": "^4.1.0",
     "rc-picker": "^2.5.12",
     "react": "^17.0.2",
     "react-app-polyfill": "^2.0.0",
@@ -45,6 +47,7 @@
   },
   "browserslist": {
     "production": [
+      "last 4 safari versions",
       ">0.2%",
       "not dead",
       "not op_mini all"
