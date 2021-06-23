@@ -1,6 +1,5 @@
-"use strict";
 
-var locale = {
+let locale = {
   locale: 'ru_RU',
   today: 'Сегодня',
   now: 'Сейчас',

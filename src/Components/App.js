@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from 'react';
+
 import './Styles/App.css';
 import Navigation from './Navigation';
 import Store from './Store';
+
 
 function App() {
   const [dataState, setDataState] = useState({validate: false})

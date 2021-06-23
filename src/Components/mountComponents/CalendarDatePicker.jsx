@@ -9,6 +9,7 @@ import locale from '../config/locale/date_picker/ru/date_picker_ru_RU';
 import moment from 'moment';
 import '../Styles/CalendarDatePicker.css'
 // const enhanceWithClickOutside = require('react-click-outside');
+moment.suppressDeprecationWarnings = true;
 
 function CalendarPicker(props) {
   const [globalState, inSetState] = useContext(Context);
@@ -17,8 +18,8 @@ function CalendarPicker(props) {
 
   // let targetCalendar = `${name}` + `${toggleActivePage}`
   const mappingValueCalendar = {
-    'From': () => toggleActivePage === 'report' ? globalState.fetch.report.searchStartDateReport : globalState.fetch.chart.searchStartDateChart,
-    'To': () => toggleActivePage === 'report' ? globalState.fetch.report.searchEndDateReport : globalState.fetch.chart.searchEndDateChart
+    'From': toggleActivePage === 'report' ? globalState.fetch.report.searchStartDateReport : globalState.fetch.chart.searchStartDateChart,
+    'To': toggleActivePage === 'report' ? globalState.fetch.report.searchEndDateReport : globalState.fetch.chart.searchEndDateChart
   }
 
   // useEffect(() => {
@@ -75,7 +76,10 @@ function CalendarPicker(props) {
       inSetState({ ...globalState, fetch })
     }
   }
-
+  let targetDateMapping = mappingValueCalendar[name]
+  // console.log(targetDateMapping, 'targetDateMapping')
+  let testDate = moment(targetDateMapping, 'YYYY-MM-DD HH:mm:ss')
+  // console.log(formatDateToLocale(testDate), 'formatDateToLocale')
   return (
     <div className="col-lg-2 col-sm-4 pb-3 button_max_width">
       <label className="pb-1">{labelName}</label>
@@ -92,7 +96,7 @@ function CalendarPicker(props) {
         showTime={true}
         // open={state.toggleActivePage}
         defaultValue={moment(defaultPeriod(period, 'dd:mm:yyyy'), 'DD:MM:YYYY')}
-        value={ moment(formatDateToLocale(new Date(mappingValueCalendar[name]()))) }
+        value={ moment(formatDateToLocale(new Date(testDate)), 'YYYY-MM-DD HH:mm:ss') }
         showNow={false}
         onSelect={onChange}
         showToday={true}
