@@ -1,8 +1,8 @@
 var convert = require('xml-js');
 
-const fetchFunction = async(config, e = false) => {
+const fetchFunction = async (config, e = false) => {
     let arrResponseElements = []
-    let noRenderPagination = false;
+    let noRenderPagination = true;
     if (e !== false) {
         const newOffSet = (e - 1) * 20;
         config.fetch.offset = newOffSet;
@@ -70,39 +70,91 @@ const fetchFunction = async(config, e = false) => {
     // if (config.toggleActivePage === 'chart') requestForm.set('CountBy', 'day')
     // console.log('...ЗАПРОС =>>>')
     
-    await fetch(apiUrlGetData, {
-        method: 'POST',
-        body: bodyfetch,
-        headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                },
-    }).then((response) => {
-        try {
-            const dataResponseText = response.text();
-            // console.log(dataResponseText, 'dataResponseText RenderTable');
-            return dataResponseText;
-        } catch (err) {
-            console.log(err, 'err');
-            arrResponseElements = [];
-            noRenderPagination = true;
-        }
-    }).then((data) => {
-        try {
-            let result = convert.xml2json(data, { compact: false });
-            let parseData = JSON.parse(result);
-            const { elements } = parseData;
-            const arrElements = elements[0].elements;
-            noRenderPagination = false;
-            // console.log(typeof arrElements === "undefined", `typeof arrElements === "undefined"`);
-            arrResponseElements = [...arrElements]
-                // console.log(arrResponseElements, 'return arrResponseElements');
-        } catch (err) {
-            // console.log(err, 'err2');
-            arrResponseElements = [];
-            noRenderPagination = true;
-        }
-    })
-    return { arr: arrResponseElements, noRenderPagination: noRenderPagination }
+    // await fetch(apiUrlGetData, {
+    //     method: 'POST',
+    //     body: bodyfetch,
+    //     headers: {
+    //             'Content-Type': 'application/x-www-form-urlencoded',
+    //             },
+    // }).then((response) => {
+    //     try {
+    //         const dataResponseText = response.text();
+    //         // console.log(dataResponseText, 'dataResponseText RenderTable');
+    //         return dataResponseText;
+    //     } catch (err) {
+    //         console.log(err, 'err');
+    //         arrResponseElements = [];
+    //         noRenderPagination = true;
+    //     }
+    // }).then((data) => {
+    //     try {
+    //         let result = convert.xml2json(data, { compact: false });
+    //         let parseData = JSON.parse(result);
+    //         const { elements } = parseData;
+    //         const arrElements = elements[0].elements;
+    //         noRenderPagination = false;
+    //         // console.log(typeof arrElements === "undefined", `typeof arrElements === "undefined"`);
+    //         arrResponseElements = [...arrElements]
+    //             // console.log(arrResponseElements, 'return arrResponseElements');
+    //     } catch (err) {
+    //         // console.log(err, 'err2');
+    //         arrResponseElements = [];
+    //         noRenderPagination = true;
+    //     }
+    // })
+    let promise = new Promise(function(resolve,reject) {
+      let http =  new XMLHttpRequest();
+    //   let urle = 'http://va.fpst.ru:8080/api/login';
+    //   let bodyfetch = 'Login=' + encodeURIComponent('tplusfront') +
+    //   '&Password=' + encodeURIComponent('tplusfront00');
+      http.open('POST', apiUrlGetData, true);
+      http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      http.onload = function() {//Call a function when the state changes.
+        // console.log(http.readyState != 4, http.status === 200)
+        // if  (http.readyState != 4 && http.status === 200) {
+            // console.log(http.status === 200)
+            let response = http.responseText;
+            resolve(response)
+            // try {
+            //     let result = convert.xml2json(response, { compact: false });
+            //     let parseData = JSON.parse(result);
+            //     let { elements } = parseData;
+            //     // console.log(elements, 'elements')
+            //     let arrElements = elements[0]['elements'];
+            //     noRenderPagination = false;
+            //     // console.log(arrElements, 'arrElements')
+            //     // console.log(typeof arrElements === "undefined", `typeof arrElements === "undefined"`);
+            //     arrResponseElements = [...arrElements]
+            //         // console.log(arrResponseElements, 'return arrResponseElements');
+            // } catch (err) {
+            //     console.log(err, 'err2');
+            //     arrResponseElements = [];
+            //     noRenderPagination = true;
+            // }
+            // console.log(JSON.parse(response) )
+        // }
+        
+    }
+    http.onerror = function() {
+        arrResponseElements = [];
+        noRenderPagination = true;
+    }
+    http.send(bodyfetch);
+})
+   return promise.then(function(response){
+        let result = convert.xml2json(response, { compact: false });
+                let parseData = JSON.parse(result);
+                let { elements } = parseData;
+                // console.log(elements, 'elements')
+                let arrElements = elements[0]['elements'];
+                noRenderPagination = false;
+                // console.log(arrElements, 'arrElements')
+                // console.log(typeof arrElements === "undefined", `typeof arrElements === "undefined"`);
+                arrResponseElements = [...arrElements]
+                    // console.log(arrResponseElements, 'return arrResponseElements');
+                    return { arr: arrResponseElements, noRenderPagination: noRenderPagination }
+    });
+    
 }
 
 export default fetchFunction;

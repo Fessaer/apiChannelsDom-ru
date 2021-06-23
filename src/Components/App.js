@@ -10,29 +10,44 @@ function App() {
 
   useEffect(() => {
     (async function fetchData() {
-      // console.log('useEffect')
+      let http = new XMLHttpRequest();
       let urle = 'http://va.fpst.ru:8080/api/login';
-      // let form = new FormData();
-      // form.set('Login', 'tplusfront')
-      // form.set('Password', 'tplusfront00')
-      var bodyfetch = 'Login=' + encodeURIComponent('tplusfront') +
+      let bodyfetch = 'Login=' + encodeURIComponent('tplusfront') +
       '&Password=' + encodeURIComponent('tplusfront00');
-      console.log(bodyfetch.length)
-      await fetch(urle, {
-        method: 'POST',
-        body: bodyfetch,
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-      }).then(function(response) {
-        let data = response.text()
-        console.log(data)
-        return data;
-      }).then((inf) => {
-        const { SessionID, ChangePasswordAtNextLogin } = JSON.parse(inf);
-        setDataState({SessionID, ChangePasswordAtNextLogin, validate: true})
-      }).catch((err) => console.log(err, 'error response auth'))
+      http.open('POST', urle, true);
+      http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      http.send(bodyfetch);
+      http.onreadystatechange = function() {//Call a function when the state changes.
+        if  (http.readyState === 4 && http.status === 200) {
+          
+            let response = http.responseText;
+            // console.log(JSON.parse(response) )
+            const { SessionID, ChangePasswordAtNextLogin } = JSON.parse(response);
+            setDataState({SessionID, ChangePasswordAtNextLogin, validate: true})
+        }
+      }
+      // 
+      // let response = http.responseText
+      // const { SessionID, ChangePasswordAtNextLogin } = JSON.parse(response);
+      // setDataState({SessionID, ChangePasswordAtNextLogin, validate: true})
+      //   setDataState({SessionID, ChangePasswordAtNextLogin, validate: true})
+      // console.log(bodyfetch.length)
+      // await fetch(urle, {
+      //   method: 'POST',
+      //   body: bodyfetch,
+      //   headers: {
+      //     'Content-Type': 'application/x-www-form-urlencoded',
+      //   },
+      // }).then(function(response) {
+      //   let data = response.text()
+      //   console.log(data)
+      //   return data;
+      // }).then((inf) => {
+      //   const { SessionID, ChangePasswordAtNextLogin } = JSON.parse(inf);
+      //   setDataState({SessionID, ChangePasswordAtNextLogin, validate: true})
+      // }).catch((err) => console.log(err, 'error response auth'))
     })()
+
   }, [])
   // console.log(dataState, 'dataState')
   const { validate } = dataState;

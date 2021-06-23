@@ -55,7 +55,7 @@ function CalendarPicker(props) {
     let d = new Date(e._d)
     
     const resultDate = formatDateToLocale(d, 'yyyy-mm-dd hh:MM:ss', 0)
-    console.log( resultDate , " resultDate ")
+    // console.log( resultDate , " resultDate ")
     if (name === 'From' && toggleActivePage === 'report') {
       report = { ...report, searchStartDateReport: resultDate }
       fetch = { ...fetch, report }
