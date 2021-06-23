@@ -141,7 +141,7 @@ const fetchFunction = async (config, e = false) => {
     }
     http.send(bodyfetch);
 })
-   return promise.then(function(response){
+   return promise.then(function(response) {
         let result = convert.xml2json(response, { compact: false });
                 let parseData = JSON.parse(result);
                 let { elements } = parseData;
@@ -153,6 +153,10 @@ const fetchFunction = async (config, e = false) => {
                 arrResponseElements = [...arrElements]
                     // console.log(arrResponseElements, 'return arrResponseElements');
                     return { arr: arrResponseElements, noRenderPagination: noRenderPagination }
+    }).catch(() =>{
+        arrResponseElements = [];
+        noRenderPagination = true;
+        return { arr: arrResponseElements, noRenderPagination: noRenderPagination }
     });
     
 }
