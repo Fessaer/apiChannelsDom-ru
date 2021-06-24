@@ -1,15 +1,21 @@
+/* eslint-disable no-mixed-operators */
 import React, { useContext } from 'react';
 import { Context } from '../Store';
 import '../Styles/renderTable.css';
 import { Pagination } from 'antd';
 import fetchFunc from '../helpers/fetchFunction';
 
-export default function Paging() {
+export default function Paging(props) {
   const [globalState, inSetState] = useContext(Context);
   let { fetch, ui } = globalState;
   let { lengthPagination, noRenderPagination } = globalState.ui;
   let { elements } = globalState.fetch.report;
   let { report, offset } = globalState.fetch
+  // console.log(props.norender, 'paging props')
+
+  let propsNorender = props.norender
+  if(propsNorender === undefined) propsNorender = 0
+  // console.log(propsNorender, 'paging props')
 
   const handlePaging = async (e, f) => {
     report = await { ...report, loadingSpinnerReport: true }
@@ -27,12 +33,14 @@ export default function Paging() {
     ui = await { ...ui, activePage: e, lengthPagination, noRenderPagination: dataFetch.noRenderPagination }
     await inSetState({ ...globalState, fetch, ui });
   }
-
+  // console.log(elements.length)
   let { activePage } = globalState.ui;
   if (elements !== undefined) {
     return (
       <>
-        {elements.length !== 0 || elements.length > 20 || noRenderPagination === false ?
+        {elements.length !== 0 && propsNorender < elements.length 
+        || elements.length > 20 && propsNorender < elements.length 
+        || propsNorender < elements.length &&  noRenderPagination === false ?
           <div className="pl-0">
             <Pagination
               current={activePage}

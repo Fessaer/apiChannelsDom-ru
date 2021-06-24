@@ -20,7 +20,7 @@ export default function Reports() {
       <Pagination />
       <DataPlate />
       {/* <DataReactTable /> */}
-      <Pagination />
+      <Pagination norender={15}/>
     </>
   )
 }

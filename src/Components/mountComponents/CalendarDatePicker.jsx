@@ -101,6 +101,7 @@ function CalendarPicker(props) {
         showNow={false}
         onSelect={onChange}
         showToday={true}
+        inputReadOnly={true}
       />
     </div>
   )
