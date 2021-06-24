@@ -40,8 +40,8 @@ export default function Submit() {
   }
 
   return (
-    <div className="col-lg-2 col-sm-4 pt-1 d-flex align-items-center">
-      <button type="button" className="btn btn-outline-primary btn-sm button_max_width mt-1" onClick={handleSubmit}>Применить</button>
+    <div className="d-flex align-items-end col-sm-4 col-lg-3 col-xl-2 pt-1 pb-3 button_max_width">
+      <button type="button" className="btn btn-outline-primary btn-sm button_max_width" style={{height: "32px"}} onClick={handleSubmit}>Применить</button>
     </div>
   )
 }

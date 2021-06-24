@@ -58,7 +58,8 @@ export default function RenderChart(props) {
       <ResponsiveContainer width="95.5%" height={(() => {
         const pageWidth = document.documentElement.scrollWidth
         const height = pageWidth / 2
-        if (height > 600) return 600
+        if (height > 790) return 600
+        if (height > 790) return 500
         if (height < 300) return 300
         return height })()}>
         <BarChart data={elementsRechart}>
