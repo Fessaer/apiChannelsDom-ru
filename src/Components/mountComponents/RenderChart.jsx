@@ -3,6 +3,9 @@ import { Context } from '../Store';
 import 'moment/locale/ru';
 import '../Styles/searchBar.css';
 import {colors} from '../config/configCharts';
+import moment from 'moment';
+import formatDateToLocale from '../helpers/functionFormatReplaceDate'
+
 import {
   BarChart,
   Bar,
@@ -41,7 +44,7 @@ export default function RenderChart(props) {
   const bigNumberArray = copyArrayData.length
     > 0 ? Number(copyArrayData.sort((prev, next) =>
       prev[objClassID[activeFilterChart]] - next[objClassID[activeFilterChart]]).pop()[objClassID[activeFilterChart]]) : 0
-
+  // console.log(elementsRechart)
   const autoWidth = (arr) => {
     if (arr.length === 0) return 0
     let arrLength = []
@@ -52,6 +55,28 @@ export default function RenderChart(props) {
     let resultArr = arrLength[arrLength.length - 1]
     return Number(resultArr.toString().length + '0') + 10
   }
+
+  function formatXAxis(tickItem) {
+    // console.log(new Date(tickItem))
+    // console.log(formatDateToLocale(new Date(tickItem), 'mm\.dd\.yyyy'))
+    // console.log(moment().diff(tickItem, 'minutes'))
+    // If using moment.js
+    function formatLocaleDate(str) {
+      const g = str.substr(0, 2)
+      const m = str.substr(3, 2)
+      const d = str.substr(6, 4)
+      return `${d}-${m}-${g}`
+    }
+    let strDate = formatLocaleDate(tickItem)
+    let newStrDate = strDate
+    // console.log(moment().diff(`${strDate} 00:00:01`, 'minutes'), 'moment')
+    // console.log(newStrDate)
+    if(tickItem !== "") console.log(new Date(tickItem.replace(/-/g, "/")))
+
+    if(tickItem !== "") return formatDateToLocale(new Date(`${strDate}T15:00:48`), 'mm\.dd\.yyyy')//formatDateToLocale(new Date(newStrDate))
+    if(tickItem === "") return ""
+    }
+
   // if(elementsRechart.length > 0 ) console.log(Object.entries(elementsRechart[0]), activeFilterChart )
   return (
     <div className="me-0">
@@ -64,7 +89,7 @@ export default function RenderChart(props) {
         return height })()}>
         <BarChart data={elementsRechart}>
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="dateTime" domain={['', '']} />
+          <XAxis dataKey="dateTime" type={"category"} domain={["", ""]} />
           <YAxis tickCount={20} domain={[0, bigNumberArray]}
             padding={{ top: 20 }} interval={2} width={autoWidth(elementsRechart)} />
           <Tooltip />
