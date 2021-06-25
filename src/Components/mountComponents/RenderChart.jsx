@@ -55,26 +55,57 @@ export default function RenderChart(props) {
     let resultArr = arrLength[arrLength.length - 1]
     return Number(resultArr.toString().length + '0') + 10
   }
-
+  // console.log(window.navigator.userAgent)
   function formatXAxis(tickItem) {
     // console.log(new Date(tickItem))
     // console.log(formatDateToLocale(new Date(tickItem), 'mm\.dd\.yyyy'))
-    // console.log(moment().diff(tickItem, 'minutes'))
+    // console.log(moment(formatDateToLocale(tickItem, 'dd.mm.yyyy')).format('LLLL'))
     // If using moment.js
-    function formatLocaleDate(str) {
-      const g = str.substr(0, 2)
-      const m = str.substr(3, 2)
-      const d = str.substr(6, 4)
-      return `${d}-${m}-${g}`
+    const mappingDay = {
+      "понедельник": "Пн",
+      "вторник": "Вт",
+      "среда": "Ср",
+      "четверг": "Чт",
+      "пятница": "Пт",
+      "суббота": "Сб",
+      "воскресенье": "Вс"
     }
-    let strDate = formatLocaleDate(tickItem)
-    let newStrDate = strDate
-    // console.log(moment().diff(`${strDate} 00:00:01`, 'minutes'), 'moment')
-    // console.log(newStrDate)
-    if(tickItem !== "") console.log(new Date(tickItem.replace(/-/g, "/")))
+    const mappingMonth = {
+      'январь': 'янв',
+      'февраль': 'фев',
+      'март': 'мар',
+      'апрель': 'апр',
+      'май': 'май',
+      'июнь': 'июн',
+      'июль': 'июл',
+      'август': 'авг',
+      'сентябрь': 'Сен',
+      'октябрь': 'окт',
+      'ноябрь': 'Ноя',
+      'декабрь': 'Дек'
+    };
 
-    if(tickItem !== "") return formatDateToLocale(new Date(`${strDate}T15:00:48`), 'mm\.dd\.yyyy')//formatDateToLocale(new Date(newStrDate))
-    if(tickItem === "") return ""
+
+    function formatLocaleDate(str) {
+      const d = str.substr(0, 2)
+      const m = str.substr(3, 2)
+      const g = str.substr(6, 4)
+      return `${d}/${m}`
+    }
+
+    let strDate = formatLocaleDate(tickItem)
+    // let newStrDate = strDate
+    // console.log(moment(strDate, 'minutes'))
+    // console.log(elementsRechart.length);
+    const dayString = moment(formatDateToLocale(new Date(tickItem), 'dd.mm.yyyy')).format('dddd')
+    const monthString = moment(formatDateToLocale(new Date(tickItem), 'dd.mm.yyyy')).format('MMM')
+    const ddString = moment(formatDateToLocale(new Date(tickItem), 'dd.mm.yyyy')).format('DD')
+    const returnRefactoringDay = `${mappingDay[dayString]}, ` + ddString + ' ' + mappingMonth[monthString]
+    // if(tickItem !== "" && tickItem !== undefined) console.log(returnRefactoringDay)
+    if(tickItem !== "" && elementsRechart.length > 7 && tickItem !== undefined) return strDate//formatDateToLocale(new Date(`${strDate}T15:00:48`), 'mm\.dd\.yyyy')//formatDateToLocale(new Date(newStrDate))
+    if(tickItem !== "" && elementsRechart.length <= 7 && tickItem !== undefined) return returnRefactoringDay
+    if(tickItem === "" && tickItem === undefined) return ""
+    return ''
     }
 
   // if(elementsRechart.length > 0 ) console.log(Object.entries(elementsRechart[0]), activeFilterChart )
@@ -82,14 +113,16 @@ export default function RenderChart(props) {
     <div className="me-0">
       <ResponsiveContainer width="95.5%" height={(() => {
         const pageWidth = document.documentElement.scrollWidth
+        // console.log(pageWidth)
         const height = pageWidth / 2
+        // console.log(height)
         if (height > 790) return 600
         if (height > 790) return 500
         if (height < 300) return 300
         return height })()}>
         <BarChart data={elementsRechart}>
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="dateTime" type={"category"} domain={["", ""]} />
+          <XAxis dataKey="dateTime" tickFormatter={formatXAxis}  domain={["", ""]} />
           <YAxis tickCount={20} domain={[0, bigNumberArray]}
             padding={{ top: 20 }} interval={2} width={autoWidth(elementsRechart)} />
           <Tooltip />
