@@ -23,7 +23,7 @@ export default function RenderChart(props) {
 
   let { activeFilterChart } = globalState.ui;
   let { elementsRechart } = globalState.fetch.chart;
-
+ 
   // useEffect(() => {
   //   inSetState({...globalState, toggleActivePage: 'chart'})
   //   console.log('useEffect')
@@ -40,6 +40,7 @@ export default function RenderChart(props) {
   if (elementsRechart === undefined) {
     elementsRechart = [];
   }
+
   if (activeFilterChart === "") activeFilterChart = ''
   let copyArrayData = [...elementsRechart]
   let copyArrayDataRenderBar = [...elementsRechart]
@@ -107,24 +108,7 @@ export default function RenderChart(props) {
     if(tickItem !== "" && elementsRechart.length > 7 && tickItem !== undefined) return strDate//formatDateToLocale(new Date(`${strDate}T15:00:48`), 'mm\.dd\.yyyy')//formatDateToLocale(new Date(newStrDate))
     if(tickItem !== "" && elementsRechart.length <= 7 && tickItem !== undefined) return returnRefactoringDay
     if(tickItem === "" && tickItem === undefined) return ""
-    return ''
-    }
-    useEffect(() => {
-      autoWidthChart()
-    }, [])
-    const autoWidthChart = () => {
-      let pageWidth = document.documentElement.scrollWidth
-      let documentTabsBarHeight = document.querySelector('.ant-tabs-nav').getBoundingClientRect().height
-      // let documentSearchBarHeight = document.querySelector('#chart-search-bar').getBoundingClientRect().height
-      // let heightContent = documentTabsBarHeight
-      let height = pageWidth / 2 - documentTabsBarHeight
-      // console.log(heightContent, height)
-      
-      // console.log(height)
-      // if (height > 790) return 600
-      if (height > 790) return 500
-      if (height < 300) return 300
-      setState({width: height})
+      return ''
     }
     const keysData = copyArrayDataRenderBar.map((item) => {
       // console.log(Object.keys(item))
@@ -136,8 +120,8 @@ export default function RenderChart(props) {
     let countColor = 0
   // if(elementsRechart.length > 0 ) console.log(Object.entries(elementsRechart[0]), activeFilterChart )
   return (
-    <div className="me-0">
-      <ResponsiveContainer width="95.5%" height={state.width}>
+    <div className="me-0 col-xl-9">
+      <ResponsiveContainer width="100%" aspect={2}>
         <BarChart data={elementsRechart}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="dateTime" tickFormatter={formatXAxis}  domain={["", ""]} />
@@ -146,21 +130,11 @@ export default function RenderChart(props) {
           <Tooltip />
           <Legend />
           {uniqueElemBar.map((item) => {
-            console.log(item)
-            countColor = countColor + 1
             // console.log(Object.keys(item))
-              if (item !== "dateTime" &&
-                activeFilterChart === '') 
-                return <Bar 
-                        maxBarSize={200}
-                        dataKey={item}
-                        fill={activeFilterChart !== '' ? colors[0] : colors[countColor - 2]} />
-              if (item !== "dateTime" &&
-                objClassID[activeFilterChart] === item) 
-                return <Bar 
-                        maxBarSize={200}
-                        dataKey={objClassID[activeFilterChart]}
-                        fill={activeFilterChart !== '' ? colors[0] : colors[countColor - 2]} />
+              if (item !== "dateTime" && (activeFilterChart === '' || objClassID[activeFilterChart] === item)) {
+                  countColor = countColor + 1
+                  return <Bar maxBarSize={200} dataKey={item} fill={colors[countColor - 1]} />
+               }
             // return Object.keys(item)
             })}
           {/* {activeFilterChart !== '' && activeFilterChart !== '1' ? null : <Bar maxBarSize={200} dataKey='Каска' fill={activeFilterChart !== '' ? colors[0] : colors[0]} />}
