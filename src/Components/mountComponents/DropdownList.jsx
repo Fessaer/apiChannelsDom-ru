@@ -48,7 +48,7 @@ export default function DropdownList(props) {
           // console.log(item)
           const key = Object.keys(item).join()
           const value = Object.values(item).join()
-          if (value === 'Все объекты' || value === 'Все камеры') return <option key={key} selected>{value}</option>
+          if (value === 'Все объекты' || value === 'Все камеры') return <option key={key}>{value}</option>
           return (
             <option key={key} value={allSelect(key, value)}>{value}</option>
           )

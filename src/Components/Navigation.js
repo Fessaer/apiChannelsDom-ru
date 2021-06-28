@@ -17,7 +17,6 @@ export default function Navigation() {
 
   const handleChangeActivePage = (key) => {
     inSetState({...globalState, toggleActivePage: key})
-    // console.log(key === "report" && loadingSpinnerChart === true && loadingFetchReport === false);
   }
   
   return (

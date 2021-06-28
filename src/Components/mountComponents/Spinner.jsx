@@ -4,7 +4,6 @@ import { css } from "@emotion/react";
 import FadeLoader from "react-spinners/FadeLoader";
 import { Context } from '../Store';
 
-
 // Can be a string as well. Need to ensure each key-value pair ends with ;
 const override = css`
   display: block;
@@ -20,7 +19,6 @@ const override = css`
 `;
 
 const Spinner = () => {
-  // let [loading, setLoading] = useState(true);
   let [color] = useState("#0D6EFD");
   const [globalState] = useContext(Context);
   const { loadingSpinnerChart } = globalState.fetch.chart;

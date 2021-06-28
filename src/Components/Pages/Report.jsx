@@ -6,9 +6,7 @@ import SearchBar from './SearchBarReport';
 import DataPlate from '../mountComponents/RenderDataPlate';
 import DataReactTable from '../mountComponents/RenderDataTable';
 import Pagination from '../mountComponents/Paging';
-// import Submit from '../mountComponents/Submit';
 import Spinner from '../mountComponents/Spinner';
-// var convert = require('xml-js');
 
 export default function Reports() {
   const [globalState, inSetState] = useContext(Context);
@@ -19,7 +17,6 @@ export default function Reports() {
       <Spinner />
       <Pagination />
       <DataPlate />
-      {/* <DataReactTable /> */}
       <Pagination norender={15}/>
     </>
   )

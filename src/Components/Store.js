@@ -6,7 +6,6 @@ import formatDateToLocale from './helpers/functionFormatReplaceDate';
   d.setDate(d.getDate() - 7);
   const period = "yyyy-mm-dd"
   const defaultDateStart = formatDateToLocale(d, period)
-  // console.log(defaultDateStart)
 
     let initialState = {
       fetch: {
@@ -14,13 +13,13 @@ import formatDateToLocale from './helpers/functionFormatReplaceDate';
           searchStartDateChart: defaultDateStart + ' 00:00:00',
           searchEndDateChart: formatDateToLocale(new Date(), period) + ' 00:00:00',
           loadingSpinnerChart: false,
-          ClassIdChart: "",
+          ClassID: "",
           eventSubjectID: "552",
         },
         report: {
           searchStartDateReport: defaultDateStart + ' 00:00:00',
           searchEndDateReport: formatDateToLocale(new Date(), period) + ' 00:00:00',
-          ClassIdReport: "",
+          ClassID: "",
           loadingSpinnerReport: false,
         },
         algorithm: 'TPlusCoveralls',
@@ -32,8 +31,6 @@ import formatDateToLocale from './helpers/functionFormatReplaceDate';
         activePage: 1,
         renderCountItems: 20,  
       },
-      // searchStartDate: new Date().toISOString().substring(0, 10) + ' 00:00:00', // начальная дата
-      // searchEndDate: new Date().toISOString().substring(0, 10) + ' 23:59:59', // начальная дата
     }
 
 export const Context = React.createContext();
@@ -52,7 +49,3 @@ const Store = ({children}) => {
   )
 }
 export default Store;
-
-
-// searchStartDateChart: new Date().toISOString().substring(0, 10) + ' 00:00:00',
-// searchEndDateChart: new Date().toISOString().substring(0, 10) + ' 23:59:59',

@@ -9,7 +9,7 @@ export default function Submit() {
   const [globalState, inSetState] = useContext(Context);
   let { toggleActivePage, fetch, ui } = globalState;
   let { chart, report } = globalState.fetch
-  let { ClassIdChart } = globalState.fetch.chart
+  let { ClassID } = globalState.fetch.chart
 
   const handleSubmit = async () => {
     if (toggleActivePage === 'chart') {
@@ -31,9 +31,9 @@ export default function Submit() {
       inSetState({ ...globalState, fetch, ui })
     }
     if (toggleActivePage === 'chart') {
-      const arrAgregating = preparingGraphArray(dataFetch.arr, ClassIdChart)
+      const arrAgregating = preparingGraphArray(dataFetch.arr, ClassID)
       chart = { ...chart, loadingSpinnerChart: false, elementsRechart: [...arrAgregating] }
-      ui = { activePage: 1, loadingSpinnerChart: false, lengthPagination: 0, noRenderPagination: true, activeFilterChart: ClassIdChart }
+      ui = { activePage: 1, loadingSpinnerChart: false, lengthPagination: 0, noRenderPagination: true, activeFilterChart: ClassID }
       fetch = { ...fetch, chart, offset: 0 }
       inSetState({ ...globalState, fetch, ui })
     }

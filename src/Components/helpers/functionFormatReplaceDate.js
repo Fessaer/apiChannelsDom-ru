@@ -12,10 +12,6 @@ const format = (date, format = 'yyyy-mm-dd hh:MM:ss', localDate = 0) => {
     for (const replace in replaces) {
         result = result.replace(replace, replaces[replace]);
     }
-    // console.log(result, 'result')
     return result;
 };
 export default format;
-
-
-// console.log(format(new Date(),'MM'))
