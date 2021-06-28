@@ -103,7 +103,7 @@ const fetchFunction = async (config, e = false) => {
     //     }
     // })
     let promise = new Promise(function(resolve,reject) {
-      let http =  new XMLHttpRequest();
+        let http =  new XMLHttpRequest();
     //   let urle = 'http://va.fpst.ru:8080/api/login';
     //   let bodyfetch = 'Login=' + encodeURIComponent('tplusfront') +
     //   '&Password=' + encodeURIComponent('tplusfront00');

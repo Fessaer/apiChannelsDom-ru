@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Context } from '../Store';
 import 'moment/locale/ru';
 import '../Styles/searchBar.css';
@@ -19,6 +19,7 @@ import {
 
 export default function RenderChart(props) {
   const [globalState] = useContext(Context);
+  const [state, setState] = useState(true)
 
   let { activeFilterChart } = globalState.ui;
   let { elementsRechart } = globalState.fetch.chart;
@@ -32,15 +33,16 @@ export default function RenderChart(props) {
     '1': 'Каска',
     '2': 'Куртка',
     '3': 'Штаны',
-    '4': 'Все объекты'
+    '': 'Все объекты'
   }
 
+  const arrayObjClassID = Object.entries(objClassID)
   if (elementsRechart === undefined) {
     elementsRechart = [];
   }
-  if (activeFilterChart === "") activeFilterChart = '4'
+  if (activeFilterChart === "") activeFilterChart = ''
   let copyArrayData = [...elementsRechart]
-
+  let copyArrayDataRenderBar = [...elementsRechart]
   const bigNumberArray = copyArrayData.length
     > 0 ? Number(copyArrayData.sort((prev, next) =>
       prev[objClassID[activeFilterChart]] - next[objClassID[activeFilterChart]]).pop()[objClassID[activeFilterChart]]) : 0
@@ -107,19 +109,35 @@ export default function RenderChart(props) {
     if(tickItem === "" && tickItem === undefined) return ""
     return ''
     }
-
+    useEffect(() => {
+      autoWidthChart()
+    }, [])
+    const autoWidthChart = () => {
+      let pageWidth = document.documentElement.scrollWidth
+      let documentTabsBarHeight = document.querySelector('.ant-tabs-nav').getBoundingClientRect().height
+      // let documentSearchBarHeight = document.querySelector('#chart-search-bar').getBoundingClientRect().height
+      // let heightContent = documentTabsBarHeight
+      let height = pageWidth / 2 - documentTabsBarHeight
+      // console.log(heightContent, height)
+      
+      // console.log(height)
+      // if (height > 790) return 600
+      if (height > 790) return 500
+      if (height < 300) return 300
+      setState({width: height})
+    }
+    const keysData = copyArrayDataRenderBar.map((item) => {
+      // console.log(Object.keys(item))
+      // return <Bar maxBarSize={200} dataKey='Каска' fill={activeFilterChart !== '' ? colors[0] : colors[0]} />
+      return Object.keys(item)
+      })
+    const uniqueElemBar = [...new Set(...keysData)]
+    console.log( uniqueElemBar)
+    let countColor = 0
   // if(elementsRechart.length > 0 ) console.log(Object.entries(elementsRechart[0]), activeFilterChart )
   return (
     <div className="me-0">
-      <ResponsiveContainer width="95.5%" height={(() => {
-        const pageWidth = document.documentElement.scrollWidth
-        // console.log(pageWidth)
-        const height = pageWidth / 2
-        // console.log(height)
-        if (height > 790) return 600
-        if (height > 790) return 500
-        if (height < 300) return 300
-        return height })()}>
+      <ResponsiveContainer width="95.5%" height={state.width}>
         <BarChart data={elementsRechart}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="dateTime" tickFormatter={formatXAxis}  domain={["", ""]} />
@@ -127,10 +145,28 @@ export default function RenderChart(props) {
             padding={{ top: 20 }} interval={2} width={autoWidth(elementsRechart)} />
           <Tooltip />
           <Legend />
-          {activeFilterChart !== '4' && activeFilterChart !== '1' ? null : <Bar maxBarSize={200} dataKey='Каска' fill={activeFilterChart !== '4' ? colors[0] : colors[0]} />}
-          {activeFilterChart !== '4' && activeFilterChart !== '2' ? null : <Bar maxBarSize={200} dataKey='Куртка' fill={activeFilterChart !== '4' ? colors[0] : colors[1]} />}
-          {activeFilterChart !== '4' && activeFilterChart !== '3' ? null : <Bar maxBarSize={200} dataKey='Штаны' fill={activeFilterChart !== '4' ? colors[0] : colors[2]} />}
-          {activeFilterChart !== '4' && activeFilterChart !== '4' ? null : <Bar maxBarSize={200} dataKey='Все объекты' fill={activeFilterChart !== '4' ? colors[0] : colors[3]} />}
+          {uniqueElemBar.map((item) => {
+            console.log(item)
+            countColor = countColor + 1
+            // console.log(Object.keys(item))
+              if (item !== "dateTime" &&
+                activeFilterChart === '') 
+                return <Bar 
+                        maxBarSize={200}
+                        dataKey={item}
+                        fill={activeFilterChart !== '' ? colors[0] : colors[countColor - 2]} />
+              if (item !== "dateTime" &&
+                objClassID[activeFilterChart] === item) 
+                return <Bar 
+                        maxBarSize={200}
+                        dataKey={objClassID[activeFilterChart]}
+                        fill={activeFilterChart !== '' ? colors[0] : colors[countColor - 2]} />
+            // return Object.keys(item)
+            })}
+          {/* {activeFilterChart !== '' && activeFilterChart !== '1' ? null : <Bar maxBarSize={200} dataKey='Каска' fill={activeFilterChart !== '' ? colors[0] : colors[0]} />}
+          {activeFilterChart !== '' && activeFilterChart !== '2' ? null : <Bar maxBarSize={200} dataKey='Куртка' fill={activeFilterChart !== '' ? colors[0] : colors[1]} />}
+          {activeFilterChart !== '' && activeFilterChart !== '3' ? null : <Bar maxBarSize={200} dataKey='Штаны' fill={activeFilterChart !== '' ? colors[0] : colors[2]} />}
+          {activeFilterChart !== '' && activeFilterChart !== '' ? null : <Bar maxBarSize={200} dataKey='Все объекты' fill={activeFilterChart !== '' ? colors[0] : colors[3]} />} */}
         </BarChart>
       </ResponsiveContainer>
     </div>

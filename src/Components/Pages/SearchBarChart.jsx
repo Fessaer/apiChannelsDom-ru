@@ -9,7 +9,7 @@ import Spinner from '../mountComponents/Spinner';
 export default function SearchBarChart() {
   return (
     <form>
-      <div className="row">
+      <div id="chart-search-bar" className="row">
         <Spinner />
         <DropdownList name={'CameraIdChart'} items={[{ 2: 'Все камеры' }, { '650': 'Помещение 107' }, { '697': 'Спецодежда VLC stream' }]} labelName={'Камера'} />
         <Calendar name={'From'} labelName={'Дата и время (от)'}  period={'7'} />
