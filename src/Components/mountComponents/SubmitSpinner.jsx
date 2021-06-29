@@ -15,13 +15,11 @@ export default function SubmitSpinner() {
 
   const handleSubmit = async () => {
     if (toggleActivePage === 'chart') {
-      chart = { ...chart }
       ui = {...ui, loadingSpinnerChart: true}
       fetch = { ...fetch, chart }
       inSetState({ ...globalState, fetch, ui })
     }
     if (toggleActivePage === 'report') {
-      report = { ...report }
       ui = {...ui, loadingSpinnerChart: true}
       fetch = { ...fetch, report }
       inSetState({ ...globalState, fetch, ui })
@@ -29,23 +27,24 @@ export default function SubmitSpinner() {
 
     const dataFetch = await fetchFunc(globalState)
     if (toggleActivePage === 'report') {
-      report = { ...report, elements: [...dataFetch.arr] }
+      report = { ...report, Offset: 0, elements: [...dataFetch.arr] }
       ui = { ...ui, activePage: 1, loadingSpinnerReport: false, lengthPagination: 0, noRenderPagination: dataFetch.noRenderPagination }
-      fetch = { ...fetch, report, offset: 0 }
+      fetch = { ...fetch, report  }
       inSetState({ ...globalState, fetch, ui })
     }
     if (toggleActivePage === 'chart') {
       const arrAgregating = preparingGraphArray(dataFetch.arr, ClassID)
-      chart = { ...chart, elementsRechart: [...arrAgregating] }
+      chart = { ...chart, Offset: 0, elementsRechart: [...arrAgregating] }
       ui = { ...ui, activePage: 1, loadingSpinnerChart: false, lengthPagination: 0, noRenderPagination: true, activeFilterChart: ClassID }
-      fetch = { ...fetch, chart, offset: 0 }
+      fetch = { ...fetch, chart  }
       inSetState({ ...globalState, fetch, ui })
     }
   }
+  console.log('button')
   if (toggleActivePage === "report") {
   return (
     <div className="d-flex align-items-end col-sm-4 col-lg-3 col-xl-2 pt-1 pb-3 button_max_width">
-      <button className="btn-outline-primary btn-sm button_max_width" type="button" disabled={loadingSpinnerReport} style={{height: "32px"}} onClick={handleSubmit}>
+      <button className="btn-outline-primary btn-sm button_max_width" type="button"  style={{height: "32px"}} onClick={handleSubmit}>
       {loadingSpinnerReport === true ? <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : null}
         <span className="sr-only ps-1">Применить</span>
       </button>
@@ -55,7 +54,7 @@ export default function SubmitSpinner() {
   if (toggleActivePage === "chart") {
     return (
       <div className="d-flex align-items-end col-sm-4 col-lg-3 col-xl-2 pt-1 pb-3 button_max_width">
-        <button className="btn-outline-primary btn-sm button_max_width" type="button" disabled={loadingSpinnerChart} style={{height: "32px"}} onClick={handleSubmit}>
+        <button className="btn btn-outline-primary btn-sm button_max_width" type="button" style={{height: "32px"}} onClick={handleSubmit}>
         {loadingSpinnerChart === true ? <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : null}
           <span className="sr-only ps-1">Применить</span>
         </button>

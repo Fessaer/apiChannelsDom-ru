@@ -5,39 +5,34 @@ var convert = require('xml-js');
 const fetchFunction = async (config, e = false) => {
     let arrResponseElements = []
     let noRenderPagination = true;
+    const { toggleActivePage } = config;
+
     if (e !== false) {
         const newOffSet = (e - 1) * 20;
-        config.fetch.offset = newOffSet;
+        config.fetch[toggleActivePage].Offset = newOffSet;
     }
-
+    
     let bodyfetch = 
     configName.SessionID + encodeURIComponent(config.SessionID) +
-    configName.changePasswordAtNextLogin + encodeURIComponent(config.ChangePasswordAtNextLogin)
-    + configName.analytics + encodeURIComponent(config.fetch.algorithm)
-    
-    if (config.toggleActivePage === 'report') {
-        let cameraID = configName.cameraID + encodeURIComponent(config.fetch.report.CameraID === undefined ? "" : config.fetch.report.CameraID)
-        let offset = configName.offset + encodeURIComponent(config.fetch.offset)
-        let from = configName.from + encodeURIComponent(config.fetch.report.searchStartDateReport)
-        let to = configName.to + encodeURIComponent(config.fetch.report.searchEndDateReport)
-        let limit = configName.limit + encodeURIComponent(configParam.limit)
-        let classID = configName.cameraID + encodeURIComponent(config.fetch.report.ClassID === undefined ? "" : config.fetch.report.ClassID)
-        let eventSubjectID = configName.eventSubjectID + 
-            encodeURIComponent(config.fetch.report.eventSubjectID === undefined ? 
-            configParam.eventSubjectIDdefault : config.fetch.report.eventSubjectID)
-        bodyfetch = bodyfetch + cameraID + offset + from + to + limit + classID + eventSubjectID
-    }
-
-    if (config.toggleActivePage === 'chart') {
-        let cameraID = configName.cameraID + encodeURIComponent(config.fetch.chart.CameraID === undefined ? "" : config.fetch.report.CameraID)
-        let from = configName.from + encodeURIComponent(config.fetch.chart.searchStartDateChart)
-        let to = configName.to + encodeURIComponent(config.fetch.chart.searchEndDateChart)
-        let chartOffset = configName.offset + encodeURIComponent(0)
-        let countBy = configName.countBy + encodeURIComponent(configParam.countBy)
-        let classID = configName.classID + encodeURIComponent(config.fetch.chart.ClassID === undefined ? "" : config.fetch.chart.ClassID)
-        let eventSubjectID = configName.eventSubjectID + encodeURIComponent(config.fetch.chart.eventSubjectID)
-        bodyfetch = bodyfetch + cameraID + chartOffset + from + to  + countBy + classID + eventSubjectID
-    }
+    configName.ChangePasswordAtNextLogin + encodeURIComponent(config.ChangePasswordAtNextLogin)
+    + configName.Analytics + encodeURIComponent(config.fetch.Algorithm)
+        let cameraID = configName.CameraID + encodeURIComponent(config.fetch[toggleActivePage].CameraID === undefined ? "" : config.fetch[toggleActivePage].CameraID)
+        let offset = configName.Offset + encodeURIComponent(config.fetch[toggleActivePage].Offset)
+        let from = configName.From + encodeURIComponent(config.fetch[toggleActivePage].From)
+        let to = configName.To + encodeURIComponent(config.fetch[toggleActivePage].To)
+        let limit = configName.Limit + encodeURIComponent(configParam[toggleActivePage].Limit)
+        let countBy = configName.CountBy + encodeURIComponent(configParam[toggleActivePage].CountBy)
+        let classID = configName.ClassID + encodeURIComponent(config.fetch[toggleActivePage].ClassID === undefined ? "" : config.fetch[toggleActivePage].ClassID)
+        let eventSubjectID = configName.EventSubjectID + 
+            encodeURIComponent(config.fetch[toggleActivePage].EventSubjectID === undefined ? 
+            configParam.EventSubjectIDdefault : config.fetch[toggleActivePage].EventSubjectID)
+        bodyfetch = bodyfetch + cameraID + offset + from + to
+        if (toggleActivePage === 'report') {
+            bodyfetch = bodyfetch + limit + classID + eventSubjectID
+        }
+        if (toggleActivePage === 'chart') {
+            bodyfetch = bodyfetch + countBy + classID + eventSubjectID
+        }
 
     let promise = new Promise(function(resolve,reject) {
         let http =  new XMLHttpRequest();
@@ -53,6 +48,7 @@ const fetchFunction = async (config, e = false) => {
     }
     http.send(bodyfetch);
 })
+
 return promise.then(function(response) {
         let result = convert.xml2json(response, { compact: false });
                 let parseData = JSON.parse(result);

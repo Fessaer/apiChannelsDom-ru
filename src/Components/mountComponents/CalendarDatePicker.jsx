@@ -18,8 +18,8 @@ function CalendarPicker(props) {
   const { toggleActivePage } = globalState;
 
   const mappingValueCalendar = {
-    'From': toggleActivePage === 'report' ? globalState.fetch.report.searchStartDateReport : globalState.fetch.chart.searchStartDateChart,
-    'To': toggleActivePage === 'report' ? globalState.fetch.report.searchEndDateReport : globalState.fetch.chart.searchEndDateChart
+    'From': toggleActivePage === 'report' ? globalState.fetch.report.From : globalState.fetch.chart.From,
+    'To': toggleActivePage === 'report' ? globalState.fetch.report.To : globalState.fetch.chart.To
   }
 
   const defaultPeriod = (period, format) => {
@@ -48,22 +48,22 @@ function CalendarPicker(props) {
     
     const resultDate = formatDateToLocale(d, 'yyyy-mm-dd hh:MM:ss', 0)
     if (name === 'From' && toggleActivePage === 'report') {
-      report = { ...report, searchStartDateReport: resultDate }
+      report = { ...report, From: resultDate }
       fetch = { ...fetch, report }
       inSetState({ ...globalState, fetch })
     }
     if (name === 'To' && toggleActivePage === 'report') {
-      report = { ...report, searchEndDateReport: resultDate }
+      report = { ...report, To: resultDate }
       fetch = { ...fetch, report }
       inSetState({ ...globalState, fetch })
     }
     if (name === 'From' && toggleActivePage === 'chart') {
-      chart = { ...chart, searchStartDateChart: resultDate }
+      chart = { ...chart, From: resultDate }
       fetch = { ...fetch, chart }
       inSetState({ ...globalState, fetch })
     }
     if (name === 'To' && toggleActivePage === 'chart') {
-      chart = { ...chart, searchEndDateChart: resultDate }
+      chart = { ...chart, To: resultDate }
       fetch = { ...fetch, chart }
       inSetState({ ...globalState, fetch })
     }

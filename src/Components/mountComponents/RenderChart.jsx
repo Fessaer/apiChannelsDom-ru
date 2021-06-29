@@ -99,6 +99,7 @@ export default function RenderChart(props) {
       })
     const uniqueElemBar = [...new Set(...keysData)]
     let countColor = 0
+    console.log('render charts')
   return (
     <div className="me-0 col-xl-9">
       <ResponsiveContainer width="100%" aspect={2}>

@@ -19,7 +19,7 @@ export default function Submit() {
       inSetState({ ...globalState, fetch, ui })
     }
     if (toggleActivePage === 'report') {
-      report = { ...report }
+      report = { ...report, Offset: 0 }
       ui = {...ui, loadingSpinnerReport: true}
       fetch = { ...fetch, report }
       inSetState({ ...globalState, fetch, ui })
@@ -27,16 +27,16 @@ export default function Submit() {
 
     const dataFetch = await fetchFunc(globalState)
     if (toggleActivePage === 'report') {
-      report = { ...report, elements: [...dataFetch.arr] }
+      report = { ...report, Offset: 0, elements: [...dataFetch.arr] }
       ui = { ...ui, activePage: 1, loadingSpinnerReport: false, lengthPagination: 0, noRenderPagination: dataFetch.noRenderPagination }
-      fetch = { ...fetch, report, offset: 0 }
+      fetch = { ...fetch, report }
       inSetState({ ...globalState, fetch, ui })
     }
     if (toggleActivePage === 'chart') {
       const arrAgregating = preparingGraphArray(dataFetch.arr, ClassID)
       chart = { ...chart, elementsRechart: [...arrAgregating] }
       ui = { activePage: 1, loadingSpinnerChart: false, lengthPagination: 0, noRenderPagination: true, activeFilterChart: ClassID }
-      fetch = { ...fetch, chart, offset: 0 }
+      fetch = { ...fetch, chart, Offset: 0 }
       inSetState({ ...globalState, fetch, ui })
     }
   }

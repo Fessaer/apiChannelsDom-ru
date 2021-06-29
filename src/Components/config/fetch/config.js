@@ -1,30 +1,37 @@
-import { defaultDateStart, defaultDateEnd } from '../../helpers/getDefaultDay'
+import { defaultFrom, defaultTo } from '../../helpers/getDefaultDay'
+
 
 export const configName = {
   SessionID: 'SessionID=',
-  changePasswordAtNextLogin: '&ChangePasswordAtNextLogin=',
-  analytics: "&Analytics=",
-  cameraID: '&CameraID=',
-  offset: '&Offset=',
-  from: '&From=',
-  to: '&To=',
-  limit: '&Limit=',
-  classID: '&TPlusCoveralls[ClassID]=',
-  eventSubjectID: '&TPlusCoveralls[EventSubjectID]=',
-  countBy: '&CountBy=',
+  ChangePasswordAtNextLogin: '&ChangePasswordAtNextLogin=',
+  Analytics: "&Analytics=",
+  CameraID: '&CameraID=',
+  Offset: '&Offset=',
+  From: '&From=',
+  To: '&To=',
+  Limit: '&Limit=',
+  ClassID: '&TPlusCoveralls[ClassID]=',
+  EventSubjectID: '&TPlusCoveralls[EventSubjectID]=',
+  CountBy: '&CountBy=',
   
 }
 
 export const configParam = {
   urlAPI: 'http://va.fpst.ru:8080/api/exportreport',
-  limit: 21,
-  eventSubjectIDdefault: '552',
-  countBy: 'day',
-  algorithm: 'TPlusCoveralls',
-  classID: '',
-  defaultDateStart: defaultDateStart,
-  defaulrDateEnd: defaultDateEnd,
-  offset: 0,
+  EventSubjectIDdefault: '552',
+  Algorithm: 'TPlusCoveralls',
+  ClassID: '',
+  defaultFrom: defaultFrom,
+  defaulrTo: defaultTo,
+  Offset: 0,
+  report: {
+    CountBy: '',
+    Limit: 21,
+  },
+  chart: {
+    CountBy: 'day',
+    Limit: 0,
+  }
 }
 
 export const configFetch = {
