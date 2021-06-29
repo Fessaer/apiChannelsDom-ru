@@ -2,9 +2,6 @@ import React, { useContext } from 'react';
 import { Context } from '../Store';
 import allSelect from '../helpers/allSelect';
 
-// import 'bootstrap/dist/css/bootstrap.min.css';
-//DropdownList name={'ClassID'} items={[{1:'Голова'}, {2: 'Туловище'}, {3: 'Ноги'}]} labelName={'Объект'}
-
 export default function DropdownList(props) {
   let { name, items, labelName } = props
   const [globalState, inSetState] = useContext(Context);
@@ -14,7 +11,6 @@ export default function DropdownList(props) {
   if (items === undefined) console.log('не все параметры переданны для dropdown(items)');
   if (name === undefined) console.log('не все параметры переданны для dropdown(name)');
   const changeHandle = (e) => {
-    // console.log(e.target.value, 'e.target.value')
     if (e.target.value === 'Все объекты' || e.target.value === 'Все камеры') {
       if (toggleActivePage === 'chart') {
         chart = { ...chart, [name]: '' }
@@ -45,7 +41,6 @@ export default function DropdownList(props) {
       <label className="pb-1">{labelName}</label>
       <select className="form-select form-select-sm" onChange={changeHandle}>
         {items.map((item) => {
-          // console.log(item)
           const key = Object.keys(item).join()
           const value = Object.values(item).join()
           if (value === 'Все объекты' || value === 'Все камеры') return <option key={key}>{value}</option>

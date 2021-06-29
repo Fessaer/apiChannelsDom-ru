@@ -17,7 +17,6 @@ export default function Paging(props) {
 
   const handlePaging = async (e, f) => {
     ui = await { ...ui, loadingSpinnerReport: true }
-    // fetch = await { ...fetch, report }
     await inSetState({ ...globalState, ui });
     lengthPagination = (e - 1) * 20;
     const newOffSet = (e - 1) * 20;

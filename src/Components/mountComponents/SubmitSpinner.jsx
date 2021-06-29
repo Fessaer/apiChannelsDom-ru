@@ -37,7 +37,7 @@ export default function SubmitSpinner() {
     if (toggleActivePage === 'chart') {
       const arrAgregating = preparingGraphArray(dataFetch.arr, ClassID)
       chart = { ...chart, elementsRechart: [...arrAgregating] }
-      ui = { activePage: 1, loadingSpinnerChart: false, lengthPagination: 0, noRenderPagination: true, activeFilterChart: ClassID }
+      ui = { ...ui, activePage: 1, loadingSpinnerChart: false, lengthPagination: 0, noRenderPagination: true, activeFilterChart: ClassID }
       fetch = { ...fetch, chart, offset: 0 }
       inSetState({ ...globalState, fetch, ui })
     }
