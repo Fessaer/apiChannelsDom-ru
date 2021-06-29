@@ -1,35 +1,31 @@
 import React, { useState } from 'react';
-import formatDateToLocale from './helpers/functionFormatReplaceDate';
+import { configParam } from './config/fetch/config'
 
-
-  let d = new Date(); // today!
-  d.setDate(d.getDate() - 7);
-  const period = "yyyy-mm-dd"
-  const defaultDateStart = formatDateToLocale(d, period)
+ 
 
     let initialState = {
       fetch: {
         chart: {
-          searchStartDateChart: defaultDateStart + ' 00:00:00',
-          searchEndDateChart: formatDateToLocale(new Date(), period) + ' 00:00:00',
-          loadingSpinnerChart: false,
-          ClassID: "",
-          eventSubjectID: "552",
+          searchStartDateChart: configParam.defaultDateStart,
+          searchEndDateChart: configParam.defaulrDateEnd,
+          ClassID: configParam.classID,
+          eventSubjectID: configParam.eventSubjectIDdefault,
         },
         report: {
-          searchStartDateReport: defaultDateStart + ' 00:00:00',
-          searchEndDateReport: formatDateToLocale(new Date(), period) + ' 00:00:00',
-          ClassID: "",
-          loadingSpinnerReport: false,
+          searchStartDateReport: configParam.defaultDateStart,
+          searchEndDateReport: configParam.defaulrDateEnd,
+          ClassID: configParam.classID,
         },
-        algorithm: 'TPlusCoveralls',
-        offset: 0,
+        algorithm: configParam.algorithm,
+        offset: configParam.offset,
       },
       ui: {
         noRenderPagination: true,
         lengthPagination: 1,
         activePage: 1,
-        renderCountItems: 20,  
+        renderCountItems: 20,
+        loadingSpinnerChart: false,
+        loadingSpinnerReport: false,  
       },
     }
 

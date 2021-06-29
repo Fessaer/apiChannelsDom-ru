@@ -21,8 +21,8 @@ const override = css`
 const Spinner = () => {
   let [color] = useState("#0D6EFD");
   const [globalState] = useContext(Context);
-  const { loadingSpinnerChart } = globalState.fetch.chart;
-  const { loadingSpinnerReport } = globalState.fetch.report;
+  const { loadingSpinnerChart } = globalState.ui;
+  const { loadingSpinnerReport } = globalState.ui;
   const { toggleActivePage } = globalState;
   if (toggleActivePage === "report") {
     return (

@@ -3,14 +3,13 @@ import 'moment/locale/ru';
 import '../Styles/searchBar.css';
 import Calendar from '../mountComponents/CalendarDatePicker';
 import DropdownList from '../mountComponents/DropdownList';
-import Submit from '../mountComponents/Submit';
-import Spinner from '../mountComponents/Spinner';
+import Submit from '../mountComponents/SubmitSpinner';
+
 
 export default function SearchBarChart() {
   return (
     <form>
       <div id="chart-search-bar" className="row">
-        <Spinner />
         <DropdownList name={'CameraIdChart'} items={[{ 2: 'Все камеры' }, { '650': 'Помещение 107' }, { '697': 'Спецодежда VLC stream' }]} labelName={'Камера'} />
         <Calendar name={'From'} labelName={'Дата и время (от)'}  period={'7'} />
         <Calendar name={'To'} labelName={'Дата и время (до)'} period={'0'} />

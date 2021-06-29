@@ -16,9 +16,9 @@ export default function Paging(props) {
   if(propsNorender === undefined) propsNorender = 0
 
   const handlePaging = async (e, f) => {
-    report = await { ...report, loadingSpinnerReport: true }
-    fetch = await { ...fetch, report }
-    await inSetState({ ...globalState, fetch });
+    ui = await { ...ui, loadingSpinnerReport: true }
+    // fetch = await { ...fetch, report }
+    await inSetState({ ...globalState, ui });
     lengthPagination = (e - 1) * 20;
     const newOffSet = (e - 1) * 20;
     offset = newOffSet;
@@ -26,9 +26,9 @@ export default function Paging(props) {
     ui = await { ...ui, activePage: e, lengthPagination, noRenderPagination: false };
     await inSetState({ ...globalState, fetch, ui });
     const dataFetch = await fetchFunc(globalState, e);
-    report = await { ...report, elements: [...dataFetch.arr], loadingSpinnerReport: false };
+    report = await { ...report, elements: [...dataFetch.arr]};
     fetch = await { ...fetch, report, offset }
-    ui = await { ...ui, activePage: e, lengthPagination, noRenderPagination: dataFetch.noRenderPagination };
+    ui = await { ...ui, activePage: e, lengthPagination, noRenderPagination: dataFetch.noRenderPagination, loadingSpinnerReport: false  };
     await inSetState({ ...globalState, fetch, ui });
   }
   let { activePage } = globalState.ui;

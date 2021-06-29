@@ -5,8 +5,10 @@ import '../Styles/searchBar.css';
 import fetchFunc from '../helpers/fetchFunction';
 import preparingGraphArray from '../helpers/preparingGraphArray';
 
-export default function Submit() {
+export default function SubmitSpinner() {
   const [globalState, inSetState] = useContext(Context);
+  const { loadingSpinnerChart } = globalState.ui;
+  const { loadingSpinnerReport } = globalState.ui;
   let { toggleActivePage, fetch, ui } = globalState;
   let { chart, report } = globalState.fetch
   let { ClassID } = globalState.fetch.chart
@@ -20,7 +22,7 @@ export default function Submit() {
     }
     if (toggleActivePage === 'report') {
       report = { ...report }
-      ui = {...ui, loadingSpinnerReport: true}
+      ui = {...ui, loadingSpinnerChart: true}
       fetch = { ...fetch, report }
       inSetState({ ...globalState, fetch, ui })
     }
@@ -40,11 +42,28 @@ export default function Submit() {
       inSetState({ ...globalState, fetch, ui })
     }
   }
-
+  if (toggleActivePage === "report") {
   return (
     <div className="d-flex align-items-end col-sm-4 col-lg-3 col-xl-2 pt-1 pb-3 button_max_width">
-      <button type="button" disabled={globalState.ui.loadingSpinnerReport} className="btn btn-outline-primary btn-sm button_max_width" style={{height: "32px"}} onClick={handleSubmit}>Применить</button>
+      <button className="btn-outline-primary btn-sm button_max_width" type="button" disabled={loadingSpinnerReport} style={{height: "32px"}} onClick={handleSubmit}>
+      {loadingSpinnerReport === true ? <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : null}
+        <span className="sr-only ps-1">Применить</span>
+      </button>
     </div>
-  )
+    )
+  }
+  if (toggleActivePage === "chart") {
+    return (
+      <div className="d-flex align-items-end col-sm-4 col-lg-3 col-xl-2 pt-1 pb-3 button_max_width">
+        <button className="btn-outline-primary btn-sm button_max_width" type="button" disabled={loadingSpinnerChart} style={{height: "32px"}} onClick={handleSubmit}>
+        {loadingSpinnerChart === true ? <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : null}
+          <span className="sr-only ps-1">Применить</span>
+        </button>
+      </div>
+      )
+    }
+    else {
+      return null;
+    }
 }
 
