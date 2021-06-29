@@ -3,9 +3,6 @@ const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
 const glob = require("glob")
 
 module.exports = {
-  entry: {
-    "bundle.js": glob.sync("build/static/?(js|css)/*.?(js|css)").map(f => path.resolve(__dirname, f)),
-  },
   output: {
     filename: "build/static/js/bundle.min.js",
   },
@@ -15,7 +12,18 @@ module.exports = {
         test: /\.css$/,
         use: ["style-loader", "css-loader"],
       },
+      {
+          test: /\.jsx?$/,
+          exclude: /(node_modules)/,
+          loader: "babel-loader",
+          options:{
+              presets:["@babel/preset-env", "@babel/preset-react"]    // используемые плагины
+          }
+      }
     ],
   },
   plugins: [new UglifyJsPlugin()],
+  resolve: {
+    extensions: ['.js', '.jsx']
+  }
 }
