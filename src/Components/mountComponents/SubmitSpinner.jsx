@@ -4,6 +4,7 @@ import 'moment/locale/ru';
 import '../Styles/searchBar.css';
 import fetchFunc from '../helpers/fetchFunction';
 import preparingGraphArray from '../helpers/preparingGraphArray';
+import { Button, Col } from 'antd';
 
 export default function SubmitSpinner() {
   const [globalState, inSetState] = useContext(Context);
@@ -52,12 +53,15 @@ export default function SubmitSpinner() {
   }
   if (toggleActivePage === "chart") {
     return (
-      <div className="d-flex align-items-end col-sm-4 col-lg-3 col-xl-2 pt-1 pb-3 button_max_width">
-        <button className="btn btn-outline-primary btn-sm button_max_width" type="button" style={{height: "32px"}} onClick={handleSubmit}>
+        <Col className="gutter-row" sm={{ span: 6, push: 0}} xl={{ span: 4, push: 0}} style={{display:'flex', alignItems: 'flex-end', height: 54 }}>
+          <Button type="primary" loading={loadingSpinnerChart} onClick={handleSubmit}>
+            Применить
+          </Button>
+        {/* <button className="btn btn-outline-primary btn-sm button_max_width" type="button" style={{height: "32px"}} onClick={handleSubmit}>
         {loadingSpinnerChart === true ? <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : null}
           <span className="sr-only ps-1">Применить</span>
-        </button>
-      </div>
+        </button> */}
+      </Col>
       )
     }
     else {

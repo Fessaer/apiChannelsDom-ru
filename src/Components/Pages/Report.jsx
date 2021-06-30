@@ -6,15 +6,19 @@ import DataPlate from '../mountComponents/RenderDataPlate';
 import DataReactTable from '../mountComponents/RenderDataTable';
 import Pagination from '../mountComponents/Paging';
 import Spinner from '../mountComponents/Spinner';
+import { Col, Row } from 'antd';
+
 
 export default function Reports() {
   return (
     <>
-      <SearchBar />
-      <Spinner />
-      <Pagination />
-      <DataPlate />
-      <Pagination norender={15}/>
+        <SearchBar />
+        <Row style={{padding: '0px 16px'}}>
+          <Spinner />
+          <Pagination />
+          <DataPlate />
+          <Pagination norender={15}/>
+        </Row>
     </>
   )
 }

@@ -16,7 +16,9 @@ import {
   ResponsiveContainer,
   Legend
 } from 'recharts';
-import {objClassID, mappingDay, mappingMonth } from '../config/chart/conf'
+import {objClassID, mappingDay, mappingMonth } from '../config/chart/conf';
+import { Col, Row } from 'antd';
+
 let _ = require('lodash');
 
 export default function RenderChart() {
@@ -69,7 +71,8 @@ export default function RenderChart() {
     const uniqueElemBar = [...new Set(...keysData)]
     let countColor = 0
   return (
-    <div className="me-0 col-xl-9">
+    <Row style={{marginTop: 16, marginLeft: 12 }}>
+      <Col span={18}>
       <ResponsiveContainer width="100%" aspect={2}>
         <BarChart data={elementsRechart}>
           <CartesianGrid strokeDasharray="3 3" />
@@ -86,6 +89,7 @@ export default function RenderChart() {
             })}
         </BarChart>
       </ResponsiveContainer>
-    </div>
+    </Col>
+    </Row>
   )
 }

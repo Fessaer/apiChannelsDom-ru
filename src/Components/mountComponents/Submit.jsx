@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
 import { Context } from '../Store';
 import 'moment/locale/ru';
-import '../Styles/searchBar.css';
+// import '../Styles/searchBar.css';
 import fetchFunc from '../helpers/fetchFunction';
 import preparingGraphArray from '../helpers/preparingGraphArray';
+import { Button, Col } from 'antd';
+
 
 export default function Submit() {
   const [globalState, inSetState] = useContext(Context);
@@ -42,9 +44,13 @@ export default function Submit() {
   }
 
   return (
-    <div className="d-flex align-items-end col-sm-4 col-lg-3 col-xl-2 pt-1 pb-3 button_max_width">
-      <button type="button" disabled={globalState.ui.loadingSpinnerReport} className="btn btn-outline-primary btn-sm button_max_width" style={{height: "32px"}} onClick={handleSubmit}>Применить</button>
-    </div>
+    <Col className="gutter-row" sm={{ span: 6, push: 0}} xl={{ span: 4, push: 0}} style={{display:'flex', alignItems: 'flex-end', height: 54 }}>
+      <Button onClick={handleSubmit} disabled={globalState.ui.loadingSpinnerReport} type="primary">
+        <span style={{paddingBottom: '10px'}}>Применить</span>
+      </Button>
+    </Col>
+      // <button type="button" disabled={globalState.ui.loadingSpinnerReport} className="btn btn-outline-primary btn-sm button_max_width" style={{height: "32px"}} onClick={handleSubmit}>Применить</button>
+    
   )
 }
 
