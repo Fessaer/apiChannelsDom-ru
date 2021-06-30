@@ -22,7 +22,7 @@ export const configParam = {
   Algorithm: 'TPlusCoveralls',
   ClassID: '',
   defaultFrom: defaultFrom,
-  defaulrTo: defaultTo,
+  defaultTo: defaultTo,
   Offset: 0,
   report: {
     CountBy: '',

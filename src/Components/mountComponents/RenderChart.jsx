@@ -16,20 +16,14 @@ import {
   ResponsiveContainer,
   Legend
 } from 'recharts';
+import {objClassID, mappingDay, mappingMonth } from '../config/chart/conf'
 let _ = require('lodash');
 
-export default function RenderChart(props) {
+export default function RenderChart() {
   const [globalState] = useContext(Context);
   let { activeFilterChart } = globalState.ui;
   let { elementsRechart } = globalState.fetch.chart;
  
-  const objClassID = {
-    '1': 'Каска',
-    '2': 'Куртка',
-    '3': 'Штаны',
-    '': 'Все объекты'
-  }
-
   if (elementsRechart === undefined) {
     elementsRechart = [];
   }
@@ -52,31 +46,6 @@ export default function RenderChart(props) {
   }
 
   function formatXAxis(tickItem) {
-    
-    const mappingDay = {
-      "понедельник": "Пн",
-      "вторник": "Вт",
-      "среда": "Ср",
-      "четверг": "Чт",
-      "пятница": "Пт",
-      "суббота": "Сб",
-      "воскресенье": "Вс"
-    }
-
-    const mappingMonth = {
-      'январь': 'янв',
-      'февраль': 'фев',
-      'март': 'мар',
-      'апрель': 'апр',
-      'май': 'май',
-      'июнь': 'июн',
-      'июль': 'июл',
-      'август': 'авг',
-      'сентябрь': 'Сен',
-      'октябрь': 'окт',
-      'ноябрь': 'Ноя',
-      'декабрь': 'Дек'
-    };
 
     function formatLocaleDate(str) {
       const d = str.substr(0, 2)
@@ -99,7 +68,6 @@ export default function RenderChart(props) {
       })
     const uniqueElemBar = [...new Set(...keysData)]
     let countColor = 0
-    console.log('render charts')
   return (
     <div className="me-0 col-xl-9">
       <ResponsiveContainer width="100%" aspect={2}>
@@ -113,7 +81,7 @@ export default function RenderChart(props) {
           {uniqueElemBar.map((item) => {
               if (item !== "dateTime" && (activeFilterChart === '' || objClassID[activeFilterChart] === item)) {
                   countColor = countColor + 1;
-                  return <Bar  key={_.uniqueId()} maxBarSize={200} dataKey={item} fill={colors[countColor - 1]} />
+                  return <Bar  isAnimationActive={false} key={_.uniqueId()} maxBarSize={200} dataKey={item} fill={colors[countColor - 1]} />
               }
             })}
         </BarChart>

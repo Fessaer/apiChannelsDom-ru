@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Chart from './Pages/Chart';
 import Report from './Pages/Report';
 import { Context } from './Store';
@@ -17,11 +17,7 @@ const Navigation = React.memo(props => {
   const handleChangeActivePage = (key) => {
     inSetState({...globalState, toggleActivePage: key})
   }
-  const prop = globalState.toggleActivePage
 
-  console.log('render nav')
-  console.log(prop, 'prop')
-  
   return (
 
     <div className="container-fluid">

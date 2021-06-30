@@ -40,11 +40,10 @@ export default function SubmitSpinner() {
       inSetState({ ...globalState, fetch, ui })
     }
   }
-  console.log('button')
   if (toggleActivePage === "report") {
   return (
     <div className="d-flex align-items-end col-sm-4 col-lg-3 col-xl-2 pt-1 pb-3 button_max_width">
-      <button className="btn-outline-primary btn-sm button_max_width" type="button"  style={{height: "32px"}} onClick={handleSubmit}>
+      <button className="btn btn-outline-primary btn-sm button_max_width" type="button"  style={{height: "32px"}} onClick={handleSubmit}>
       {loadingSpinnerReport === true ? <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : null}
         <span className="sr-only ps-1">Применить</span>
       </button>

@@ -30,7 +30,6 @@ function App() {
   if (validate === false) {
     return null;
   } else {
-  console.log('render app')
   return (
       <Store>
           {dataState}

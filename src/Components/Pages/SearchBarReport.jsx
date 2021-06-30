@@ -5,7 +5,6 @@ import Calendar from '../mountComponents/CalendarDatePicker';
 import Submit from '../mountComponents/Submit';
 
 export default function SearchBar() {
-  console.log('searchbar report')
   return (
     <form className="searchForm">
       <div className="row">

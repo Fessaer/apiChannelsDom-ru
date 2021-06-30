@@ -4,7 +4,6 @@ import RenderChart from '../mountComponents/RenderChart';
 import '../Styles/searchBar.css';
 
 const Chart = () => {
-  console.log('render Chart')
   return (
     <div className="container-fluid vh-90 ps-0">
       <SearchBarChart />

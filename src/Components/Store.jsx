@@ -6,15 +6,15 @@ import { configParam } from './config/fetch/config'
     let initialState = {
       fetch: {
         chart: {
-          To: configParam.defaultFrom,
-          From: configParam.defaulrTo,
+          To: configParam.defaultTo,
+          From: configParam.defaultFrom,
           ClassID: configParam.ClassID,
           EventSubjectID: configParam.EventSubjectIDdefault,
           Offset: configParam.Offset,
         },
         report: {
           From: configParam.defaultFrom,
-          To: configParam.defaulrTo,
+          To: configParam.defaultTo,
           ClassID: configParam.ClassID,
           Offset: configParam.Offset,
         },

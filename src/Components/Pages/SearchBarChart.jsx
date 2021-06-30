@@ -7,7 +7,6 @@ import Submit from '../mountComponents/SubmitSpinner';
 
 
 export default function SearchBarChart() {
-  console.log('searchBar  Chart')
   return (
     <form>
       <div id="chart-search-bar" className="row">
