@@ -3,16 +3,8 @@ import React, { useContext } from 'react';
 import { Context } from '../Store';
 import '../Styles/renderTable.css';
 import formatLocaleDate from '../helpers/formatDate';
+import { SubClassID } from '../config/report/conf'
 let _ = require('lodash');
-
-const SubClassID = {
-  "2": 'Голова в каске',
-  "3": "Стандартная куртка",
-  "4": "Стандартные штаны",
-  "5": "Голова без каски",
-  "6": "Нестандартная куртка",
-  "7": "Нестандартные штаны"
-}
 
 const RenderPlate = () => {
   const [globalState] = useContext(Context);
