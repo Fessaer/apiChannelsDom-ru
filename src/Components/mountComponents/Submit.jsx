@@ -27,7 +27,7 @@ export default function Submit() {
       inSetState({ ...globalState, fetch, ui })
     }
 
-    const dataFetch = await fetchFunc(globalState)
+    const dataFetch = await fetchFunc(globalState, 1)
     if (toggleActivePage === 'report') {
       report = { ...report, Offset: 0, elements: [...dataFetch.arr] }
       ui = { ...ui, activePage: 1, loadingSpinnerReport: false, lengthPagination: 0, noRenderPagination: dataFetch.noRenderPagination }
@@ -49,8 +49,6 @@ export default function Submit() {
         <span style={{paddingBottom: '10px'}}>Применить</span>
       </Button>
     </Col>
-      // <button type="button" disabled={globalState.ui.loadingSpinnerReport} className="btn btn-outline-primary btn-sm button_max_width" style={{height: "32px"}} onClick={handleSubmit}>Применить</button>
-    
   )
 }
 

@@ -26,7 +26,7 @@ export default function SubmitSpinner() {
       inSetState({ ...globalState, fetch, ui })
     }
 
-    const dataFetch = await fetchFunc(globalState)
+    const dataFetch = await fetchFunc(globalState, 1)
     if (toggleActivePage === 'report') {
       report = { ...report, Offset: 0, elements: [...dataFetch.arr] }
       ui = { ...ui, activePage: 1, loadingSpinnerReport: false, lengthPagination: 0, noRenderPagination: dataFetch.noRenderPagination }
@@ -57,11 +57,7 @@ export default function SubmitSpinner() {
           <Button type="primary" loading={loadingSpinnerChart} onClick={handleSubmit}>
             Применить
           </Button>
-        {/* <button className="btn btn-outline-primary btn-sm button_max_width" type="button" style={{height: "32px"}} onClick={handleSubmit}>
-        {loadingSpinnerChart === true ? <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : null}
-          <span className="sr-only ps-1">Применить</span>
-        </button> */}
-      </Col>
+        </Col>
       )
     }
     else {
