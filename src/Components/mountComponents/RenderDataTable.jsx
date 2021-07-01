@@ -3,17 +3,11 @@ import React, { useContext } from 'react';
 import { Context } from '../Store';
 import '../Styles/renderTable.css';
 import Table from 'react-bootstrap/Table'
-import formatDateToLocale from '../helpers/functionFormatReplaceDate'
-let _ = require('lodash');
+import formatDateToLocale from '../helpers/functionFormatReplaceDate';
+import { SubClassID } from '../config/report/conf'
+import AlertMessage from './Alert'; 
 
-const SubClassID = {
-  "2": 'Голова в каске',
-  "3": "Стандартная куртка",
-  "4": "Стандартные штаны",
-  "5": "Голова без каски",
-  "6": "Нестандартная куртка",
-  "7": "Нестандартные штаны"
-}
+let _ = require('lodash');
 
 const RenderTable = () => {
   const [globalState] = useContext(Context);
@@ -34,9 +28,7 @@ const RenderTable = () => {
   })
   if (globalState.fetch.report.elements !== undefined) {
     if(globalState.fetch.report.elements.length === 0) return (
-      <div class="alert alert-warning" role="alert">
-        События не найдены
-      </div>
+      <AlertMessage />
       )
   }
   return (

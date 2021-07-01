@@ -11,3 +11,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.anticon-loading svg {
+  /* display: inline-block; */
+  margin-bottom: 0px;
+}

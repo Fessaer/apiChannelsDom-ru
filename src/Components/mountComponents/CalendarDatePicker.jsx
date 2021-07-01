@@ -1,16 +1,16 @@
 /* eslint-disable no-mixed-operators */
 import React, { useContext } from 'react';
-
+import { Col } from 'antd';
 import formatDateToLocale from '../helpers/functionFormatReplaceDate'
 import { Context } from '../Store';
 import { DatePicker } from 'antd';
 import 'moment/locale/ru';
-// import locale from 'antd/es/date-picker/locale/ru_RU';
 import locale from '../config/locale/date_picker/ru/date_picker_ru_RU';
 import moment from 'moment';
 import '../Styles/CalendarDatePicker.css'
-// const enhanceWithClickOutside = require('react-click-outside');
 moment.suppressDeprecationWarnings = true;
+const style = { display: 'flex', flexDirection: 'column', maxWidth: 220};
+
 
 function CalendarPicker(props) {
   const [globalState, inSetState] = useContext(Context);
@@ -18,8 +18,8 @@ function CalendarPicker(props) {
   const { toggleActivePage } = globalState;
 
   const mappingValueCalendar = {
-    'From': toggleActivePage === 'report' ? globalState.fetch.report.searchStartDateReport : globalState.fetch.chart.searchStartDateChart,
-    'To': toggleActivePage === 'report' ? globalState.fetch.report.searchEndDateReport : globalState.fetch.chart.searchEndDateChart
+    'From': toggleActivePage === 'report' ? globalState.fetch.report.From : globalState.fetch.chart.From,
+    'To': toggleActivePage === 'report' ? globalState.fetch.report.To : globalState.fetch.chart.To
   }
 
   const defaultPeriod = (period, format) => {
@@ -32,7 +32,6 @@ function CalendarPicker(props) {
     return result;
   }
   
-
   let { fetch } = globalState;
   let { chart, report } = globalState.fetch
   const disabledDate = (current) => {
@@ -47,23 +46,24 @@ function CalendarPicker(props) {
     let d = new Date(e._d)
     
     const resultDate = formatDateToLocale(d, 'yyyy-mm-dd hh:MM:ss', 0)
+
     if (name === 'From' && toggleActivePage === 'report') {
-      report = { ...report, searchStartDateReport: resultDate }
+      report = { ...report, From: resultDate }
       fetch = { ...fetch, report }
       inSetState({ ...globalState, fetch })
     }
     if (name === 'To' && toggleActivePage === 'report') {
-      report = { ...report, searchEndDateReport: resultDate }
+      report = { ...report, To: resultDate }
       fetch = { ...fetch, report }
       inSetState({ ...globalState, fetch })
     }
     if (name === 'From' && toggleActivePage === 'chart') {
-      chart = { ...chart, searchStartDateChart: resultDate }
+      chart = { ...chart, From: resultDate }
       fetch = { ...fetch, chart }
       inSetState({ ...globalState, fetch })
     }
     if (name === 'To' && toggleActivePage === 'chart') {
-      chart = { ...chart, searchEndDateChart: resultDate }
+      chart = { ...chart, To: resultDate }
       fetch = { ...fetch, chart }
       inSetState({ ...globalState, fetch })
     }
@@ -71,11 +71,11 @@ function CalendarPicker(props) {
   let targetDateMapping = mappingValueCalendar[name]
   let testDate = moment(targetDateMapping, 'YYYY-MM-DD HH:mm:ss')
   return (
-    <div className="col-sm-4 col-lg-3 col-xl-2 pb-3 button_max_width">
+    <Col className="gutter-row" sm={{ span: 6, push: 0}} xl={{ span: 4, push: 0}} style={style}>
       <label className="pb-1">{labelName}</label>
       <DatePicker
         allowClear={false}
-        style={{ display: "flex" }}
+        style={{ display: "flex", width: 200 }}
         locale={locale}
         format="DD.MM.YYYY HH:mm:ss"
         disabledDate={disabledDate}
@@ -87,9 +87,8 @@ function CalendarPicker(props) {
         showToday={true}
         inputReadOnly={true}
       />
-    </div>
+    </Col>
   )
 }
 
 export default CalendarPicker;
-// export default CalendarPicker;

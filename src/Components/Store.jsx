@@ -6,18 +6,19 @@ import { configParam } from './config/fetch/config'
     let initialState = {
       fetch: {
         chart: {
-          searchStartDateChart: configParam.defaultDateStart,
-          searchEndDateChart: configParam.defaulrDateEnd,
-          ClassID: configParam.classID,
-          eventSubjectID: configParam.eventSubjectIDdefault,
+          To: configParam.defaultTo,
+          From: configParam.defaultFrom,
+          ClassID: configParam.ClassID,
+          EventSubjectID: configParam.EventSubjectIDdefault,
+          Offset: configParam.Offset,
         },
         report: {
-          searchStartDateReport: configParam.defaultDateStart,
-          searchEndDateReport: configParam.defaulrDateEnd,
-          ClassID: configParam.classID,
+          From: configParam.defaultFrom,
+          To: configParam.defaultTo,
+          ClassID: configParam.ClassID,
+          Offset: configParam.Offset,
         },
-        algorithm: configParam.algorithm,
-        offset: configParam.offset,
+        Algorithm: configParam.Algorithm,
       },
       ui: {
         noRenderPagination: true,
