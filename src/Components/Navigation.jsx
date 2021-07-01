@@ -17,11 +17,7 @@ const Navigation = React.memo(props => {
     inSetState({...globalState, toggleActivePage: key})
   }
   return (
-
-    // <div className="container-fluid">
-    
-    
-      <Tabs onChange={handleChangeActivePage} type="card">
+      <Tabs onChange={handleChangeActivePage} type="card" style={{marginLeft: 16}}>
         <TabPane tab="Журнал" key="report">
           {<Report />}
         </TabPane>

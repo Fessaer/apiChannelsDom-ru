@@ -13,7 +13,7 @@ export default function Reports() {
   return (
     <>
         <SearchBar />
-        <Row style={{padding: '0px 16px'}}>
+        <Row>
           <Spinner />
           <Pagination />
           <DataPlate />
