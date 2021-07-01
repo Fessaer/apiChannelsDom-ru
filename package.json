@@ -8,11 +8,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "antd": "^4.16.1",
-<<<<<<< HEAD
     "babel-loader": "^8.2.2",
-    "bootstrap": "^5.0.1",
-=======
->>>>>>> c1a790c4fc88580db0a7bd05faefb2564b186e1f
     "classnames": "^2.3.1",
     "core-js": "^3.15.0",
     "lodash": "^4.17.21",
