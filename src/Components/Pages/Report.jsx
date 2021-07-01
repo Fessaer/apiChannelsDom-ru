@@ -13,7 +13,7 @@ export default function Reports() {
   return (
     <>
         <SearchBar />
-        <Row>
+        <Row style={{marginRight: 16}}>
           <Spinner />
           <Pagination />
           <DataPlate />

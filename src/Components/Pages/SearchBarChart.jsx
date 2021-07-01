@@ -3,7 +3,7 @@ import 'moment/locale/ru';
 import '../Styles/searchBar.css';
 import Calendar from '../mountComponents/CalendarDatePicker';
 import DropdownList from '../mountComponents/DropdownList';
-import Submit from '../mountComponents/SubmitSpinner';
+import Submit from '../mountComponents/Submit';
 import { Row } from 'antd';
 
 export default function SearchBarChart() {
