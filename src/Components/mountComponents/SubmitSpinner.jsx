@@ -53,7 +53,7 @@ export default function SubmitSpinner() {
   }
   if (toggleActivePage === "chart") {
     return (
-        <Col className="gutter-row" sm={{ span: 6, push: 0}} xl={{ span: 4, push: 0}} style={{display:'flex', alignItems: 'flex-end', height: 54 }}>
+        <Col className="gutter-row" xs={{ span: 24, push: 0}} sm={{ span: 6, push: 0}} xl={{ span: 4, push: 0}} style={{display:'flex', alignItems: 'flex-end', height: 54 }}>
           <Button type="primary" loading={loadingSpinnerChart} onClick={handleSubmit}>
             Применить
           </Button>

@@ -5,6 +5,7 @@ import '../Styles/renderTable.css';
 import Table from 'react-bootstrap/Table'
 import formatDateToLocale from '../helpers/functionFormatReplaceDate';
 import { SubClassID } from '../config/report/conf'
+import AlertMessage from './Alert'; 
 
 let _ = require('lodash');
 
@@ -27,9 +28,7 @@ const RenderTable = () => {
   })
   if (globalState.fetch.report.elements !== undefined) {
     if(globalState.fetch.report.elements.length === 0) return (
-      <div class="alert alert-warning" role="alert">
-        События не найдены
-      </div>
+      <AlertMessage />
       )
   }
   return (

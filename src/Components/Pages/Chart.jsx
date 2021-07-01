@@ -5,7 +5,7 @@ import '../Styles/searchBar.css';
 
 const Chart = () => {
   return (
-    <div className="container-fluid vh-90 ps-0">
+    <div>
       <SearchBarChart />
       <RenderChart />
     </div>

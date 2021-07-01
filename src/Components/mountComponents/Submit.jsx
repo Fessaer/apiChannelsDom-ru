@@ -44,7 +44,7 @@ export default function Submit() {
   }
 
   return (
-    <Col className="gutter-row" sm={{ span: 6, push: 0}} xl={{ span: 4, push: 0}} style={{display:'flex', alignItems: 'flex-end', height: 54 }}>
+    <Col className="gutter-row" xs={{ span: 12, push: 0}} sm={{ span: 8, push: 0}} xl={{ span: 4, push: 0}} style={{display:'flex', alignItems: 'flex-end', height: 54 }}>
       <Button onClick={handleSubmit} disabled={globalState.ui.loadingSpinnerReport} type="primary">
         <span style={{paddingBottom: '10px'}}>Применить</span>
       </Button>

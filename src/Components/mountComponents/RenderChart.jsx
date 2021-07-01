@@ -72,7 +72,7 @@ export default function RenderChart() {
     let countColor = 0
   return (
     <Row style={{marginTop: 16, marginLeft: 12 }}>
-      <Col span={18}>
+      <Col xs={{ span: 24, push: 0}} sm={{ span: 18, push: 0}} xl={{ span: 18, push: 0}}>
       <ResponsiveContainer width="100%" aspect={2}>
         <BarChart data={elementsRechart}>
           <CartesianGrid strokeDasharray="3 3" />
