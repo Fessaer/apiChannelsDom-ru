@@ -9,6 +9,8 @@ import locale from '../config/locale/date_picker/ru/date_picker_ru_RU';
 import moment from 'moment';
 import '../Styles/CalendarDatePicker.css'
 moment.suppressDeprecationWarnings = true;
+let u = require('updeep');
+
 const style = { display: 'flex', flexDirection: 'column', maxWidth: 220};
 
 
@@ -45,7 +47,7 @@ function CalendarPicker(props) {
   const onChange = (e, f = null) => {
     let d = new Date(e._d)
     
-    const resultDate = formatDateToLocale(d, 'yyyy-mm-dd hh:MM:ss', 0)
+    let resultDate = formatDateToLocale(d, 'yyyy-mm-dd hh:MM:ss', 0)
 
     if (name === 'From' && toggleActivePage === 'report') {
       report = { ...report, From: resultDate }
@@ -58,9 +60,10 @@ function CalendarPicker(props) {
       inSetState({ ...globalState, fetch })
     }
     if (name === 'From' && toggleActivePage === 'chart') {
-      chart = { ...chart, From: resultDate }
-      fetch = { ...fetch, chart }
-      inSetState({ ...globalState, fetch })
+      var result = u({ fetch: { chart: { From: resultDate }}}, globalState);
+      // chart = { ...chart, From: resultDate }
+      // fetch = { ...fetch, chart }
+      inSetState(result)
     }
     if (name === 'To' && toggleActivePage === 'chart') {
       chart = { ...chart, To: resultDate }
