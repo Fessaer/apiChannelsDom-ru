@@ -1,12 +1,12 @@
 import formatDateToLocale from './functionFormatReplaceDate';
 
 const preparingGraphArray = (arr, toggleSoloChart) => arr.map((item) => {
-    const d = item.elements[0].elements[0].text
-    const count = item.elements[1].elements[0].text
+    const d = item['DateTime']
+    const count = item['Count']
     const date = formatDateToLocale(new Date(d), 'dd.mm.yyyy')
-    const count1 = item.elements[2].elements[0].text
-    const count2 = item.elements[3].elements[0].text
-    const count3 = item.elements[4].elements[0].text
+    const count1 = item['Count1']
+    const count2 = item['Count2']
+    const count3 = item['Count3']
     if (toggleSoloChart === "" || toggleSoloChart === undefined) return { dateTime: date, 'Все объекты': count, 'Каска': count1, 'Куртка': count2, 'Штаны': count3 }
     else return { dateTime: date, 'Все объекты': 0, 'Каска': count1, 'Куртка': count2, 'Штаны': count3 }
 });

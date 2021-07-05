@@ -7,8 +7,6 @@ import formatDateToLocale from '../helpers/functionFormatReplaceDate';
 import { SubClassID } from '../config/report/conf'
 import AlertMessage from './Alert'; 
 
-let _ = require('lodash');
-
 const RenderTable = () => {
   const [globalState] = useContext(Context);
   let { elements } = globalState.fetch.report;
@@ -17,13 +15,13 @@ const RenderTable = () => {
       elements = []
   }
 
-  const sortElements = elements.map((item) => {
-    const id = _.uniqueId();
-    const dateTime = item.elements[0].elements[0].text
-    const cameraName = item.elements[2].elements[0].text
-    const image = <img className="photo" src={`data:image/png;base64,${item.elements[5].elements[0].text}`} alt="altImage" />
-    const param1 = item.elements[6].elements[0].elements[0].elements[0].text
-    const param2 = item.elements[6].elements[0].elements[1].elements[0].text
+  const sortElements = elements.map((item, index) => {
+    const id = item['DateTime'] + index.toString()
+    const dateTime = item['DateTime']
+    const cameraName = item['CameraName']
+    const image = <img className="photo" src={`data:image/png;base64,${item['Image']}`} alt="altImage" />
+    const param1 = item['SubClassID']
+    const param2 = item['Score']
     return {id: id, time: dateTime, cameraName: cameraName, image: image, param1: param1, param2: param2}
   })
   if (globalState.fetch.report.elements !== undefined) {

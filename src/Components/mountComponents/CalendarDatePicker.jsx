@@ -9,10 +9,8 @@ import locale from '../config/locale/date_picker/ru/date_picker_ru_RU';
 import moment from 'moment';
 import '../Styles/CalendarDatePicker.css'
 moment.suppressDeprecationWarnings = true;
-let u = require('updeep');
 
 const style = { display: 'flex', flexDirection: 'column', maxWidth: 220};
-
 
 function CalendarPicker(props) {
   const [globalState, inSetState] = useContext(Context);
@@ -60,10 +58,9 @@ function CalendarPicker(props) {
       inSetState({ ...globalState, fetch })
     }
     if (name === 'From' && toggleActivePage === 'chart') {
-      var result = u({ fetch: { chart: { From: resultDate }}}, globalState);
-      // chart = { ...chart, From: resultDate }
-      // fetch = { ...fetch, chart }
-      inSetState(result)
+      chart = { ...chart, From: resultDate }
+      fetch = { ...fetch, chart }
+      inSetState({ ...globalState, fetch })
     }
     if (name === 'To' && toggleActivePage === 'chart') {
       chart = { ...chart, To: resultDate }

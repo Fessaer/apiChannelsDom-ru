@@ -1,24 +1,29 @@
 import React, { useState } from 'react';
-import { configParam } from './config/fetch/config'
+import { configParam, configFetch, defaultParam } from './config/fetch/config'
 
  
 
     let initialState = {
       fetch: {
         chart: {
-          To: configParam.defaultTo,
-          From: configParam.defaultFrom,
-          ClassID: configParam.ClassID,
-          EventSubjectID: configParam.EventSubjectIDdefault,
-          Offset: configParam.Offset,
+          To: configParam['To'],
+          From: configParam['From'],
+          ClassID: configParam['ClassID'],
+          EventSubjectID: configParam['EventSubjectID'],
+          Offset: configParam['Offset'],
+          Limit: defaultParam.chart.Limit,
+          CountBy: defaultParam.chart.CountBy,
+          CameraID: configParam['CameraID']
         },
         report: {
-          From: configParam.defaultFrom,
-          To: configParam.defaultTo,
-          ClassID: configParam.ClassID,
-          Offset: configParam.Offset,
-        },
-        Algorithm: configParam.Algorithm,
+          From: configParam['From'],
+          To: configParam['To'],
+          ClassID: configParam['ClassID'],
+          Offset: configParam['Offset'],
+          EventSubjectID: configParam['EventSubjectID'],
+          Limit: defaultParam.report.Limit,
+          CameraID: configParam['CameraID']
+        }
       },
       ui: {
         noRenderPagination: true,
@@ -28,6 +33,7 @@ import { configParam } from './config/fetch/config'
         loadingSpinnerChart: false,
         loadingSpinnerReport: false,  
       },
+      Analytics: configFetch['Algorithm'],
     }
 
 export const Context = React.createContext();

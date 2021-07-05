@@ -18,8 +18,6 @@ import {
 } from 'recharts';
 import {objClassID, mappingDay, mappingMonth } from '../config/chart/conf';
 
-let _ = require('lodash');
-
 export default function RenderChart() {
   const [globalState] = useContext(Context);
   let { activeFilterChart } = globalState.ui;
@@ -79,10 +77,10 @@ export default function RenderChart() {
             padding={{ top: 20 }} interval={2} width={autoWidth(elementsRechart)} />
           <Tooltip />
           <Legend />
-          {uniqueElemBar.map((item) => {
+          {uniqueElemBar.map((item, index) => {
               if (item !== "dateTime" && (activeFilterChart === '' || objClassID[activeFilterChart] === item)) {
                   countColor = countColor + 1;
-                  return <Bar  isAnimationActive={false} key={_.uniqueId()} maxBarSize={200} dataKey={item} fill={colors[countColor - 1]} />;
+                  return <Bar key={item + index.toString()} maxBarSize={200} dataKey={item} fill={colors[countColor - 1]} />;
               }
             })}
         </BarChart>

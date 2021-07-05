@@ -16,6 +16,7 @@ export default function Reports() {
         <Row style={{marginRight: 16}}>
           <Spinner />
           <Pagination />
+          {/* <DataReactTable /> */}
           <DataPlate />
           <Pagination norender={15}/>
         </Row>
