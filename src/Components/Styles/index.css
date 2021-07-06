@@ -1,6 +1,5 @@
 
 .anticon-loading svg {
-  /* display: inline-block; */
   margin-bottom: 0px;
 }
 .photo {
@@ -18,7 +17,6 @@
   margin: 0
 }
 .ant-picker-ok > button.ant-btn {
-  /* font-size: 0; */
   height: 2em;
 }
 .alert_custom {

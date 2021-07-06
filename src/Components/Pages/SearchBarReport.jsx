@@ -3,7 +3,7 @@ import React from 'react';
 import DropdownList from '../mountComponents/DropdownList';
 import Calendar from '../mountComponents/CalendarDatePicker';
 import Submit from '../mountComponents/Submit';
-import { Col, Row } from 'antd';
+import { Row } from 'antd';
 
 export default function SearchBar() {
   return (

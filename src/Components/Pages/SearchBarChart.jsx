@@ -1,6 +1,5 @@
 import React from 'react';
 import 'moment/locale/ru';
-import '../Styles/searchBar.css';
 import Calendar from '../mountComponents/CalendarDatePicker';
 import DropdownList from '../mountComponents/DropdownList';
 import Submit from '../mountComponents/Submit';

@@ -3,7 +3,6 @@ import SearchBarChart from './SearchBarChart';
 import RenderChart from '../mountComponents/RenderChart';
 import Spinner from '../mountComponents/Spinner';
 import { Col, Row } from 'antd';
-import '../Styles/searchBar.css';
 
 const Chart = () => {
   return (
