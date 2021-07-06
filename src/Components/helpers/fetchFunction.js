@@ -15,8 +15,8 @@ const fetchFunction = async (config, e = false) => {
     const forBuildingFetch = () => {
         let bodyfetch = ''
         const buildParam = Object.entries(configParam).forEach(([key, value]) => {
-            if(key === 'ClassID') return bodyfetch = bodyfetch + `TPlusCoveralls[${key}]=${encodeURIComponent(config.fetch[toggleActivePage][key] === undefined ? "" : config.fetch[toggleActivePage][key])}&`
-            if(key === 'EventSubjectID') return bodyfetch = bodyfetch + `TPlusCoveralls[${key}]=${encodeURIComponent(config.fetch[toggleActivePage][key])}&`
+            if(key === 'ClassID') return bodyfetch = bodyfetch + `${configFetch.Algorithm}[${key}]=${encodeURIComponent(config.fetch[toggleActivePage][key] === undefined ? "" : config.fetch[toggleActivePage][key])}&`
+            if(key === 'EventSubjectID') return bodyfetch = bodyfetch + `${configFetch.Algorithm}[${key}]=${encodeURIComponent(config.fetch[toggleActivePage][key])}&`
             if(key === 'CountBy') return bodyfetch = bodyfetch + ((() => toggleActivePage === 'chart' ? `${key}=${encodeURIComponent(config.fetch[toggleActivePage][key])}&` : '')())
             if(key === 'Limit') return bodyfetch = bodyfetch + ((() => toggleActivePage !== 'chart' ? `${key}=${encodeURIComponent(config.fetch[toggleActivePage][key])}&` : '')())
             if(key === 'SessionID' || key === 'ChangePasswordAtNextLogin'|| key === 'Analytics') return bodyfetch = bodyfetch + `${key}=${encodeURIComponent(config[key])}&`
