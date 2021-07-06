@@ -1,40 +1,37 @@
 import React, { useState } from 'react';
 import { configParam, configFetch, defaultParam } from './config/fetch/config'
 
- 
+const configParamArray = Object.entries(configParam);
 
-    let initialState = {
-      fetch: {
-        chart: {
-          To: configParam['To'],
-          From: configParam['From'],
-          ClassID: configParam['ClassID'],
-          EventSubjectID: configParam['EventSubjectID'],
-          Offset: configParam['Offset'],
-          Limit: defaultParam.chart.Limit,
-          CountBy: defaultParam.chart.CountBy,
-          CameraID: configParam['CameraID']
-        },
-        report: {
-          From: configParam['From'],
-          To: configParam['To'],
-          ClassID: configParam['ClassID'],
-          Offset: configParam['Offset'],
-          EventSubjectID: configParam['EventSubjectID'],
-          Limit: defaultParam.report.Limit,
-          CameraID: configParam['CameraID']
-        }
-      },
-      ui: {
-        noRenderPagination: true,
-        lengthPagination: 1,
-        activePage: 1,
-        renderCountItems: 20,
-        loadingSpinnerChart: false,
-        loadingSpinnerReport: false,  
-      },
-      Analytics: configFetch['Algorithm'],
+const buidParamObject = (arr) => {
+  let obj = {};
+  arr.forEach(([key, value]) => {
+    if (key === 'ClassID') obj[key] = value;
+    if (value !== '' && key !== 'SessionID') obj[key] = value;
+  });
+  return obj;
+}; 
+
+const objct = buidParamObject(configParamArray);
+
+let initialState = {
+  fetch: {
+    chart: objct,
+    report: {
+      ...objct,
+      Limit: defaultParam.report.Limit,
     }
+  },
+  ui: {
+    noRenderPagination: true,
+    lengthPagination: 1,
+    activePage: 1,
+    renderCountItems: 20,
+    loadingSpinnerChart: false,
+    loadingSpinnerReport: false,  
+  },
+  Analytics: configFetch['Algorithm'],
+};
 
 export const Context = React.createContext();
 

@@ -27,8 +27,8 @@ export default function RenderChart() {
   }
 
   if (activeFilterChart === "") activeFilterChart = ''
-  let copyArrayData = [...elementsRechart]
-  let copyArrayDataRenderBar = [...elementsRechart]
+  let copyArrayData = [...elementsRechart];
+  let copyArrayDataRenderBar = [...elementsRechart];
   const bigNumberArray = copyArrayData.length
     > 0 ? Number(copyArrayData.sort((prev, next) =>
       prev[objClassID[activeFilterChart]] - next[objClassID[activeFilterChart]]).pop()[objClassID[activeFilterChart]]) : 0;
@@ -61,11 +61,15 @@ export default function RenderChart() {
     if(tickItem === "" && tickItem === undefined) return "";
       return '';
     }
+
     const keysData = copyArrayDataRenderBar.map((item) => {
       return Object.keys(item);
-      })
+      });
+
     const uniqueElemBar = [...new Set(...keysData)];
+
     let countColor = 0;
+
   return (
       <ResponsiveContainer width="100%" aspect={2}>
         {/* <Spinner /> */}
@@ -84,5 +88,5 @@ export default function RenderChart() {
             })}
         </BarChart>
       </ResponsiveContainer>
-  )
-}
+  );
+};
