@@ -1,9 +1,29 @@
-import { configParam, configFetch, defaultParam } from '../config/fetch/config';
+import { configParam, configFetch, defaultParam, configParamTest } from '../config/fetch/config';
 import { normalizeDataKeys } from './normalizeDataObject';
+import keInObject from './keyInObject';
+import buildRegilarAlgorithm from './buildRegilarAlgorithm';
+
 var convert = require('xml-js');
 
+// arr.includes(elem);
+
+// if (typeof obj['key'] === "undefined") {
+//     //ключа нет
+//     } else {
+//     //ключ есть
+//     }
+
+const objQueryParam = Object.entries(configParamTest.query)
+const buildingStringFetch = (arr) => {
+    arr.forEach(([key, value]) => {
+        console.log(key, value.default)
+    })
+}
+
+console.log(buildingStringFetch(objQueryParam))
+
 const fetchFunction = async (config, e = false) => {
-    let arrResponseElements = []
+    let arrResponseElements = [];
     let noRenderPagination = true;
     const { toggleActivePage } = config;
 
@@ -12,14 +32,16 @@ const fetchFunction = async (config, e = false) => {
         config.fetch[toggleActivePage].Offset = newOffSet;
     }
     
+    // console.log(configParamTest)
+
     const forBuildingFetch = () => {
         let bodyfetch = ''
-        const buildParam = Object.entries(configParam).forEach(([key, value]) => {
+        Object.entries(configParam).forEach(([key, value]) => {
             if (key === 'ClassID') return bodyfetch = bodyfetch + `${configFetch.Algorithm}[${key}]=${encodeURIComponent(config.fetch[toggleActivePage][key] === undefined ? "" : config.fetch[toggleActivePage][key])}&`;
             if (key === 'EventSubjectID') return bodyfetch = bodyfetch + `${configFetch.Algorithm}[${key}]=${encodeURIComponent(config.fetch[toggleActivePage][key] === undefined ? "" : config.fetch[toggleActivePage][key])}&`;
             if (key === 'CountBy') return bodyfetch = bodyfetch + ((() => toggleActivePage === 'chart' ? `${key}=${encodeURIComponent(defaultParam[toggleActivePage][key])}&` : '')());
             if (key === 'Limit') return bodyfetch = bodyfetch + ((() => toggleActivePage !== 'chart' ? `${key}=${encodeURIComponent(config.fetch[toggleActivePage][key] === undefined ? "" : config.fetch[toggleActivePage][key])}&` : '')());
-            if (key === 'SessionID' || key === 'ChangePasswordAtNextLogin'|| key === 'Analytics') return bodyfetch = bodyfetch + `${key}=${encodeURIComponent(config[key])}&`;
+            if (key === 'SessionID' || key === 'Analytics') return bodyfetch = bodyfetch + `${key}=${encodeURIComponent(config[key])}&`;
             return bodyfetch = bodyfetch + `${key}=${encodeURIComponent(config.fetch[toggleActivePage][key] === undefined ? "" : config.fetch[toggleActivePage][key])}&`;
         });
         return bodyfetch;

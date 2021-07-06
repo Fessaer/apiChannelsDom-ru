@@ -5,6 +5,7 @@ import formatLocaleDate from '../helpers/formatDate';
 import { SubClassID } from '../config/report/conf';
 import { Col, Row } from 'antd';
 import AlertMessage from './Alert'; 
+
 const style = { display: 'flex', width: '100%',minWidth: 260, border: 'solid 1px #D3D3D3', borderRadius: 5, margin: '1px'};
 
 const RenderPlate = () => {

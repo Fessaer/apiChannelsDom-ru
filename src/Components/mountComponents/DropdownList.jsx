@@ -8,7 +8,7 @@ const { Option } = Select;
 const style = { display: 'flex', flexDirection: 'column', maxWidth: 220};
 
 export default function DropdownList(props) {
-  let { name, items, labelName } = props
+  let { name, items, labelName, defaultValue } = props
   const [globalState, inSetState] = useContext(Context);
   let { fetch, toggleActivePage } = globalState;
   let { chart, report } = globalState.fetch
