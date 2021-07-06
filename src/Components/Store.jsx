@@ -6,8 +6,7 @@ const configParamArray = Object.entries(configParam);
 const buidParamObject = (arr) => {
   let obj = {};
   arr.forEach(([key, value]) => {
-    if (key === 'ClassID') obj[key] = value;
-    if (value !== '' && key !== 'SessionID') obj[key] = value;
+    if (value !== '' || key === 'ClassID') return obj[key] = value;
   });
   return obj;
 }; 
