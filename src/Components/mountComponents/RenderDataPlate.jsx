@@ -1,7 +1,6 @@
 /* eslint-disable array-callback-return */
 import React, { useContext } from 'react';
 import { Context } from '../Store';
-// import '../Styles/renderTable.css';
 import formatLocaleDate from '../helpers/formatDate';
 import { SubClassID } from '../config/report/conf';
 import { Col, Row } from 'antd';

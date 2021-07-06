@@ -1,15 +1,15 @@
-.ant-picker-ok > button.ant-btn {
+/* .ant-picker-ok > button.ant-btn { */
   /* font-size: 0; */
-  height: 2em;
-}
+  /* height: 2em;
+} */
 
 /* button.ant-btn-sm:after {
   font-size: 14px; 
   content: "Выбрать";
 } */
-.anticon.anticon-calendar > svg {
+/* .anticon.anticon-calendar > svg {
   margin: 0
-}
+} */
 
 /* .ant-picker-ranges {
   display: none;

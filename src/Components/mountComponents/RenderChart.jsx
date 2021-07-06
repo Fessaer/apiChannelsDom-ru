@@ -2,7 +2,6 @@
 import React, { useContext } from 'react';
 import { Context } from '../Store';
 import 'moment/locale/ru';
-import '../Styles/searchBar.css';
 import {colors} from '../config/configCharts';
 import moment from 'moment';
 import formatDateToLocale from '../helpers/functionFormatReplaceDate'

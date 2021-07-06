@@ -7,7 +7,6 @@ import { DatePicker } from 'antd';
 import 'moment/locale/ru';
 import locale from '../config/locale/date_picker/ru/date_picker_ru_RU';
 import moment from 'moment';
-import '../Styles/CalendarDatePicker.css'
 moment.suppressDeprecationWarnings = true;
 
 const style = { display: 'flex', flexDirection: 'column', maxWidth: 220};

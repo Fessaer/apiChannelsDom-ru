@@ -1,7 +1,6 @@
 /* eslint-disable array-callback-return */
 import React, { useContext } from 'react';
 import { Context } from '../Store';
-import '../Styles/renderTable.css';
 import Table from 'react-bootstrap/Table'
 import formatDateToLocale from '../helpers/functionFormatReplaceDate';
 import { SubClassID } from '../config/report/conf'

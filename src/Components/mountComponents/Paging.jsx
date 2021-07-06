@@ -1,7 +1,6 @@
 /* eslint-disable no-mixed-operators */
 import React, { useContext } from 'react';
 import { Context } from '../Store';
-import '../Styles/renderTable.css';
 import { Pagination } from 'antd';
 import fetchFunc from '../helpers/fetchFunction';
 

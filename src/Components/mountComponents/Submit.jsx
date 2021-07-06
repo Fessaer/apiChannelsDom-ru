@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { Context } from '../Store';
 import 'moment/locale/ru';
-// import '../Styles/searchBar.css';
 import fetchFunc from '../helpers/fetchFunction';
 import preparingGraphArray from '../helpers/preparingGraphArray';
 import { Button, Col } from 'antd';
