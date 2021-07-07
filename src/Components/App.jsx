@@ -15,9 +15,11 @@ function App() {
       http.open('POST', urle, true);
       http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
       http.send(bodyfetch);
+      
+
       http.onreadystatechange = function() {
         if  (http.readyState === 4 && http.status === 200) {
-          
+
             let response = http.responseText;
             const { SessionID, ChangePasswordAtNextLogin } = JSON.parse(response);
             setDataState({SessionID, ChangePasswordAtNextLogin, validate: true})
@@ -26,9 +28,9 @@ function App() {
     })()
   }, [])
   const { validate } = dataState;
-  if (validate === false) {
+  if (validate === false || `PHPSESSIDFPST=${dataState.SessionID}` !== document.cookie && document.cookie.split('=').includes('PHPSESSIDFPST')) {
     return null;
-  } else {
+  } else if (!document.cookie.split('=').includes('PHPSESSIDFPST')){
   return (
       <Store>
           {dataState}

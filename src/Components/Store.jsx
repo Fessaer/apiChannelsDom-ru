@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { configFetch, configParamTest } from './config/fetch/config';
+import { configParam } from './config/fetch/config';
 import keyInObject from '../Components/helpers/keyInObject';
-const configParamArray = Object.entries(configParamTest.query);
+const configParamArray = Object.entries(configParam.query);
 
 const buidParamObject = (arr, toggle = '') => {
   let obj = {};
@@ -35,7 +35,7 @@ let initialState = {
     loadingSpinnerChart: false,
     loadingSpinnerReport: false,  
   },
-  Analytics: configFetch['Algorithm'],
+  Analytics: configParam['Algorithm'],
 };
 
 export const Context = React.createContext();

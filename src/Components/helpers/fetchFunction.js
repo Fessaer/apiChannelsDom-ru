@@ -1,5 +1,5 @@
 /* eslint-disable array-callback-return */
-import { configParam, configFetch, defaultParam, configParamTest } from '../config/fetch/config';
+import { configParam } from '../config/fetch/config';
 import { normalizeDataKeys } from './normalizeDataObject';
 import keInObject from './keyInObject';
 import buildRegilarAlgorithm from './buildRegilarAlgorithm';
@@ -14,7 +14,7 @@ var convert = require('xml-js');
 //     //ключ есть
 //     }
 
-// const objQueryParam = Object.entries(configParamTest.query)
+// const objQueryParam = Object.entries(configParam.query)
 
 const buildingStringFetch = (obj, toggle = '', config) => {
     let arr = Object.entries(obj.query);
@@ -54,11 +54,11 @@ const fetchFunction = async (config, e = false) => {
         config.fetch[toggleActivePage].Offset = newOffSet;
     }
     
-    let bodyfetch = buildingStringFetch(configParamTest, toggleActivePage, config);
+    let bodyfetch = buildingStringFetch(configParam, toggleActivePage, config);
 
     let promise = new Promise(function(resolve, reject) {
         let http =  new XMLHttpRequest();
-        http.open(configFetch.requestMethod, configFetch.urlAPI, true);
+        http.open(configParam.requestMethod, configParam.urlAPI, true);
         http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         http.onload = function() {
             let response = http.responseText;
