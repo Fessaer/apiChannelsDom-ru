@@ -6,16 +6,6 @@ import buildRegilarAlgorithm from './buildRegilarAlgorithm';
 
 var convert = require('xml-js');
 
-// arr.includes(elem);
-
-// if (typeof obj['key'] === "undefined") {
-//     //ключа нет
-//     } else {
-//     //ключ есть
-//     }
-
-// const objQueryParam = Object.entries(configParam.query)
-
 const buildingStringFetch = (obj, toggle = '', config) => {
     let arr = Object.entries(obj.query);
     let requestString = 'SessionID=' + config.SessionID + '&Analytics=' + obj.Algorithm + '&';
