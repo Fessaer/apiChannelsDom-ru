@@ -3,17 +3,18 @@ import React from 'react';
 import DropdownList from '../mountComponents/DropdownList';
 import Calendar from '../mountComponents/CalendarDatePicker';
 import Submit from '../mountComponents/Submit';
+import { configParamTest } from '../config/fetch/config'
 import { Row } from 'antd';
 
 export default function SearchBar() {
   return (
     <form className="searchForm">
           <Row justify="start" gutter={8} >
-            <DropdownList name={'CameraID'} items={[{ 2: 'Все камеры' }, { '697': 'Спецодежда VLC stream' }, { '650': 'Помещение 107' }]} labelName={'Камера'} />
-            <Calendar name={'From'} labelName={'Дата и время (от)'} period={7}/>
-            <Calendar name={'To'} labelName={'Дата и время (до)'} period={0}/>
-            <DropdownList name={'ClassID'} items={[{ 4: 'Все объекты' }, { 1: 'Каска' }, { 2: 'Куртка' }, { 3: 'Штаны' }]} labelName={'Объект'} />
-            <DropdownList name={'EventSubjectID'} items={[{ 552: 'Нестандартная спецодежда' }, { 553: 'Стандартная спецодежда' }]} labelName={'Спецодежда'} />
+            <DropdownList configs={configParamTest.query.CameraID.formElementProps} />
+            <Calendar configs={configParamTest.query.From.formElementProps} />
+            <Calendar configs={configParamTest.query.To.formElementProps} />
+            <DropdownList configs={configParamTest.query.ClassID.formElementProps} />
+            <DropdownList configs={configParamTest.query.EventSubjectID.formElementProps} />
             <Submit />
           </Row>
     </form>

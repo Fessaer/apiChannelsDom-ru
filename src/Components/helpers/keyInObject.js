@@ -1,2 +1,12 @@
-const keInObject = (object, key) => typeof object[key] !== 'undefined' ? true : false;
-export default keInObject;
+const keyInObject = (object, key) => {
+  try { 
+    if (typeof object[key] !== 'undefined') {
+      return true;
+    } else {
+      return false
+    }
+  } catch {
+    return false
+  }
+}
+export default keyInObject;

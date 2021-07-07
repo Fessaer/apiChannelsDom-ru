@@ -38,60 +38,73 @@ export const configParamTest = {
     From: {
       formElementType: 'datePicker',
       formElementProps: {
+        type: 'From',
         default: defaultFrom,
-        label: 'Дата и время (от)'
+        label: 'Дата и время (от)',
+        periodAgo: 7,
       }
     },
     To: {
       formElementType: 'datePicker',
       formElementProps: {
+        type: 'To',
         label:'Дата и время (до)',
         default: defaultTo,
+        periodAgo: 0,
       }
     },
     CameraID: {
       formElementType: 'dropdown',
       formElementProps: {
-        default: 0,
+        type: 'CameraID',
+        default: '0',
         label: 'Камера',
-        items: [{ ID: 0, Name: 'Все камеры' }, { ID: '650', Name: 'Помещение 107' }, { ID: '697', Name:'Спецодежда VLC stream' }],
-        
+        items: [{ ID: '0', Name: 'Все камеры' }, { ID: '650', Name: 'Помещение 107' }, { ID: '697', Name:'Спецодежда VLC stream' }],
       },
     },
     ClassID: {
       formElementType: 'dropdown',
       formElementProps: {
+        type: 'ClassID',
+        Algorithm: true,
         label: 'Объект',
-        default: 0,
-        items: [{ 4: 'Все объекты' }, { 1: 'Каска' }, { 2: 'Куртка' }, { 3: 'Штаны' }]
+        default: '0',
+        items: [{ ID: '0', Name: 'Все объекты' }, { ID:'1', Name: 'Каска' }, { ID:'2', Name: 'Куртка' }, { ID:'3', Name: 'Штаны' }],
+        
         }
       },
     EventSubjectID: {
       formElementType: 'dropdown',
       formElementProps: {
+        type: 'EventSubjectID',
+        label: 'Спецодежда',
+        Algorithm: true,
         default: '552',
-        defaultValue: 'Нестандартная спецодежда',
-        items: [{ '552': 'Нестандартная спецодежда' }, { '553': 'Стандартная спецодежда' }]
+        items: [{ ID:'552', Name: 'Нестандартная спецодежда' }, { ID:'553', Name: 'Стандартная спецодежда' }],
       },
     },
     CountBy: {
-      default: 'day',
-      active:['chart']
+      formElementProps: {
+        default: 'day',
+        active:['chart']
+      }
     },
     Offset: {
-      default: '0',
-      active:['report']
+      formElementProps: {
+        default: '0',
+        active:['report']
+      },
     },
     Limit: {
-      default: '21',
-      active:['report']
-    },
-    
-    SessionID: {
-      default: '',
+      formElementProps: {
+        default: '21',
+        active:['report']
+      }
     }
   },
   urlAPI: 'http://va.fpst.ru:8080/api/exportreport',
   requestMethod: 'POST',
   Algorithm: 'TPlusCoveralls',
+  SessionID: ''
+  
 }

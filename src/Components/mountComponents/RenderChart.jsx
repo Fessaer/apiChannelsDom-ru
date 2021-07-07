@@ -25,8 +25,7 @@ export default function RenderChart() {
   if (elementsRechart === undefined) {
     elementsRechart = [];
   }
-
-  if (activeFilterChart === "") activeFilterChart = ''
+  if (activeFilterChart === '0') activeFilterChart = '0'
   let copyArrayData = [...elementsRechart];
   let copyArrayDataRenderBar = [...elementsRechart];
   const bigNumberArray = copyArrayData.length
@@ -45,6 +44,7 @@ export default function RenderChart() {
   };
 
   function formatXAxis(tickItem) {
+    
     function formatLocaleDate(str) {
       const d = str.substr(0, 2);
       const m = str.substr(3, 2);
@@ -52,6 +52,7 @@ export default function RenderChart() {
     };
 
     let strDate = formatLocaleDate(tickItem);
+    
     const dayString = moment(formatDateToLocale(new Date(tickItem), 'dd.mm.yyyy')).format('dddd');
     const monthString = moment(formatDateToLocale(new Date(tickItem), 'dd.mm.yyyy')).format('MMM');
     const ddString = moment(formatDateToLocale(new Date(tickItem), 'dd.mm.yyyy')).format('DD');
@@ -81,7 +82,7 @@ export default function RenderChart() {
           <Tooltip />
           <Legend />
           {uniqueElemBar.map((item, index) => {
-              if (item !== "dateTime" && (activeFilterChart === '' || objClassID[activeFilterChart] === item)) {
+              if (item !== "dateTime" && (activeFilterChart === '0' || objClassID[activeFilterChart] === item)) {
                   countColor = countColor + 1;
                   return <Bar key={item + index.toString()} maxBarSize={200} dataKey={item} fill={colors[countColor - 1]} />;
               }

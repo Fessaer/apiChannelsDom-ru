@@ -11,11 +11,11 @@ const Navigation = React.memo(props => {
   useEffect(() => {
     inSetState({...globalState, toggleActivePage: 'report'})
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
 
   const handleChangeActivePage = (key) => {
     inSetState({...globalState, toggleActivePage: key})
-  }
+  };
   return (
       <Tabs onChange={handleChangeActivePage} type="card" style={{marginLeft: 16}}>
         <TabPane tab="Журнал" key="report">
@@ -25,9 +25,7 @@ const Navigation = React.memo(props => {
           {<Chart />}
         </TabPane>
       </Tabs>
-   
-    
     )
-})
+});
 
 export default Navigation;

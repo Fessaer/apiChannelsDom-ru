@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import { configParam, configFetch, defaultParam, configParamTest } from '../config/fetch/config';
 import { normalizeDataKeys } from './normalizeDataObject';
 import keInObject from './keyInObject';
@@ -13,14 +14,35 @@ var convert = require('xml-js');
 //     //ключ есть
 //     }
 
-const objQueryParam = Object.entries(configParamTest.query)
-const buildingStringFetch = (arr) => {
-    arr.forEach(([key, value]) => {
-        console.log(key, value.default)
-    })
-}
+// const objQueryParam = Object.entries(configParamTest.query)
 
-console.log(buildingStringFetch(objQueryParam))
+const buildingStringFetch = (obj, toggle = '', config) => {
+    let arr = Object.entries(obj.query);
+    let requestString = 'SessionID=' + config.SessionID + '&Analytics=' + obj.Algorithm + '&';
+    arr.filter(([key, value]) => {
+        if (keInObject(value, 'formElementProps')) return [key, value];
+    })
+        .filter(([key, value]) => {
+            if (keInObject(value.formElementProps, 'default')) return [key, value];
+        })
+        .forEach(([key, value]) => {
+            if (keInObject(value.formElementProps, 'Algorithm')) {
+                requestString = requestString + buildRegilarAlgorithm(obj.Algorithm, key) + '=' + config.fetch[toggle][key] + '&';
+            } else {
+                if (keInObject(value.formElementProps, 'active') && value.formElementProps.active.includes(toggle)) {
+                    requestString = requestString + key + '=' + config.fetch[toggle][key] + '&';
+                } 
+                if (!keInObject(value.formElementProps, 'active')) {
+                    requestString = requestString + key + '=' + config.fetch[toggle][key] + '&';
+                }
+            }
+            
+        
+    });
+    return requestString;
+};
+
+
 
 const fetchFunction = async (config, e = false) => {
     let arrResponseElements = [];
@@ -32,21 +54,7 @@ const fetchFunction = async (config, e = false) => {
         config.fetch[toggleActivePage].Offset = newOffSet;
     }
     
-    // console.log(configParamTest)
-
-    const forBuildingFetch = () => {
-        let bodyfetch = ''
-        Object.entries(configParam).forEach(([key, value]) => {
-            if (key === 'ClassID') return bodyfetch = bodyfetch + `${configFetch.Algorithm}[${key}]=${encodeURIComponent(config.fetch[toggleActivePage][key] === undefined ? "" : config.fetch[toggleActivePage][key])}&`;
-            if (key === 'EventSubjectID') return bodyfetch = bodyfetch + `${configFetch.Algorithm}[${key}]=${encodeURIComponent(config.fetch[toggleActivePage][key] === undefined ? "" : config.fetch[toggleActivePage][key])}&`;
-            if (key === 'CountBy') return bodyfetch = bodyfetch + ((() => toggleActivePage === 'chart' ? `${key}=${encodeURIComponent(defaultParam[toggleActivePage][key])}&` : '')());
-            if (key === 'Limit') return bodyfetch = bodyfetch + ((() => toggleActivePage !== 'chart' ? `${key}=${encodeURIComponent(config.fetch[toggleActivePage][key] === undefined ? "" : config.fetch[toggleActivePage][key])}&` : '')());
-            if (key === 'SessionID' || key === 'Analytics') return bodyfetch = bodyfetch + `${key}=${encodeURIComponent(config[key])}&`;
-            return bodyfetch = bodyfetch + `${key}=${encodeURIComponent(config.fetch[toggleActivePage][key] === undefined ? "" : config.fetch[toggleActivePage][key])}&`;
-        });
-        return bodyfetch;
-    }
-    let bodyfetch = forBuildingFetch();
+    let bodyfetch = buildingStringFetch(configParamTest, toggleActivePage, config);
 
     let promise = new Promise(function(resolve, reject) {
         let http =  new XMLHttpRequest();
@@ -72,7 +80,7 @@ return promise.then(function(response) {
             arrResponseElements = [...arrElements];
                 const newArrey = normalizeDataKeys(arrResponseElements);
                 return { arr: newArrey, noRenderPagination: noRenderPagination };
-    }).catch(() =>{
+    }).catch(() => {
         arrResponseElements = [];
         noRenderPagination = true;
         return { arr: arrResponseElements, noRenderPagination: noRenderPagination };

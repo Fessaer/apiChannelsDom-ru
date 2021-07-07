@@ -1,24 +1,30 @@
 import React, { useState } from 'react';
-import { configParam, configFetch, defaultParam } from './config/fetch/config'
+import { configFetch, configParamTest } from './config/fetch/config';
+import keyInObject from '../Components/helpers/keyInObject';
+const configParamArray = Object.entries(configParamTest.query);
 
-const configParamArray = Object.entries(configParam);
-
-const buidParamObject = (arr) => {
+const buidParamObject = (arr, toggle = '') => {
   let obj = {};
   arr.forEach(([key, value]) => {
-    if (value !== '' || key === 'ClassID') return obj[key] = value;
+    if (value.formElementProps.default !== '') {
+      if (keyInObject(value.formElementProps, 'active') && value.formElementProps.active.includes(toggle)) {
+        return obj[key] = value.formElementProps.default;
+      } 
+      if (!keyInObject(value.formElementProps, 'active')) {
+        return obj[key] = value.formElementProps.default;
+      }
+    }
   });
   return obj;
 }; 
 
-const objct = buidParamObject(configParamArray);
 
 let initialState = {
   fetch: {
-    chart: objct,
+    chart: buidParamObject(configParamArray, 'chart'),
     report: {
-      ...objct,
-      Limit: defaultParam.report.Limit,
+      ...buidParamObject(configParamArray, 'report'),
+      Limit: 21,
     }
   },
   ui: {
@@ -36,10 +42,9 @@ export const Context = React.createContext();
 
 const Store = ({children}) => {
   
-  const {SessionID, ChangePasswordAtNextLogin, validate} = children[0];
+  const {SessionID, validate} = children[0];
 
   initialState['SessionID'] = SessionID;
-  initialState['ChangePasswordAtNextLogin'] = ChangePasswordAtNextLogin;
   initialState['validate'] = validate;
   const [globalState, inSetState] = useState(initialState);
   
