@@ -15,34 +15,54 @@ import {
   ResponsiveContainer,
   Legend
 } from 'recharts';
-import {objClassID, mappingDay, mappingMonth } from '../config/chart/conf';
+import { mappingDay, mappingMonth } from '../config/chart/conf';
 
-export default function RenderChart() {
+export default function RenderChart(props) {
   const [globalState] = useContext(Context);
   let { activeFilterChart } = globalState.ui;
   let { elementsRechart } = globalState.fetch.chart;
- 
+  let { configs } = props
+
   if (elementsRechart === undefined) {
     elementsRechart = [];
   }
-  if (activeFilterChart === '0') activeFilterChart = '0'
+
   let copyArrayData = [...elementsRechart];
-  let copyArrayDataRenderBar = [...elementsRechart];
+
   const bigNumberArray = copyArrayData.length
-    > 0 ? Number(copyArrayData.sort((prev, next) =>
-      prev[objClassID[activeFilterChart]] - next[objClassID[activeFilterChart]]).pop()[objClassID[activeFilterChart]]) : 0;
-
-  const autoWidth = (arr) => {
-    if (arr.length === 0) return 0
-    let arrLength = []
-    arr.forEach((item) => {
-      if (item !== undefined) arrLength.push(Number(item[objClassID[activeFilterChart]]))
-    })
-    if (arrLength.length > 0) arrLength.sort((prev, next) => Number(prev) - Number(next))
-    let resultArr = arrLength[arrLength.length - 1]
-    return Number(resultArr.toString().length + '0') - 5
-  };
-
+    > 0 ? copyArrayData.sort((prev, next) => {
+      let newPrev = [];
+      let newNext = [];
+      Object.entries(prev).forEach(([key, value]) => {
+        if(!isNaN(Number(value))) newPrev.push(Number(value))
+      })
+      Object.entries(next).forEach(([key, value]) => {
+        if(!isNaN(Number(value))) newNext.push(Number(value))
+      })
+      const elPrev = newPrev.sort(function(a, b) {
+        return a - b;
+      })
+      const elNext = newNext.sort(function(a, b) {
+        return a - b;
+      })
+      const prevElement = elPrev.pop()
+      const nextElement = elNext.pop()
+      return prevElement - nextElement}).pop()
+    : 0;
+    
+  const bigNumber = (() => {
+    let arrNums = []
+    Object.entries(bigNumberArray).forEach(([key, value]) => {
+    if(!isNaN(Number(value))) arrNums.push(Number(value))
+  })
+  if (arrNums.length > 0) return arrNums.sort(function(a, b) {
+    return a - b;
+  }).pop()
+  if (arrNums.length === 0) return 0
+})()
+ 
+  const autoWidth = (num) => num !== undefined && num !== 0 ? Number(num.toString().length + '0') - 5 : 0;
+  
   function formatXAxis(tickItem) {
     
     function formatLocaleDate(str) {
@@ -63,30 +83,24 @@ export default function RenderChart() {
       return '';
     }
 
-    const keysData = copyArrayDataRenderBar.map((item) => {
-      return Object.keys(item);
-      });
-
-    const uniqueElemBar = [...new Set(...keysData)];
-
-    let countColor = 0;
-
   return (
       <ResponsiveContainer width="100%" aspect={2}>
         {/* <Spinner /> */}
         <BarChart data={elementsRechart}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="dateTime" tickFormatter={formatXAxis}  domain={["", ""]} />
-          <YAxis tickCount={20} domain={[0, bigNumberArray]}
-            padding={{ top: 20 }} interval={2} width={autoWidth(elementsRechart)} />
+          <YAxis tickCount={20} domain={[0, bigNumber]}
+            padding={{ top: 20 }} interval={2} width={autoWidth(bigNumber)} />
           <Tooltip />
           <Legend />
-          {uniqueElemBar.map((item, index) => {
-              if (item !== "dateTime" && (activeFilterChart === '0' || objClassID[activeFilterChart] === item)) {
-                  countColor = countColor + 1;
-                  return <Bar key={item + index.toString()} maxBarSize={200} dataKey={item} fill={colors[countColor - 1]} />;
-              }
-            })}
+          {configs.items.map((item, index) => {
+            if (item !== "dateTime" && activeFilterChart === '0') {
+                return <Bar key={item.ID + index.toString()} maxBarSize={200} dataKey={item.Name} fill={colors[index]} />;
+            }
+            if (item.ID === activeFilterChart && activeFilterChart !== '0') {
+                return <Bar key={item.ID + index.toString()} maxBarSize={200} dataKey={item.Name} fill={colors[index]} />; 
+            }
+          })}
         </BarChart>
       </ResponsiveContainer>
   );

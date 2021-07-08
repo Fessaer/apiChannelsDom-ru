@@ -33,7 +33,7 @@ let initialState = {
     activePage: 1,
     renderCountItems: 20,
     loadingSpinnerChart: false,
-    loadingSpinnerReport: false,  
+    loadingSpinnerReport: false, 
   },
   Analytics: configParam['Algorithm'],
 };

@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const path = require("path")
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
@@ -7,24 +8,21 @@ module.exports = {
   output: {
     filename: "build/static/js/bundle.min.js",
   },
-  devtool: 'source-map',
+  plugins: [new MiniCssExtractPlugin({ filename: '[name].css' })],
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader", "less-loader", "postcss-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "less-loader"],
       },
       {
         test: /\.less$/i,
-        use: [{
-          loader: "style-loader",
-        },
+        use: [
+          
         {
           loader: "css-loader",
         },
-        {
-          loader: "postcss-loader",
-        },
+        
         {
           loader: "less-loader",
           options: {
@@ -42,9 +40,6 @@ module.exports = {
       }
     ],
   },
-  plugins: [new UglifyJsPlugin(),
-    new webpack.NormalModuleReplacementPlugin( /node_modules\/antd\/lib\/style\/index\.less/, path.resolve(__dirname, 'src/Components/Styles/antdReplacement.less') )
-], 
   resolve: {
     extensions: ['.js', '.jsx']
   }

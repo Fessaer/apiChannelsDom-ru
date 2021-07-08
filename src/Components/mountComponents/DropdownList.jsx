@@ -9,20 +9,22 @@ const style = { display: 'flex', flexDirection: 'column', maxWidth: 220};
 export default function DropdownList(props) {
   let { configs } = props
   const [globalState, inSetState] = useContext(Context);
-  let { fetch, toggleActivePage } = globalState;
+  let { fetch, toggleActivePage, ui } = globalState;
   let { chart, report } = globalState.fetch;
   const { type } = configs;
 
   const changeHandle = (e) => {
       if (toggleActivePage === 'chart') {
+        
         chart = { ...chart, [type]: e }
         fetch = { ...fetch, chart }
-        inSetState({ ...globalState, fetch })
+        inSetState({ ...globalState, ui, fetch })
       }
       if (toggleActivePage === 'report') {
+        
         report = { ...report, [type]: e }
         fetch = { ...fetch, report }
-        inSetState({ ...globalState, fetch })
+        inSetState({ ...globalState, ui, fetch })
       }
   }
   

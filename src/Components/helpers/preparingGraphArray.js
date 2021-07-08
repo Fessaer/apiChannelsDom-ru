@@ -1,7 +1,6 @@
 import formatDateToLocale from './functionFormatReplaceDate';
 
 const preparingGraphArray = (arr, toggleSoloChart) => arr.map((item) => {
-    console.log(toggleSoloChart, ' toggleSoloChart')
     const d = item['DateTime']
     const count = item['Count']
     const date = formatDateToLocale(new Date(d), 'dd.mm.yyyy')
