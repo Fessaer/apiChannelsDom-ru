@@ -71,6 +71,17 @@ export const configParam = {
   },
   urlAPI: 'http://va.fpst.ru:8080/api/exportreport',
   requestMethod: 'POST',
-  Algorithm: 'TPlusCoveralls',
+  Algorithm: {
+    'TPlusCoveralls': {
+      subclassList: {
+        "2": 'Голова в каске',
+        "3": "Стандартная куртка",
+        "4": "Стандартные штаны",
+        "5": "Голова без каски",
+        "6": "Нестандартная куртка",
+        "7": "Нестандартные штаны"
+      },
+    },
+  },
   SessionID: ''
 }

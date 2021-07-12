@@ -34,12 +34,9 @@
   },
   "scripts": {
     "analyze": "source-map-explorer dist/*.js",
-    "start": "react-scripts start",
-    "build": "npm run build:react && npm run build:bundle",
-    "build:react": "react-scripts build",
-    "build:bundle": "webpack --config webpack.config.js",
+    "build": "webpack --config webpack.config.js",
     "report": "webpack-bundle-analyzer --port 4200 dist/stats.json",
-    "start-wp": "webpack serve --mode development --config webpack.dev.js",
+    "start": "webpack serve --mode development --config webpack.dev.js",
     "server": "serve dist -s"
   },
   "eslintConfig": {

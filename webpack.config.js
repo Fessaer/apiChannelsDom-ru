@@ -3,10 +3,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const NodePolyfillPlugin = require("node-polyfill-webpack-plugin")
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-
 const path = require("path")
-
-// const extractLESS = new ExtractTextPlugin('stylesheets/[name]-two.css');
 
 module.exports = {
   mode: 'production',
@@ -27,10 +24,9 @@ module.exports = {
   new CleanWebpackPlugin(),
   new HtmlWebpackPlugin({
     title: 'webpack Boilerplate',
-    template: path.resolve(__dirname, './INDEX/index.html'),
+    template: path.resolve(__dirname, './public/index.html'),
     filename: 'index.html', 
   })],
-  
   module: {
     rules: [
       {
@@ -44,24 +40,23 @@ module.exports = {
       {
         test: /\.less$/i,
         use:[ MiniCssExtractPlugin.loader,
-            {
-              loader: 'css-loader',
-            }, 
-            {
-              loader: 'less-loader',
-              options: {
-                lessOptions: {
-                  javascriptEnabled: true
-                },
-              }
+          {
+            loader: 'css-loader',
+          }, 
+          {
+            loader: 'less-loader',
+            options: {
+              lessOptions: {
+                javascriptEnabled: true
+              },
+            }
           }
         ]
       },
       {
-          test: /\.jsx?$/,
-          exclude: /(node_modules)/,
-          loader: "babel-loader",
-          
+        test: /\.jsx?$/,
+        exclude: /(node_modules)/,
+        loader: "babel-loader",
       }
     ],
   },

@@ -43,7 +43,8 @@ export default function Submit() {
   }
 
   return (
-    <Col className="gutter-row" xs={{ span: 12, push: 0}} sm={{ span: 8, push: 0}} xl={{ span: 4, push: 0}} style={{display:'flex', flexDirection: "column", alignItems: 'flex-start', justifyContent: 'flex-end', height: 54 }}>
+    <Col className="gutter-row" xs={{ span: 12, push: 0}} sm={{ span: 8, push: 0}} xl={{ span: 4, push: 0}} style={{display:'flex', flexDirection: "column", alignItems: 'flex-start', justifyContent: 'flex-end' }}>
+      <label>&nbsp;</label>
       <Button onClick={handleSubmit} disabled={(() => toggleActivePage === 'report' 
                                                       ? globalState.ui.loadingSpinnerReport 
                                                       : globalState.ui.loadingSpinnerChart)()} type="primary">

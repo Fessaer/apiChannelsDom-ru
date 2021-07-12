@@ -2,7 +2,7 @@
 import React, { useContext } from 'react';
 import { Context } from '../Store';
 import formatDateToLocale from '../helpers/functionFormatReplaceDate';
-import { SubClassID } from '../config/report/conf'
+// import { SubClassID } from '../config/report/conf'
 import AlertMessage from './Alert'; 
 
 const RenderTable = () => {

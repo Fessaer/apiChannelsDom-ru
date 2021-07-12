@@ -3,18 +3,17 @@ import { configParam } from '../config/fetch/config';
 import { normalizeDataKeys } from './normalizeDataObject';
 import keyInObject from './keyInObject';
 import buildRegilarAlgorithm from './buildRegilarAlgorithm';
-
 var convert = require('xml-js');
 
 const buildingStringFetch = (obj, toggle = '', config) => {
     let arr = Object.entries(obj.query);
-    let requestString = 'SessionID=' + config.SessionID + '&Analytics=' + obj.Algorithm + '&';
+    let requestString = 'SessionID=' + config.SessionID + '&Analytics=' + Object.keys(obj.Algorithm)[0] + '&';
     arr.filter(([key, value]) => {
         if (keyInObject(value, 'formElementProps')) return [key, value];
     })
         .forEach(([key, value]) => {
             if (keyInObject(value.formElementProps, 'Algorithm')) {
-                requestString = requestString + buildRegilarAlgorithm(obj.Algorithm, key) + '=' + config.fetch[toggle][key] + '&';
+                requestString = requestString + buildRegilarAlgorithm(Object.keys(obj.Algorithm)[0], key) + '=' + config.fetch[toggle][key] + '&';
             } else {
                 if (keyInObject(value.formElementProps, 'active') && value.formElementProps.active.includes(toggle)) {
                     requestString = requestString + key + '=' + config.fetch[toggle][key] + '&';
@@ -23,13 +22,9 @@ const buildingStringFetch = (obj, toggle = '', config) => {
                     requestString = requestString + key + '=' + config.fetch[toggle][key] + '&';
                 }
             }
-            
-        
     });
     return requestString;
 };
-
-
 
 const fetchFunction = async (config, e = false) => {
     let arrResponseElements = [];

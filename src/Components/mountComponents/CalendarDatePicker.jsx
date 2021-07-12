@@ -71,7 +71,7 @@ function CalendarPicker(props) {
   let testDate = moment(targetDateMapping, 'YYYY-MM-DD HH:mm:ss')
   return (
     <Col className="gutter-row" sm={{ span: 6, push: 0}} xl={{ span: 4, push: 0}} style={style}>
-      <label className="pb-1">{configs.label}</label>
+      <label>{configs.label}</label>
       <DatePicker
         allowClear={false}
         style={{ display: "flex", width: 200 }}
