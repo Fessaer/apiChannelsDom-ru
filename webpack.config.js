@@ -1,46 +1,58 @@
 const webpack = require('webpack');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-
 const path = require("path")
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
   output: {
-    filename: "build/static/js/bundle.min.js",
+    filename: "report.min.js",
   },
-  plugins: [new MiniCssExtractPlugin({ filename: '[name].css' })],
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'report.min.css', insert: function() {}
+    })
+  ],
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "less-loader"],
+        use: ["style-loader", "css-loader"],
       },
       {
-        test: /\.less$/i,
+        test: /\.less$/,
         use: [
-          
-        {
-          loader: "css-loader",
-        },
-        
-        {
-          loader: "less-loader",
-          options: {
-            lessOptions: {
-              javascriptEnabled: true
+          { loader: MiniCssExtractPlugin.loader },
+          { loader: "css-loader" },
+          {
+            loader: "less-loader",
+            options: {
+              lessOptions: {
+                javascriptEnabled: true
+              },
             },
-          },
-        }],
+          }
+        ],
       },
       {
           test: /\.jsx?$/,
           exclude: /(node_modules)/,
-          loader: "babel-loader",
-          
+          loader: "babel-loader"
       }
     ],
   },
   resolve: {
     extensions: ['.js', '.jsx']
-  }
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        test: /\.js(\?.*)?$/,
+      }),
+      new CssMinimizerPlugin({
+        minify: CssMinimizerPlugin.cleanCssMinify
+      }),
+    ],
+  },
 }

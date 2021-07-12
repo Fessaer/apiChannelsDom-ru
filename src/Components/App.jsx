@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from 'react';
-// import './Styles/App.css';
 import Navigation from './Navigation';
 import Store from './Store';
 
 function App() {
-  const [dataState, setDataState] = useState({validate: false})
+  const [dataState, setDataState] = useState({validate: false});
 
   let targetValidationCookie = false;
   document.cookie.split('; ').forEach((str) => {
@@ -35,18 +34,18 @@ function App() {
           }
         }
       })()
-  }}, [])
+  }}, []);
 
   const { validate } = dataState;
   if (validate === false) {
     return null;
   } else {
-  return (
-      <Store>
-          {dataState}
-        <Navigation />
-      </Store>
-  )
+    return (
+        <Store>
+            {dataState}
+          <Navigation />
+        </Store>
+    );
  }
 }
 
