@@ -4,7 +4,7 @@ import { Col } from 'antd';
 import { Select } from 'antd';
 
 const { Option } = Select;
-const style = { display: 'flex', flexDirection: 'column', maxWidth: 220};
+const style = { display:'flex', flexDirection: "column", alignItems: 'flex-start', justifyContent: 'flex-end', maxWidth: 220};
 
 export default function DropdownList(props) {
   let { configs } = props
@@ -30,7 +30,7 @@ export default function DropdownList(props) {
   
   return (
     <Col className="gutter-row" sm={{ span: 6, push: 0}} xl={{ span: 4, push: 0}} style={style}>
-      <label className="pb-1">{configs.label}</label>
+      <label>{configs.label}</label>
       <Select style={{ width: 200 }} onChange={changeHandle} defaultValue={configs.items.map((item) => 
       item.ID === '0' || item.ID === '552'
       ? item.Name : null)}>

@@ -2,15 +2,15 @@
 import React, { useContext } from 'react';
 import { Context } from '../Store';
 import formatLocaleDate from '../helpers/formatDate';
-import { SubClassID } from '../config/report/conf';
 import { Col, Row } from 'antd';
 import AlertMessage from './Alert'; 
 
 const style = { display: 'flex', width: '100%',minWidth: 260, border: 'solid 1px #D3D3D3', borderRadius: 5, margin: '1px'};
 
-const RenderPlate = () => {
+const RenderPlate = (props) => {
   const [globalState] = useContext(Context);
   let { elements } = globalState.fetch.report;
+  let { configs } = props
 
   if (elements === undefined) {
     elements = [];
@@ -44,7 +44,7 @@ const RenderPlate = () => {
                 <p style={{ "fontSize": "12px", padding: 10, margin: 0 }}>
                   {formatLocaleDate(item['DateTime'].substring(0, 10))}<br />
                   {item['DateTime'].substr(10)}<br />
-                  {SubClassID[item['SubClassID']]}<br />
+                  {configs[Object.keys(configs)[0]].subclassList[item['SubClassID']]}<br />
                   Уверенность: {item['Score']}%
                 </p>
               </div>

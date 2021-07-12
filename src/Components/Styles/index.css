@@ -18,5 +18,8 @@
   height: 2em;
 }
 .alert_custom {
-  margin-top: '20px'
+  margin-top: 20px
+}
+form .ant-col {
+  padding-bottom: 4px;
 }

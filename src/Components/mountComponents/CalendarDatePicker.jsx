@@ -9,7 +9,7 @@ import locale from '../config/locale/date_picker/ru/date_picker_ru_RU';
 import moment from 'moment';
 moment.suppressDeprecationWarnings = true;
 
-const style = { display: 'flex', flexDirection: 'column', maxWidth: 220};
+const style = { display:'flex', flexDirection: "column", alignItems: 'flex-start', justifyContent: 'flex-end', maxWidth: 220};
 
 function CalendarPicker(props) {
   const [globalState, inSetState] = useContext(Context);
@@ -71,7 +71,7 @@ function CalendarPicker(props) {
   let testDate = moment(targetDateMapping, 'YYYY-MM-DD HH:mm:ss')
   return (
     <Col className="gutter-row" sm={{ span: 6, push: 0}} xl={{ span: 4, push: 0}} style={style}>
-      <label className="pb-1">{configs.label}</label>
+      <label>{configs.label}</label>
       <DatePicker
         allowClear={false}
         style={{ display: "flex", width: 200 }}

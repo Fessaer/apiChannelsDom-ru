@@ -5,6 +5,11 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
+  mode: 'production',
+  devtool: 'source-map',
+  entry: {
+    main: path.resolve(__dirname, './src/index.jsx'),
+  },
   output: {
     filename: "report.min.js",
   },
@@ -29,7 +34,7 @@ module.exports = {
             options: {
               lessOptions: {
                 javascriptEnabled: true
-              },
+              }
             },
           }
         ],
@@ -54,5 +59,5 @@ module.exports = {
         minify: CssMinimizerPlugin.cleanCssMinify
       }),
     ],
-  },
+  }
 }
