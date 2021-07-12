@@ -9,7 +9,7 @@ import locale from '../config/locale/date_picker/ru/date_picker_ru_RU';
 import moment from 'moment';
 moment.suppressDeprecationWarnings = true;
 
-const style = { display: 'flex', flexDirection: 'column', maxWidth: 220};
+const style = { display:'flex', flexDirection: "column", alignItems: 'flex-start', justifyContent: 'flex-end', maxWidth: 220};
 
 function CalendarPicker(props) {
   const [globalState, inSetState] = useContext(Context);

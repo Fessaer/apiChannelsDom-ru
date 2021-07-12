@@ -4,7 +4,7 @@ import { Col } from 'antd';
 import { Select } from 'antd';
 
 const { Option } = Select;
-const style = { display: 'flex', flexDirection: 'column', maxWidth: 220};
+const style = { display:'flex', flexDirection: "column", alignItems: 'flex-start', justifyContent: 'flex-end', maxWidth: 220};
 
 export default function DropdownList(props) {
   let { configs } = props

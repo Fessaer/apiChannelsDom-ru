@@ -1,7 +1,7 @@
 /* eslint-disable array-callback-return */
 import { configParam } from '../config/fetch/config';
 import { normalizeDataKeys } from './normalizeDataObject';
-import keInObject from './keyInObject';
+import keyInObject from './keyInObject';
 import buildRegilarAlgorithm from './buildRegilarAlgorithm';
 
 var convert = require('xml-js');
@@ -10,19 +10,16 @@ const buildingStringFetch = (obj, toggle = '', config) => {
     let arr = Object.entries(obj.query);
     let requestString = 'SessionID=' + config.SessionID + '&Analytics=' + obj.Algorithm + '&';
     arr.filter(([key, value]) => {
-        if (keInObject(value, 'formElementProps')) return [key, value];
+        if (keyInObject(value, 'formElementProps')) return [key, value];
     })
-        .filter(([key, value]) => {
-            if (keInObject(value.formElementProps, 'default')) return [key, value];
-        })
         .forEach(([key, value]) => {
-            if (keInObject(value.formElementProps, 'Algorithm')) {
+            if (keyInObject(value.formElementProps, 'Algorithm')) {
                 requestString = requestString + buildRegilarAlgorithm(obj.Algorithm, key) + '=' + config.fetch[toggle][key] + '&';
             } else {
-                if (keInObject(value.formElementProps, 'active') && value.formElementProps.active.includes(toggle)) {
+                if (keyInObject(value.formElementProps, 'active') && value.formElementProps.active.includes(toggle)) {
                     requestString = requestString + key + '=' + config.fetch[toggle][key] + '&';
                 } 
-                if (!keInObject(value.formElementProps, 'active')) {
+                if (!keyInObject(value.formElementProps, 'active')) {
                     requestString = requestString + key + '=' + config.fetch[toggle][key] + '&';
                 }
             }

@@ -1,15 +1,13 @@
 const webpack = require('webpack');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const NodePolyfillPlugin = require("node-polyfill-webpack-plugin")
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const path = require("path")
 
-// const extractLESS = new ExtractTextPlugin('stylesheets/[name]-two.css');
-
 module.exports = {
-  mode: 'production',
+  target: 'web',
+  mode: 'development',
   devtool: 'source-map',
   entry: {
     main: path.resolve(__dirname, './src/index.jsx'),
@@ -18,10 +16,8 @@ module.exports = {
     path: path.resolve(__dirname, './dist'),
     filename: "[name].bundle.js",
   },
+  
   plugins: [
-    new MiniCssExtractPlugin({
-    filename: 'bundle.css'
-  }), 
   new NodePolyfillPlugin(),
   new webpack.HotModuleReplacementPlugin(),
   new CleanWebpackPlugin(),
@@ -29,13 +25,28 @@ module.exports = {
     title: 'webpack Boilerplate',
     template: path.resolve(__dirname, './INDEX/index.html'),
     filename: 'index.html', 
-  })],
-  
-  module: {
+})
+],
+
+
+
+devServer: {
+  historyApiFallback: true,
+  contentBase: path.resolve(__dirname, './dist'),
+  open: true,
+  compress: true,
+  hot: true,
+  port: 8080,
+},
+
+module: {
     rules: [
       {
         test: /\.css$/,
-        use: [ MiniCssExtractPlugin.loader,
+        use: [ 
+          {
+            loader: "style-loader",
+          },
           {
             loader: 'css-loader',
           }, 
@@ -43,7 +54,10 @@ module.exports = {
       },
       {
         test: /\.less$/i,
-        use:[ MiniCssExtractPlugin.loader,
+        use:[
+          {
+            loader: "style-loader",
+          }, 
             {
               loader: 'css-loader',
             }, 
