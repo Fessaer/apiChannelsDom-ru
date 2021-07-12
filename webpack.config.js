@@ -3,6 +3,8 @@ const path = require("path")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require("terser-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   mode: 'production',
@@ -16,8 +18,13 @@ module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
       filename: 'report.min.css', insert: function() {}
-    })
-  ],
+    }),
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+    title: 'webpack Boilerplate',
+    template: path.resolve(__dirname, './public/index.html'),
+    filename: 'index.html', 
+  })],
   module: {
     rules: [
       {
