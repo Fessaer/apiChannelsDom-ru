@@ -21,10 +21,11 @@ module.exports = {
     }),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-    title: 'webpack Boilerplate',
-    template: path.resolve(__dirname, './public/index.html'),
-    filename: 'index.html', 
-  })],
+      title: 'webpack Boilerplate',
+      template: path.resolve(__dirname, './public/index.html'),
+      filename: 'index.html', 
+    })
+  ],
   module: {
     rules: [
       {
