@@ -3,8 +3,6 @@ import React, { useContext } from 'react';
 import { Context } from '../Store';
 import 'moment/locale/ru';
 import { colors } from '../config/configCharts';
-import moment from 'moment';
-import formatDateToLocale from '../helpers/functionFormatReplaceDate';
 import {
   BarChart,
   Bar,
@@ -15,7 +13,6 @@ import {
   ResponsiveContainer,
   Legend,
 } from 'recharts';
-import { mappingDay, mappingMonth } from '../config/chart/conf';
 
 export default function RenderChart(props) {
   const [globalState] = useContext(Context);
@@ -81,18 +78,7 @@ export default function RenderChart(props) {
     }
 
     let strDate = formatLocaleDate(tickItem);
-    // console.log(strDate);
-    // const dayString = moment(
-    //   formatDateToLocale(new Date(tickItem), 'dd.mm.yyyy')
-    // ).format('dddd');
-    // const monthString = moment(
-    //   formatDateToLocale(new Date(tickItem), 'dd.mm.yyyy')
-    // ).format('MMM');
-    // const ddString = moment(
-    //   formatDateToLocale(new Date(tickItem), 'dd.mm.yyyy')
-    // ).format('DD');
-    // const returnRefactoringDay =
-    //   `${mappingDay[dayString]}, ` + ddString + ' ' + mappingMonth[monthString];
+
     if (
       tickItem !== '' &&
       elementsRechart.length > 7 &&

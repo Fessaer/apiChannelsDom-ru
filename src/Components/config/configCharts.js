@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 export const colors = [
   '#2096f8',
   '#dc3912',
