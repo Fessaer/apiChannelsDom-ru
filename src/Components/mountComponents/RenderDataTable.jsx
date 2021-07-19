@@ -1,35 +1,47 @@
 /* eslint-disable array-callback-return */
 import React, { useContext } from 'react';
 import { Context } from '../Store';
-import formatDateToLocale from '../helpers/functionFormatReplaceDate';
+// import formatDateToLocale from '../helpers/functionFormatReplaceDate';
 // import { SubClassID } from '../config/report/conf'
-import AlertMessage from './Alert'; 
+import AlertMessage from './Alert';
 
 const RenderTable = () => {
   const [globalState] = useContext(Context);
   let { elements } = globalState.fetch.report;
 
   if (elements === undefined) {
-      elements = []
+    elements = [];
   }
 
+  // eslint-disable-next-line no-unused-vars
   const sortElements = elements.map((item, index) => {
-    const id = item['DateTime'] + index.toString()
-    const dateTime = item['DateTime']
-    const cameraName = item['CameraName']
-    const image = <img className="photo" src={`data:image/png;base64,${item['Image']}`} alt="altImage" />
-    const param1 = item['SubClassID']
-    const param2 = item['Score']
-    return {id: id, time: dateTime, cameraName: cameraName, image: image, param1: param1, param2: param2}
-  })
+    const id = item['DateTime'] + index.toString();
+    const dateTime = item['DateTime'];
+    const cameraName = item['CameraName'];
+    const image = (
+      <img
+        className="photo"
+        src={`data:image/png;base64,${item['Image']}`}
+        alt="altImage"
+      />
+    );
+    const param1 = item['SubClassID'];
+    const param2 = item['Score'];
+    return {
+      id: id,
+      time: dateTime,
+      cameraName: cameraName,
+      image: image,
+      param1: param1,
+      param2: param2,
+    };
+  });
   if (globalState.fetch.report.elements !== undefined) {
-    if(globalState.fetch.report.elements.length === 0) return (
-      <AlertMessage />
-      )
+    if (globalState.fetch.report.elements.length === 0) return <AlertMessage />;
   }
   return (
     <>
-    {/* <Table striped bordered hover>
+      {/* <Table striped bordered hover>
   <thead>
     <tr>
       <th width="10%">Дата и время</th>
@@ -52,7 +64,7 @@ const RenderTable = () => {
   </tbody>
 </Table> */}
     </>
-  )
-}
+  );
+};
 
 export default RenderTable;

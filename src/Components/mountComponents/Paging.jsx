@@ -3,40 +3,63 @@ import React, { useContext } from 'react';
 import { Context } from '../Store';
 import { Pagination } from 'antd';
 import fetchFunc from '../helpers/fetchFunction';
+import buildingStringReportAndChart from '../helpers/buildBodyFetch/getReportAndChart';
 
 export default function Paging(props) {
   const [globalState, inSetState] = useContext(Context);
   let { fetch, ui } = globalState;
   let { lengthPagination, noRenderPagination } = globalState.ui;
   let { elements } = globalState.fetch.report;
-  let { report } = globalState.fetch
-  let { Offset } = globalState.fetch.report
-  let propsNorender = props.norender
-  if(propsNorender === undefined) propsNorender = 0
+  let { report } = globalState.fetch;
+  let { Offset } = globalState.fetch.report;
+  let propsNorender = props.norender;
+  if (propsNorender === undefined) propsNorender = 0;
 
-  const handlePaging = async (e, f) => {
-    ui = await { ...ui, loadingSpinnerReport: true }
+  const handlePaging = async (e) => {
+    ui = await { ...ui, loadingSpinnerReport: true };
     await inSetState({ ...globalState, ui });
     lengthPagination = (e - 1) * 20;
     const newOffSet = (e - 1) * 20;
     Offset = newOffSet;
-    report = await { ...report, Offset};
-    fetch = await { ...fetch, report }
-    ui = await { ...ui, activePage: e, lengthPagination, noRenderPagination: false };
-    await inSetState({ ...globalState, fetch, ui });
-    const dataFetch = await fetchFunc(globalState, e);
-    report = await { ...report, Offset, elements: [...dataFetch.arr]};
-    fetch = await { ...fetch, report }
-    ui = await { ...ui, activePage: e, lengthPagination, noRenderPagination: dataFetch.noRenderPagination, loadingSpinnerReport: false  };
-    await inSetState({ ...globalState, fetch, ui });
-  }
+
+    await inSetState({
+      ...globalState,
+      fetch: { ...fetch, report: { ...report, Offset } },
+      ui: {
+        ...ui,
+        activePage: e,
+        lengthPagination,
+        noRenderPagination: false,
+      },
+    });
+    const dataFetch = await fetchFunc(
+      globalState,
+      e,
+      'get',
+      buildingStringReportAndChart
+    );
+    await inSetState({
+      ...globalState,
+      fetch: {
+        ...fetch,
+        report: { ...report, Offset, elements: [...dataFetch.arr] },
+      },
+      ui: {
+        ...ui,
+        activePage: e,
+        lengthPagination,
+        noRenderPagination: dataFetch.noRenderPagination,
+        loadingSpinnerReport: false,
+      },
+    });
+  };
   let { activePage } = globalState.ui;
   if (elements !== undefined) {
     return (
       <>
-        {elements.length !== 0 && propsNorender < elements.length 
-        || elements.length > 20 && propsNorender < elements.length 
-        || propsNorender < elements.length &&  noRenderPagination === false ?
+        {(elements.length !== 0 && propsNorender < elements.length) ||
+        (elements.length > 20 && propsNorender < elements.length) ||
+        (propsNorender < elements.length && noRenderPagination === false) ? (
           <div className="pl-0">
             <Pagination
               current={activePage}
@@ -44,12 +67,18 @@ export default function Paging(props) {
               defaultPageSize={20}
               showSizeChanger={false}
               defaultCurrent={1}
-              total={elements.length <= 20 ? lengthPagination + 20 : lengthPagination + 30}
-              style={{ paddingBlock: "1rem", paddingLeft: "0rem" }} />
-          </div> : null}
+              total={
+                elements.length <= 20
+                  ? lengthPagination + 20
+                  : lengthPagination + 30
+              }
+              style={{ paddingBlock: '1rem', paddingLeft: '0rem' }}
+            />
+          </div>
+        ) : null}
       </>
-    )
+    );
   } else {
-    return null
+    return null;
   }
 }

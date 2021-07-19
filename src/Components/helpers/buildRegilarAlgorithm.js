@@ -1,3 +1,3 @@
-const buildRegilarAlgorithm = (algorithm, paramKey) => `${algorithm}[${paramKey}]`;
-
+const buildRegilarAlgorithm = (algorithm, paramKey) =>
+  `${algorithm}[${paramKey}]`;
 export default buildRegilarAlgorithm;

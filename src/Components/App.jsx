@@ -1,9 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Navigation from './Navigation';
 import Store from './Store';
+import { configParam } from './config/fetch/config';
 
 function App() {
-  const [dataState, setDataState] = useState({validate: false});
+  const [dataState, setDataState] = useState({ validate: false });
 
   let targetValidationCookie = false;
   document.cookie.split('; ').forEach((str) => {
@@ -13,40 +14,53 @@ function App() {
       targetValidationCookie = value;
     }
   });
-
   useEffect(() => {
     if (targetValidationCookie) {
-      setDataState({SessionID: targetValidationCookie, validate: true})
+      setDataState({
+        SessionID: targetValidationCookie,
+        validate: true,
+        url: window.location.origin,
+      });
     } else {
-    (async function fetchData() {
-      let http = new XMLHttpRequest();
-      let urle = 'http://va.fpst.ru:8080/api/login';
-      let bodyfetch = 'Login=' + encodeURIComponent('tplusfront') +
-      '&Password=' + encodeURIComponent('tplusfront00');
-      http.open('POST', urle, true);
-      http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-      http.send(bodyfetch);
-      http.onreadystatechange = function() {
-        if  (http.readyState === 4 && http.status === 200) {
+      (async function fetchData() {
+        let http = new XMLHttpRequest();
+        let urle = (() =>
+          targetValidationCookie
+            ? window.location.origin + configParam.api.login.auth
+            : configParam.urlAPI + configParam.api.login.auth)();
+        let bodyfetch =
+          'Login=' +
+          encodeURIComponent(configParam.login) +
+          '&Password=' +
+          encodeURIComponent(configParam.password);
+        http.open('POST', urle, true);
+        http.setRequestHeader(
+          'Content-type',
+          'application/x-www-form-urlencoded'
+        );
+        http.send(bodyfetch);
+        http.onreadystatechange = function () {
+          if (http.readyState === 4 && http.status === 200) {
             let response = http.responseText;
             const { SessionID } = JSON.parse(response);
-            setDataState({SessionID, validate: true});
+            setDataState({ SessionID, validate: true });
           }
-        }
-      })()
-  }}, []);
+        };
+      })();
+    }
+  }, []);
 
   const { validate } = dataState;
   if (validate === false) {
     return null;
   } else {
     return (
-        <Store>
-            {dataState}
-          <Navigation />
-        </Store>
+      <Store>
+        {dataState}
+        <Navigation />
+      </Store>
     );
- }
+  }
 }
 
 export default App;

@@ -4,7 +4,7 @@ import Calendar from '../mountComponents/CalendarDatePicker';
 import DropdownList from '../mountComponents/DropdownList';
 import Submit from '../mountComponents/Submit';
 import { Row } from 'antd';
-import { configParam } from '../config/fetch/config'
+import { configParam } from '../config/fetch/config';
 
 export default function SearchBarChart() {
   return (
@@ -19,5 +19,5 @@ export default function SearchBarChart() {
         </Row>
       </div>
     </form>
-  )
+  );
 }

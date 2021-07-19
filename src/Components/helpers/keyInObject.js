@@ -1,12 +1,12 @@
 const keyInObject = (object, key) => {
-  try { 
+  try {
     if (typeof object[key] !== 'undefined') {
       return true;
     } else {
-      return false
+      return false;
     }
   } catch {
-    return false
+    return false;
   }
-}
+};
 export default keyInObject;

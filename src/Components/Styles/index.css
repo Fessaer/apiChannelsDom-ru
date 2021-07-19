@@ -23,3 +23,8 @@
 form .ant-col {
   padding-bottom: 4px;
 }
+.anticon .anticon-tool {
+  font-size: 22px ;
+  padding: 0px 5px ;
+  padding-top: 7px ;
+}

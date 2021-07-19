@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { configParam } from './config/fetch/config';
 import keyInObject from '../Components/helpers/keyInObject';
@@ -7,17 +8,19 @@ const buidParamObject = (arr, toggle = '') => {
   let obj = {};
   arr.forEach(([key, value]) => {
     if (value.formElementProps.default !== '') {
-      if (keyInObject(value.formElementProps, 'active') && value.formElementProps.active.includes(toggle)) {
-        return obj[key] = value.formElementProps.default;
-      } 
+      if (
+        keyInObject(value.formElementProps, 'active') &&
+        value.formElementProps.active.includes(toggle)
+      ) {
+        return (obj[key] = value.formElementProps.default);
+      }
       if (!keyInObject(value.formElementProps, 'active')) {
-        return obj[key] = value.formElementProps.default;
+        return (obj[key] = value.formElementProps.default);
       }
     }
   });
   return obj;
-}; 
-
+};
 
 let initialState = {
   fetch: {
@@ -25,7 +28,7 @@ let initialState = {
     report: {
       ...buidParamObject(configParamArray, 'report'),
       Limit: 21,
-    }
+    },
   },
   ui: {
     noRenderPagination: true,
@@ -33,23 +36,27 @@ let initialState = {
     activePage: 1,
     renderCountItems: 20,
     loadingSpinnerChart: false,
-    loadingSpinnerReport: false, 
+    loadingSpinnerReport: false,
   },
   Analytics: configParam['Algorithm'],
 };
 
 export const Context = React.createContext();
 
-const Store = ({children}) => {
-  
-  const {SessionID, validate} = children[0];
+const Store = ({ children }) => {
+  const { SessionID, validate, url } = children[0];
 
   initialState['SessionID'] = SessionID;
   initialState['validate'] = validate;
+  if (url !== undefined) {
+    initialState['url'] = url;
+  }
   const [globalState, inSetState] = useState(initialState);
-  
+
   return (
-    <Context.Provider value={[globalState, inSetState]}>{children[1]}</Context.Provider>
-  )
-}
+    <Context.Provider value={[globalState, inSetState]}>
+      {children[1]}
+    </Context.Provider>
+  );
+};
 export default Store;
