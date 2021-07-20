@@ -3,5 +3,5 @@
 "editor.formatOnSave": true, 
 "eslint.alwaysShowStatus": true, 
 "files.autoSave": "onFocusChange",
-"files.eol": "\n"
+"files.eol": "\n",
 }

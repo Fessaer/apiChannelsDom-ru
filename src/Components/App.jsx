@@ -1,66 +1,42 @@
 import React, { useState, useEffect } from 'react';
-import Navigation from './Navigation';
+import Home from './Pages/Home';
 import Store from './Store';
-import { configParam } from './config/fetch/config';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import CardPage from './Pages/CardPage';
 
 function App() {
-  const [dataState, setDataState] = useState({ validate: false });
+  const [data, setData] = useState({});
 
-  let targetValidationCookie = false;
-  document.cookie.split('; ').forEach((str) => {
-    const arrCookie = str.split('=');
-    const [, value] = arrCookie;
-    if (arrCookie.includes('PHPSESSIDFPST')) {
-      targetValidationCookie = value;
-    }
-  });
   useEffect(() => {
-    if (targetValidationCookie) {
-      setDataState({
-        SessionID: targetValidationCookie,
-        validate: true,
-        url: window.location.origin,
-      });
-    } else {
-      (async function fetchData() {
-        let http = new XMLHttpRequest();
-        let urle = (() =>
-          targetValidationCookie
-            ? window.location.origin + configParam.api.login.auth
-            : configParam.urlAPI + configParam.api.login.auth)();
-        let bodyfetch =
-          'Login=' +
-          encodeURIComponent(configParam.login) +
-          '&Password=' +
-          encodeURIComponent(configParam.password);
-        http.open('POST', urle, true);
-        http.setRequestHeader(
-          'Content-type',
-          'application/x-www-form-urlencoded'
-        );
-        http.send(bodyfetch);
-        http.onreadystatechange = function () {
-          if (http.readyState === 4 && http.status === 200) {
-            let response = http.responseText;
-            const { SessionID } = JSON.parse(response);
-            setDataState({ SessionID, validate: true });
-          }
-        };
-      })();
-    }
+    (
+      async function dataFetch() {
+      let url = 'https://epg.domru.ru/channel/list?domain=perm';
+    await fetch(url, {
+      method: 'GET',
+    }).then((response) => {
+      return response.json();
+      }).then((data) => setData({data}))
+    })()
   }, []);
 
-  const { validate } = dataState;
-  if (validate === false) {
-    return null;
-  } else {
     return (
       <Store>
-        {dataState}
-        <Navigation />
+        {data}
+      <Router>
+        <Switch>
+          <Route path="/" exact>
+            <Home />
+          </Route>
+          <Route 
+          path="/CardPage"
+          render={props => <CardPage {...props}/>}>
+          </Route>
+        </Switch>
+      </Router>
       </Store>
-    );
-  }
+      
+  );
 }
+
 
 export default App;

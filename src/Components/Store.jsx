@@ -1,56 +1,15 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-import { configParam } from './config/fetch/config';
-import keyInObject from '../Components/helpers/keyInObject';
-const configParamArray = Object.entries(configParam.query);
 
-const buidParamObject = (arr, toggle = '') => {
-  let obj = {};
-  arr.forEach(([key, value]) => {
-    if (value.formElementProps.default !== '') {
-      if (
-        keyInObject(value.formElementProps, 'active') &&
-        value.formElementProps.active.includes(toggle)
-      ) {
-        return (obj[key] = value.formElementProps.default);
-      }
-      if (!keyInObject(value.formElementProps, 'active')) {
-        return (obj[key] = value.formElementProps.default);
-      }
-    }
-  });
-  return obj;
-};
-
-let initialState = {
-  fetch: {
-    chart: buidParamObject(configParamArray, 'chart'),
-    report: {
-      ...buidParamObject(configParamArray, 'report'),
-      Limit: 21,
-    },
-  },
-  ui: {
-    noRenderPagination: true,
-    lengthPagination: 1,
-    activePage: 1,
-    renderCountItems: 20,
-    loadingSpinnerChart: false,
-    loadingSpinnerReport: false,
-  },
-  Analytics: configParam['Algorithm'],
-};
+let initialState = {};
 
 export const Context = React.createContext();
 
 const Store = ({ children }) => {
-  const { SessionID, validate, url } = children[0];
-
-  initialState['SessionID'] = SessionID;
-  initialState['validate'] = validate;
-  if (url !== undefined) {
-    initialState['url'] = url;
-  }
+  console.log(children)
+  const { data } = children[0];
+  // console.log(data)
+  initialState['channels'] = data;
   const [globalState, inSetState] = useState(initialState);
 
   return (
