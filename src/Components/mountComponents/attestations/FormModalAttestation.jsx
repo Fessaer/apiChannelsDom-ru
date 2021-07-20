@@ -34,22 +34,21 @@ const formItemLayout = {
   },
 };
 
-const FormSetAttestation = ({ targetItem }) => {
+const FormModalAttestation = ({ targetItem, settings }) => {
   const [globalState, inSetState] = useContext(Context);
   let { fetch } = globalState;
   let { attestations } = globalState.fetch;
   const [form] = Form.useForm();
-
+  console.log(settings);
   useEffect(() => {
     if (targetItem !== undefined) {
       form.setFieldsValue({
-        'date-picker1': moment(
-          targetItem.EntryFirstDate,
-          'YYYY.MM.DD HH:mm:ss'
-        ),
+        [settings.componentAttestations.EntryFirstDate.formElementProps.type]:
+          moment(targetItem.EntryFirstDate, 'YYYY.MM.DD HH:mm:ss'),
       });
       form.setFieldsValue({
-        'date-picker2': moment(targetItem.EntryLastDate, 'YYYY.MM.DD HH:mm:ss'),
+        [settings.componentAttestations.EntryLastDate.formElementProps.type]:
+          moment(targetItem.EntryLastDate, 'YYYY.MM.DD HH:mm:ss'),
       });
 
       inSetState({
@@ -69,13 +68,18 @@ const FormSetAttestation = ({ targetItem }) => {
   const onValuesHandle = (changedValues) => {
     const keyChangeValue = Object.keys(changedValues)[0];
     const dateMapping = {
-      'date-picker1': changedValues[keyChangeValue],
-      'date-picker2': changedValues[keyChangeValue],
+      [settings.componentAttestations.EntryFirstDate.formElementProps.type]:
+        changedValues[keyChangeValue],
+      [settings.componentAttestations.EntryLastDate.formElementProps.type]:
+        changedValues[keyChangeValue],
     };
 
     let d = new Date(dateMapping[keyChangeValue]._d);
     let resultDate = formatDateToLocale(d, 'yyyy-mm-dd hh:MM:ss', 0);
-    if (keyChangeValue === 'date-picker1') {
+    if (
+      keyChangeValue ===
+      settings.componentAttestations.EntryFirstDate.formElementProps.type
+    ) {
       fetch = {
         ...fetch,
         attestations: {
@@ -84,7 +88,10 @@ const FormSetAttestation = ({ targetItem }) => {
         },
       };
     }
-    if (keyChangeValue === 'date-picker2') {
+    if (
+      keyChangeValue ===
+      settings.componentAttestations.EntryLastDate.formElementProps.type
+    ) {
       fetch = {
         ...fetch,
         attestations: {
@@ -103,7 +110,15 @@ const FormSetAttestation = ({ targetItem }) => {
       onValuesChange={onValuesHandle}
       form={form}
     >
-      <Form.Item name="date-picker1" label="Дата и время (от)" {...config}>
+      <Form.Item
+        name={
+          settings.componentAttestations.EntryFirstDate.formElementProps.type
+        }
+        label={
+          settings.componentAttestations.EntryFirstDate.formElementProps.label
+        }
+        {...config}
+      >
         <DatePicker
           allowClear={false}
           style={{ display: 'flex', width: 200 }}
@@ -115,7 +130,15 @@ const FormSetAttestation = ({ targetItem }) => {
           inputReadOnly={true}
         />
       </Form.Item>
-      <Form.Item name="date-picker2" label="Дата и время (до)" {...config}>
+      <Form.Item
+        name={
+          settings.componentAttestations.EntryLastDate.formElementProps.type
+        }
+        label={
+          settings.componentAttestations.EntryLastDate.formElementProps.label
+        }
+        {...config}
+      >
         <DatePicker
           allowClear={false}
           style={{ display: 'flex', width: 200 }}
@@ -130,4 +153,4 @@ const FormSetAttestation = ({ targetItem }) => {
     </Form>
   );
 };
-export default FormSetAttestation;
+export default FormModalAttestation;

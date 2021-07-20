@@ -76,7 +76,7 @@ export default function SetupAttestations() {
         handleClose={handleAfterClose}
         handleCancel={handleCancel}
         handleOk={handleOk}
-        forms={<FormModalAttestation />}
+        forms={<FormModalAttestation settings={configParam} />}
         title={'Аттестация'}
         footer={true}
         settings={configParam}

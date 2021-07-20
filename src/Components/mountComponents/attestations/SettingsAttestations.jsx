@@ -123,7 +123,12 @@ export default function SettingsAttestations({ id }) {
         handleClose={handleAfterClose}
         handleCancel={handleCancel}
         handleOk={handleOk}
-        forms={<FormModalAttestation targetItem={targetItem} />}
+        forms={
+          <FormModalAttestation
+            targetItem={targetItem}
+            settings={configParam}
+          />
+        }
         title={'Аттестация'}
         footer={false}
         settings={configParam}
