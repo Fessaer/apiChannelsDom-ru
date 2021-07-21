@@ -11,20 +11,20 @@ function App() {
     (
       async function dataFetch() {
       let url = 'https://epg.domru.ru/channel/list?domain=perm';
-    await fetch(url, {
-      method: 'GET',
-    }).then((response) => {
-      return response.json();
-      }).then((data) => setData({data}))
-    })()
-  }, []);
+        await fetch(url, {
+        method: 'GET',
+        }).then((response) => {
+          return response.json();
+        }).then((data) => setData({data}))
+      })()
+      }, []);
 
     return (
       <Store>
         {data}
       <Router>
         <Switch>
-          <Route path="/" exact>
+          <Route exact path="/">
             <Home />
           </Route>
           <Route 

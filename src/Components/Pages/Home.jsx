@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import { Context } from '../Store';
-import { Col, Row, Card } from 'antd';
+import { Col, Row, Card, List, Avatar, Space } from 'antd';
 
 import {
   BrowserRouter as Router,
@@ -28,33 +28,41 @@ export default function Home() {
   let { channels } = globalState;
   if (channels !== undefined) {
     return (
-      <Row
-        gutter={[8, 8]}
-        justify="space-between"
-        style={{
-          display: 'flex',
-          padding: '12px',
-          paddingBottom: '12px',
-          justifyContent: 'flex-start',
-        }}
-      >
-        {channels.map((item, index) => {
-          console.log(item)
-        return (
-          <Col
-            key={item.chid}
-            className="gutter-row"
-            xs={{ span: 24, push: 0 }}
-            sm={{ span: 12, push: 0 }}
-            md={{ span: 12, push: 0 }}
-            lg={{ span: 8, push: 0 }}
-            xl={{ span: 6, push: 0 }}
-          >
+      <div style={{margin: '5px 14px', paddingBottom: 14}}>
+      <List
+      grid={{
+        gutter: [14, 14],
+        xs: 1,
+        sm: 2,
+        md: 2,
+        lg: 4,
+        xl: 4,
+        xxl: 4,
+      }}
+      itemLayout="horisontal"
+      size="large"
+      pagination={{
+        showSizeChanger: false,
+        pageSize: 20,
+        
+      }}
+      style={{marin: "14px"}}
+      dataSource={channels}
+      renderItem={item => (
+          // <Col
+          //   key={item.chid}
+          //   className="gutter-row"
+          //   xs={{ span: 24, push: 0 }}
+          //   sm={{ span: 12, push: 0 }}
+          //   md={{ span: 12, push: 0 }}
+          //   lg={{ span: 8, push: 0 }}
+          //   xl={{ span: 6, push: 0 }}
+          // >
             <Card
               onClick={()=> history.push({pathname: `/CardPage`, props: {...item}})}
               hoverable={true}
               bordered={true}
-              style={{ width: 'auto' }}
+              style={{ width: 'auto', margin: '0px 5px' }}
               bodyStyle={{
                 padding: '12px',
                 display: 'flex',
@@ -72,10 +80,11 @@ export default function Home() {
                 />
                 <p>{item.description}</p>
               </div>
-            </Card>
-          </Col>
-        )})}
-      </Row>
+            </Card>)}
+            />
+      </div>
+      //   )})}
+      // </Row>
     )
   } else {
     return null
