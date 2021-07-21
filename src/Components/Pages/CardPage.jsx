@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import { Context } from '../Store';
 import { Button, Col, Row, Card } from 'antd';
 import {
@@ -11,11 +11,25 @@ import {
 import FormComponent from '../mountComponents/FormComponent';
 import fetchFunction from '../mountComponents/Helpers/fetchFn';
 
-
+const style = {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  justifyContent: 'flex-end',
+  maxWidth: 220,
+};
 
 export default function CardPage({ history }) {
   const [globalState, inSetState] = useContext(Context);
   const historys = useHistory();
+
+  useEffect(() => {
+    if (globalState.channels === undefined) {
+      historys.goBack()
+    }
+    
+  }, [globalState.channels])
+
 
   const handleSearch = async () => {
     // async function dataFetch() {
@@ -50,9 +64,36 @@ export default function CardPage({ history }) {
     <div style={{padding: 15}}>
       <div id="chart-search-bar">
         <Row justify="start" gutter={8}>
+        <Col className="gutter-row"
+      xs={{ span: 6, push: 0 }}
+      sm={{ span: 3, push: 0 }}
+      xl={{ span: 2, push: 0 }}
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        justifyContent: 'flex-end',
+      }}
+    >
+      <label>&nbsp;</label>
           <Button onClick={() => historys.goBack()}>Back</Button>
-          <FormComponent />
+          </Col>
+        <FormComponent />
+      <Col 
+      className="gutter-row"
+      xs={{ span: 6, push: 0 }}
+      sm={{ span: 3, push: 0 }}
+      xl={{ span: 2, push: 0 }}
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        justifyContent: 'flex-end',
+      }}
+    >
+      <label>&nbsp;</label>
           <Button onClick={handleSearch}>Поиск</Button>
+          </Col>
         </Row>
       </div>
     

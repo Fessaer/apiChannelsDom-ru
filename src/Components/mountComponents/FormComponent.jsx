@@ -1,36 +1,16 @@
 import React, { useContext, useEffect } from 'react';
 import { Context } from '../Store';
-import { Form, DatePicker } from 'antd';
+import { Form, DatePicker, Row, Col } from 'antd';
 import locale from './config/locale/date_picker/ru/date_picker_ru_RU';
 import formatDateToLocale from './helpers/functionFormatReplaceDate';
 import moment from 'moment';
 
-const config = {
-  rules: [
-    {
-      type: 'object',
-      message: 'Please select time!',
-    },
-  ],
-};
-
-const formItemLayout = {
-  labelCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 8,
-    },
-  },
-  wrapperCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 16,
-    },
-  },
+const style = {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  justifyContent: 'flex-end',
+  maxWidth: 220,
 };
 
 const FormComponent = ({ targetItem, settings }) => {
@@ -68,18 +48,35 @@ console.log(targetItem, settings)
   };
 
   return (
-    <Form
-      layout="inline"
-      name="time_related_controls"
-      {...formItemLayout}
-      onValuesChange={onValuesHandle}
-      form={form}
-    >
-      <Form.Item
-        name={'startDate'}
-        label={'startDate'}
-        {...config}
+    <>
+      <Col
+        className="gutter-row"
+        sm={{ span: 6, push: 0 }}
+        xl={{ span: 4, push: 0 }}
+        style={style}
       >
+      <div>
+            <label>Дата и время (от)</label>
+            <DatePicker
+              allowClear={false}
+              style={{ display: 'flex', width: 200 }}
+              locale={locale}
+              format="DD.MM.YYYY HH:mm:ss"
+              showTime={true}
+              showNow={false}
+              showToday={true}
+              inputReadOnly={true}
+            />
+    </div>
+    </Col>
+    <Col
+    className="gutter-row"
+    sm={{ span: 6, push: 0 }}
+    xl={{ span: 4, push: 0 }}
+    style={style}
+  >
+  <div>
+        <label>Дата и время (от)</label>
         <DatePicker
           allowClear={false}
           style={{ display: 'flex', width: 200 }}
@@ -90,24 +87,9 @@ console.log(targetItem, settings)
           showToday={true}
           inputReadOnly={true}
         />
-      </Form.Item>
-      <Form.Item
-        name={'endDate'}
-        label={'endDate'}
-        {...config}
-      >
-        <DatePicker
-          allowClear={false}
-          style={{ display: 'flex', width: 200 }}
-          locale={locale}
-          format="DD.MM.YYYY HH:mm:ss"
-          showTime={true}
-          showNow={false}
-          showToday={true}
-          inputReadOnly={true}
-        />
-      </Form.Item>
-    </Form>
+</div>
+</Col>
+</>
   );
 };
 export default FormComponent;
