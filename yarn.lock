@@ -1015,6 +1015,14 @@
     "@babel/helper-create-regexp-features-plugin" "^7.14.5"
     "@babel/helper-plugin-utils" "^7.14.5"
 
+"@babel/polyfill@^7.12.1":
+  "integrity" "sha512-X0pi0V6gxLi6lFZpGmeNa4zxtwEmCs42isWLNjZZDE0Y8yVfgu0T2OAHlzBbdYlqbW/YXVvoBHpATEM+goCj8g=="
+  "resolved" "https://registry.npmjs.org/@babel/polyfill/-/polyfill-7.12.1.tgz"
+  "version" "7.12.1"
+  dependencies:
+    "core-js" "^2.6.5"
+    "regenerator-runtime" "^0.13.4"
+
 "@babel/preset-env@^7.11.0", "@babel/preset-env@^7.12.1", "@babel/preset-env@^7.8.4":
   "integrity" "sha512-itOGqCKLsSUl0Y+1nSfhbuuOlTs0MJk2Iv7iSH+XT/mR8U1zRLO7NjWlYXB47yhK4J/7j+HYty/EhFZDYKa/VA=="
   "resolved" "https://registry.npmjs.org/@babel/preset-env/-/preset-env-7.14.7.tgz"
@@ -4366,6 +4374,11 @@
   "resolved" "https://registry.npmjs.org/core-js/-/core-js-2.6.12.tgz"
   "version" "2.6.12"
 
+"core-js@^2.6.5":
+  "integrity" "sha512-Kb2wC0fvsWfQrgk8HU5lW6U/Lcs8+9aaYcy4ZFc6DDlo4nZ7n70dEgE5rtR0oG6ufKDUnrwfWL1mXR5ljDatrQ=="
+  "resolved" "https://registry.npmjs.org/core-js/-/core-js-2.6.12.tgz"
+  "version" "2.6.12"
+
 "core-js@^3.15.2", "core-js@^3.6.5":
   "integrity" "sha512-tKs41J7NJVuaya8DxIOCnl8QuPHx5/ZVbFo1oKgVl1qHFBBrDctzQGtuLjPpRdNTWmKPH6oEvgN/MUID+l485Q=="
   "resolved" "https://registry.npmjs.org/core-js/-/core-js-3.15.2.tgz"
@@ -5569,6 +5582,11 @@
   "resolved" "https://registry.npmjs.org/es6-object-assign/-/es6-object-assign-1.1.0.tgz"
   "version" "1.1.0"
 
+"es6-promise@^4.2.8":
+  "integrity" "sha512-HJDGx5daxeIvxdBxvG2cb9g4tEvwIk3i8+nhX0yGrYmZUzbkdg8QbDevheDB8gd0//uPj4c1EQua8Q+MViT0/w=="
+  "resolved" "https://registry.npmjs.org/es6-promise/-/es6-promise-4.2.8.tgz"
+  "version" "4.2.8"
+
 "es6-symbol@^3.1.1", "es6-symbol@~3.1.3":
   "integrity" "sha512-NJ6Yn3FuDinBaBRWl/q5X/s4koRHBrgKAu+yGI6JCBeiu3qrcbJhwT2GeR/EXVfylRk8dpQVJoLEFhK+Mu31NA=="
   "resolved" "https://registry.npmjs.org/es6-symbol/-/es6-symbol-3.1.3.tgz"
@@ -6195,6 +6213,19 @@
     "promise" "^7.1.1"
     "setimmediate" "^1.0.5"
     "ua-parser-js" "^0.7.18"
+
+"fetch-everywhere@^1.0.5":
+  "integrity" "sha1-skl/R6V9kCazkHwJdWrPX0vTTos="
+  "resolved" "https://registry.npmjs.org/fetch-everywhere/-/fetch-everywhere-1.0.5.tgz"
+  "version" "1.0.5"
+  dependencies:
+    "node-fetch" "^1.0.1"
+    "whatwg-fetch" ">=0.10.0"
+
+"fetch-polyfill@^0.8.2":
+  "integrity" "sha1-PhSGRC2ltTxD5mppUeqg/V0j8aw="
+  "resolved" "https://registry.npmjs.org/fetch-polyfill/-/fetch-polyfill-0.8.2.tgz"
+  "version" "0.8.2"
 
 "figgy-pudding@^3.5.1":
   "integrity" "sha512-0btnI/H8f2pavGMN8w40mlSKOfTK2SVJmBfBeVIj3kNw0swwgzyRq0d5TJVOwodFmtvpPeWPN/MCcfuWF0Ezbw=="
@@ -14275,7 +14306,7 @@
   dependencies:
     "iconv-lite" "0.4.24"
 
-"whatwg-fetch@^3.4.1", "whatwg-fetch@>=0.10.0":
+"whatwg-fetch@^3.4.1", "whatwg-fetch@^3.6.2", "whatwg-fetch@>=0.10.0":
   "integrity" "sha512-bJlen0FcuU/0EMLrdbJ7zOnW6ITZLrZMIarMUVmdKtsGvZna8vxKYaexICWPfZ8qwf9fzNq+UEIZrnSaApt6RA=="
   "resolved" "https://registry.npmjs.org/whatwg-fetch/-/whatwg-fetch-3.6.2.tgz"
   "version" "3.6.2"

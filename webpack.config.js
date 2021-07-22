@@ -5,13 +5,13 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
   mode: 'production',
+  context: path.resolve(__dirname, 'src'),
   // devtool: 'source-map',
-  entry: {
-    main: path.resolve(__dirname, './src/index.jsx'),
-  },
+  entry: ['whatwg-fetch', './index.jsx'],
   output: {
     filename: 'report.min.js',
   },
@@ -25,6 +25,10 @@ module.exports = {
       title: 'webpack Boilerplate',
       template: path.resolve(__dirname, './public/index.html'),
       filename: 'index.html',
+    }),
+    new webpack.ProvidePlugin({ 
+      React: 'react', 
+      Promise: 'es6-promise'
     }),
   ],
   module: {
