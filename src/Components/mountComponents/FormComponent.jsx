@@ -16,35 +16,31 @@ const style = {
 const FormComponent = ({ targetItem, settings }) => {
   const [globalState, inSetState] = useContext(Context);
   const [form] = Form.useForm();
-console.log(targetItem, settings)
+
+  let dateDefaultOnePicker1 = new Date();
+  let dateDefaultOnePicker2 = new Date();
+  dateDefaultOnePicker2.setHours(dateDefaultOnePicker1.getHours() - 4);
+
+  let dateDefaultTwoPicker1 = new Date();
+  let dateDefaultTwoPicker2 = new Date();
+  dateDefaultTwoPicker2.setHours(dateDefaultTwoPicker1.getHours() + 4);
 
   useEffect(() => {
-    if (targetItem !== undefined) {
-      form.setFieldsValue({
-        startDate:
-          moment(formatDateToLocale(new Date(), 'YYYY.MM.DD HH:mm:ss'), 'YYYY.MM.DD HH:mm:ss'),
-      });
-      form.setFieldsValue({
-        endDate:
-          moment(formatDateToLocale(new Date(), 'YYYY.MM.DD HH:mm:ss'), 'YYYY.MM.DD HH:mm:ss'),
-      });
-    }
+    const resultDateStart = formatDateToLocale(dateDefaultOnePicker2, 'dd-mm-yyyy hh:MM:ss', 0);
+    const resultDateEnd = formatDateToLocale(dateDefaultTwoPicker2, 'dd-mm-yyyy hh:MM:ss', 0);
+    inSetState({...globalState, startDate: resultDateStart, endDate: resultDateEnd})
   }, []);
 
-  const onValuesHandle = (changedValues) => {
-    console.log(form)
-    const keyChangeValue = Object.keys(changedValues)[0];
-    const dateMapping = {
-      startDate: changedValues[keyChangeValue],
-      endDate: changedValues[keyChangeValue],
-    };
-    
-    console.log(keyChangeValue, 'keyChangeValue')
-
-    let d = new Date(dateMapping[keyChangeValue]._d);
+  const handleSecondPicker = (e) => {
+    let d = new Date(e._d);
     let resultDate = formatDateToLocale(d, 'yyyy-mm-dd hh:MM:ss', 0);
+    inSetState({...globalState, endDate: resultDate})
+  };
 
-    inSetState({...globalState, [keyChangeValue]: resultDate})
+  const handleFirstPicker = (e) => {
+    let d = new Date(e._d);
+    let resultDate = formatDateToLocale(d, 'yyyy-mm-dd hh:MM:ss', 0);
+    inSetState({...globalState, startDate: resultDate})
   };
 
   return (
@@ -56,40 +52,44 @@ console.log(targetItem, settings)
         style={style}
       >
       <div>
-            <label>Дата и время (от)</label>
-            <DatePicker
-              allowClear={false}
-              style={{ display: 'flex', width: 200 }}
-              locale={locale}
-              format="DD.MM.YYYY HH:mm:ss"
-              showTime={true}
-              showNow={false}
-              showToday={true}
-              inputReadOnly={true}
-            />
-    </div>
-    </Col>
-    <Col
-    className="gutter-row"
-    sm={{ span: 6, push: 0 }}
-    xl={{ span: 4, push: 0 }}
-    style={style}
-  >
-  <div>
         <label>Дата и время (от)</label>
-        <DatePicker
-          allowClear={false}
-          style={{ display: 'flex', width: 200 }}
-          locale={locale}
-          format="DD.MM.YYYY HH:mm:ss"
-          showTime={true}
-          showNow={false}
-          showToday={true}
-          inputReadOnly={true}
-        />
-</div>
-</Col>
-</>
+          <DatePicker
+            defaultValue={moment(formatDateToLocale(dateDefaultOnePicker2, 'dd-mm-yyyy hh:MM:ss', 0), "DD.MM.YYYY HH:mm:ss")}
+            allowClear={false}
+            style={{ display: 'flex', width: 200 }}
+            locale={locale}
+            format="DD.MM.YYYY HH:mm:ss"
+            showTime={true}
+            showNow={false}
+            showToday={true}
+            inputReadOnly={true}
+            onSelect={handleFirstPicker}
+          />
+      </div>
+      </Col>
+      <Col
+        className="gutter-row"
+        sm={{ span: 6, push: 0 }}
+        xl={{ span: 4, push: 0 }}
+        style={style}
+      >
+        <div>
+          <label>Дата и время (до)</label>
+          <DatePicker
+            defaultValue={moment(formatDateToLocale(dateDefaultTwoPicker2, 'dd-mm-yyyy hh:MM:ss', 0), "DD.MM.YYYY HH:mm:ss")}
+            allowClear={false}
+            style={{ display: 'flex', width: 200 }}
+            locale={locale}
+            format="DD.MM.YYYY HH:mm:ss"
+            showTime={true}
+            showNow={false}
+            showToday={true}
+            inputReadOnly={true}
+            onSelect={handleSecondPicker}
+          />
+        </div>
+      </Col>
+    </>
   );
 };
 export default FormComponent;

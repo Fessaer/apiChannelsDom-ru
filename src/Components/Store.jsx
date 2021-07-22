@@ -6,9 +6,8 @@ let initialState = {};
 export const Context = React.createContext();
 
 const Store = ({ children }) => {
-  console.log(children)
+  
   const { data } = children[0];
-  // console.log(data)
   initialState['channels'] = data;
   const [globalState, inSetState] = useState(initialState);
 

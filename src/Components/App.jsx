@@ -8,35 +8,32 @@ function App() {
   const [data, setData] = useState({});
 
   useEffect(() => {
-    (
-      async function dataFetch() {
+    (async function dataFetch() {
       let url = 'http://epg.domru.ru/channel/list?domain=perm';
-        await fetch(url, {
-        method: 'GET',
-        }).then((response) => {
-          return response.json();
-        }).then((data) => setData({data}))
-      })()
-      }, []);
+      await fetch(url, {
+        method: 'GET'})
+        .then((response) => response.json())
+        .then((data) => setData({data}))
+    })()
+  }, []);
 
     return (
-      <Store>
-        {data}
+    <Store>
+      {data}
       <Router>
         <Switch>
           <Route exact path="/">
-           <Home />
+            <Home />
           </Route>
           <Route 
             path="/CardPage"
-              render={props => <CardPage {...props}/>}>
+            render={props => <CardPage {...props}/>}>
           </Route>
         </Switch>
       </Router>
-      </Store>
-      
+    </Store>
   );
-}
+};
 
 
 export default App;
